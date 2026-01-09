@@ -45,6 +45,19 @@
             transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #00c1b7;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .input-container:focus-within .label {
             top: 0.5rem;
             font-size: 0.75rem;
@@ -102,13 +115,13 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="120" height="44" viewBox="0 0 120 44" fill="none" class="max-w-[140px] text-[#37606F]">
                 <path d="M18.9963 35.9814C18.9963 39.8933 14.6797 43.4006 8.64116 43.4006C2.60266 43.4006 0 40.8772 0 37.243C0 33.6088 0.245984 35.1641 0.8173 34.0214L2.20592 33.6168H2.37255C1.88058 34.7991 1.64254 35.9417 1.64254 36.9574C1.64254 40.3377 4.21346 42.742 8.6491 42.742C13.0847 42.742 17.2109 40.417 17.2109 36.7114C17.2109 33.0058 15.3383 32.9185 12.1563 32.7201L6.28448 32.3551C3.91987 32.1885 1.55525 31.6251 1.55525 29.4192C1.55525 27.2133 2.37255 27.1339 4.03889 26.1579L5.05456 25.5469C2.68995 24.3249 1.14263 22 1.14263 19.1037C1.14263 14.8268 4.52292 11.7242 8.96649 11.7242C13.4101 11.7242 12.3071 12.2162 13.5688 13.0732C14.8701 11.6052 16.7507 10.5895 18.9883 10.5895L18.7027 13.0732C18.0123 12.9065 17.3141 12.8272 16.6634 12.8272C15.6874 12.8272 14.7511 13.0335 14.1401 13.4779C15.7667 14.7792 16.7904 16.7788 16.7904 19.1037C16.7904 23.3807 13.4101 26.4436 8.96649 26.4436C4.52292 26.4436 6.68123 26.2373 5.70523 25.8326L4.60227 26.5626C3.49931 27.2926 3.17398 28.0306 3.17398 28.6812C3.17398 29.7842 4.03096 30.2285 6.39557 30.3952L12.3071 30.7602C16.465 31.0062 18.9883 32.7201 18.9883 35.9734L18.9963 35.9814ZM3.26127 19.1037C3.26127 23.0157 5.62588 25.785 8.96649 25.785C12.3071 25.785 14.6717 23.0157 14.6717 19.1037C14.6717 15.1918 12.2674 12.3828 8.96649 12.3828C5.66555 12.3828 3.26127 15.1918 3.26127 19.1037Z" fill="currentColor"></path><path d="M20.9956 1.41674L22.7889 0.599442H22.9555V33.6088H20.9956V1.40881V1.41674Z" fill="currentColor"></path><path d="M44.7131 33.1248L42.9198 33.9421L41.8566 30.4349V30.2286C39.611 32.5138 36.556 34.1008 33.5407 34.1008C29.0972 34.1008 26.8198 31.6965 26.8198 26.5229V12.7479L28.6131 11.9306H28.7798V26.1976C28.7798 27.9909 28.7798 33.0455 34.4056 33.0455C40.0315 33.0455 39.9046 31.5378 41.8645 29.2526V12.7479L43.6578 11.9306H43.8244V30.0302L44.7211 33.1248H44.7131Z" fill="currentColor"></path><path d="M46.665 23.0633C46.665 16.3821 51.1086 11.7719 56.6075 11.7719C62.1065 11.7719 62.8444 13.0335 64.6774 15.5648L63.376 16.7074C61.6224 13.9778 59.4641 12.3432 56.6075 12.3432C52.2433 12.3432 48.863 16.5011 48.863 22.6983C48.863 28.8955 52.4496 32.9661 56.9329 32.9661C61.4161 32.9661 62.5984 31.5775 64.3917 28.7685L64.8837 29.0542C62.9238 32.1091 59.9958 34.1087 56.3219 34.1087C50.7357 34.1087 46.665 29.6652 46.665 23.0633Z" fill="currentColor"></path><path d="M83.5946 32.7995V33.0455C82.817 33.4977 82.0473 33.7755 81.2697 33.7755C79.2701 33.7755 78.9448 31.9028 78.8654 30.7999C76.5801 32.9185 73.4855 34.0215 70.8749 34.0215C68.2643 34.0215 65.249 32.2678 65.249 29.2129C65.249 26.1579 69.0816 23.1426 74.6202 22.492C76.0485 22.3253 77.5165 22.2063 78.8575 22.127V19.683C78.8575 15.0807 77.0642 12.8351 73.3109 12.8351C69.5577 12.8351 69.153 13.6524 67.1137 15.4061L66.7487 14.9538C68.9943 12.9145 71.1923 11.7719 74.1282 11.7719C78.5321 11.7719 80.8095 14.1365 80.8095 19.3497V29.7842C80.8095 31.7441 80.8095 32.8788 82.8488 32.8788C84.888 32.8788 83.3407 32.8391 83.5788 32.7995H83.5946ZM72.0572 32.9661C74.2949 32.9661 76.8658 31.9901 78.8654 30.0302V22.6903C72.3032 23.2617 67.2883 24.2377 67.2883 28.6019C67.2883 32.9661 69.4069 32.9661 72.0572 32.9661Z" fill="currentColor"></path><path d="M100.797 12.2559C99.1707 15.7631 97.7821 19.0244 95.6635 24.079L91.4659 34.0215H91.1406L81.9678 12.2559H84.0864L91.9499 31.0062L94.9652 23.833C97.1235 18.6991 98.6708 14.5808 99.0041 12.2559H100.797Z" fill="currentColor"></path><path d="M101.607 5.82063L103.48 3.94798L105.352 5.82063L103.48 7.69328L101.607 5.82063ZM102.504 12.7478L104.297 11.9305H104.464V33.6168H102.504V12.7478Z" fill="currentColor"></path><path d="M119.992 32.5932C118.445 33.4898 116.977 34.1008 115.064 34.1008C110.256 34.1008 110.256 30.1889 110.256 28.7209V13.1525H106.709V12.4622L110.01 12.2559L112.049 5.86031H112.216V12.2559H119.754L119.183 13.1525H112.216V28.3956C112.216 29.6572 112.216 33.1248 115.969 33.1248C119.722 33.1248 118.254 32.8788 119.675 32.1091L120 32.6011L119.992 32.5932Z" fill="currentColor"></path></svg>
             
-            <div id="step-counter" class="text-lg font-medium absolute right-4 md:right-10 text-primary-black">1/10</div>
+            <div id="step-counter" class="text-lg font-medium absolute right-4 md:right-10 text-primary-black">1/9</div>
         </div>
     </header>
 
     <!-- Barra de Progresso -->
     <div class="bg-white">
-        <div id="progress-bar" class="relative z-10 h-1 bg-light-blue rounded-r" style="width: calc(10% - 20px)"></div>
+        <div id="progress-bar" class="relative z-10 h-1 bg-light-blue rounded-r" style="width: calc(11.11% - 20px)"></div>
     </div>
 
     <!-- Área Principal de Conteúdo -->
@@ -334,21 +347,8 @@
                 </div>
             </div>
 
-            <!-- ETAPA 9: Atividade Física -->
+            <!-- ETAPA 9: Resumo Final e Oferta -->
             <div id="step-9" class="hidden step-transition">
-                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Wie oft bist du im Alltag körperlich aktiv?</h3>
-                    <p class="max-w-[540px] mx-auto text-light-blue font-semibold mt-4">Das hilft uns, deinen Kalorienbedarf zu schätzen.</p>
-                </div>
-                <div class="max-w-[352px] mx-auto space-y-2">
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">Fast nie (Bürojob)</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">1-2 Mal pro Woche</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">3+ Mal pro Woche</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                </div>
-            </div>
-
-            <!-- ETAPA 10: Resumo Final e Oferta -->
-            <div id="step-10" class="hidden step-transition">
                 <!-- BMI and Summary -->
                 <div class="space-y-10">
                     <div class="max-w-[800px] mx-auto text-center space-y-4">
@@ -442,7 +442,7 @@
                         </div>
                     </div>
 
-                    <!-- Recommendations (Success Stories section) -->
+                    <!-- Testimonials and Final Recommendation Section -->
                     <div class="bg-primary-yellow rounded-3xl py-10 md:py-20 px-4">
                         <div class="max-w-[1200px] mx-auto">
                             <h2 class="text-center text-4xl font-moret mb-10">Wirf einen Blick auf die Erfolgsgeschichten unserer glücklichen Kunden</h2>
@@ -572,7 +572,7 @@
 
     <script>
         let currentStep = 1;
-        const totalSteps = 10;
+        const totalSteps = 9;
 
         function updateUI() {
             const body = document.getElementById('body-container');
@@ -591,7 +591,7 @@
                 body.style.backgroundColor = '#bcf3f1'; // bg-secondary
                 header.style.backgroundColor = '#bcf3f1';
                 socialProof.classList.add('hidden');
-            } else if (currentStep === 10) {
+            } else if (currentStep === totalSteps) {
                 socialProof.classList.add('hidden');
                 footerAdv.classList.add('hidden');
                 startTimer();
@@ -612,7 +612,7 @@
 
             // Back button
             const backBtn = document.getElementById('back-btn');
-            if (currentStep > 1 && currentStep < 10) backBtn.classList.remove('hidden');
+            if (currentStep > 1 && currentStep < totalSteps) backBtn.classList.remove('hidden');
             else backBtn.classList.add('hidden');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
