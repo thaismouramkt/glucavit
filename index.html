@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-   
+    
     <script>
         tailwind.config = {
             theme: {
@@ -17,7 +17,9 @@
                         'primary-orange': '#d95e00',
                         'light-blue': '#00c1b7',
                         'main-bg': '#e5f9f8',
+                        'secondary': '#bcf3f1',
                         'primary-black': '#111827',
+                        'hover-blue': '#06948c',
                     },
                     fontFamily: {
                         sans: ['Inter', 'ui-sans-serif', 'system-ui'],
@@ -28,181 +30,142 @@
         }
     </script>
 
-
     <style>
         body {
             font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
         .font-moret {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Moret', 'Times New Roman', Times, serif;
         }
         [v-cloak] { display: none; }
         .step-transition { transition: all 0.3s ease-in-out; }
+        
+        #progress-bar {
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Custom spinner for the last step */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #00c1b7;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Input styling for focused state */
+        .input-container:focus-within .label {
+            top: 0.5rem;
+            font-size: 0.75rem;
+            color: #3b82f6;
+        }
     </style>
 </head>
-<body class="bg-main-bg min-h-screen flex flex-col">
+<body class="bg-main-bg min-h-screen flex flex-col transition-colors duration-500" id="body-container">
 
-
-    <!-- Top Banners -->
+    <!-- Top Rating Banner -->
     <section class="min-h-10 py-2 sm:py-3 bg-primary-orange">
         <div class="container mx-auto flex items-center justify-center gap-4 text-xs md:text-sm px-4 text-white">
-            <svg width="113" height="17" viewBox="0 0 113 17" fill="none"><path d="M15.1432 5.8744L10.8276 5.21746L8.89678 1.11972C8.55881 0.404105 7.44091 0.404105 7.10294 1.11972L5.17312 5.21746L0.856507 5.8744C0.0395812 5.99908 -0.291389 7.05521 0.302557 7.66291L3.42628 10.8523L2.68934 15.3565C2.55035 16.2094 3.40628 16.8642 4.14021 16.4609L7.99986 14.335L11.8605 16.4619C12.5884 16.8611 13.4514 16.2167 13.3114 15.3576L12.5744 10.8533L15.6982 7.66395C16.2911 7.05521 15.9601 5.99908 15.1432 5.8744Z" fill="#FEB511"></path><path d="M39.1432 5.8744L34.8276 5.21746L32.8968 1.11972C32.5588 0.404105 31.4409 0.404105 31.1029 1.11972L29.1731 5.21746L24.8565 5.8744C24.0396 5.99908 23.7086 7.05521 24.3026 7.66291L27.4263 10.8523L26.6893 15.3565C26.5504 16.2094 27.4063 16.8642 28.1402 16.4609L31.9999 14.335L35.8605 16.4619C36.5884 16.8611 37.4514 16.2167 37.3114 15.3576L36.5744 10.8533L39.6982 7.66395C40.2911 7.05521 39.9601 5.99908 39.1432 5.8744Z" fill="#FEB511"></path><path d="M64.0897 5.8744L59.5043 5.21746L57.4528 1.11972C57.0937 0.404105 55.906 0.404105 55.5469 1.11972L53.4964 5.21746L48.91 5.8744C48.0421 5.99908 47.6904 7.05521 48.3215 7.66291L51.6404 10.8523L50.8574 15.3565C50.7098 16.2094 51.6192 16.8642 52.399 16.4609L56.4999 14.335L60.6018 16.4619C61.3752 16.8611 62.2921 16.2167 62.1433 15.3576L61.3604 10.8533L64.6793 7.66395C65.3093 7.05521 64.9577 5.99908 64.0897 5.8744Z" fill="#FEB511"></path><path d="M88.1432 5.8744L83.8276 5.21746L81.8968 1.11972C81.5588 0.404105 80.4409 0.404105 80.1029 1.11972L78.1731 5.21746L73.8565 5.8744C73.0396 5.99908 72.7086 7.05521 73.3026 7.66291L76.4263 10.8523L75.6893 15.3565C75.5504 16.2094 76.4063 16.8642 77.1402 16.4609L80.9999 14.335L84.8605 16.4619C85.5884 16.8611 86.4514 16.2167 86.3114 15.3576L85.5744 10.8533L88.6982 7.66395C89.2911 7.05521 88.9601 5.99908 88.1432 5.8744Z" fill="#FEB511"></path><path d="M112.143 5.8744L107.828 5.21746L105.897 1.11972C105.559 0.404105 104.441 0.404105 104.103 1.11972L102.173 5.21746L97.8565 5.8744C97.0396 5.99908 96.7086 7.05521 97.3026 7.66291L100.426 10.8523L99.6893 15.3565C99.5504 16.2094 100.406 16.8642 101.14 16.4609L105 14.335L108.861 16.4619C109.588 16.8611 110.451 16.2167 110.311 15.3576L109.574 10.8533L112.698 7.66395C113.291 7.05521 112.96 5.99908 112.143 5.8744Z" fill="#FEB511"></path></svg>
-            <span>Bewertet mit <b>4,8</b> / 5 basierend auf <b>5.000 zufriedenen Kunden</b></span>
+            <svg width="113" height="17" viewBox="0 0 113 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_27_1063)">
+                    <path d="M15.1432 5.8744L10.8276 5.21746L8.89678 1.11972C8.55881 0.404105 7.44091 0.404105 7.10294 1.11972L5.17312 5.21746L0.856507 5.8744C0.0395812 5.99908 -0.291389 7.05521 0.302557 7.66291L3.42628 10.8523L2.68934 15.3565C2.55035 16.2094 3.40628 16.8642 4.14021 16.4609L7.99986 14.335L11.8605 16.4619C12.5884 16.8611 13.4514 16.2167 13.3114 15.3576L12.5744 10.8533L15.6982 7.66395C16.2911 7.05521 15.9601 5.99908 15.1432 5.8744Z" fill="#FEB511"></path>
+                    <path d="M39.1432 5.8744L34.8276 5.21746L32.8968 1.11972C32.5588 0.404105 31.4409 0.404105 31.1029 1.11972L29.1731 5.21746L24.8565 5.8744C24.0396 5.99908 23.7086 7.05521 24.3026 7.66291L27.4263 10.8523L26.6893 15.3565C26.5504 16.2094 27.4063 16.8642 28.1402 16.4609L31.9999 14.335L35.8605 16.4619C36.5884 16.8611 37.4514 16.2167 37.3114 15.3576L36.5744 10.8533L39.6982 7.66395C40.2911 7.05521 39.9601 5.99908 39.1432 5.8744Z" fill="#FEB511"></path>
+                    <path d="M64.0897 5.8744L59.5043 5.21746L57.4528 1.11972C57.0937 0.404105 55.906 0.404105 55.5469 1.11972L53.4964 5.21746L48.91 5.8744C48.0421 5.99908 47.6904 7.05521 48.3215 7.66291L51.6404 10.8523L50.8574 15.3565C50.7098 16.2094 51.6192 16.8642 52.399 16.4609L56.4999 14.335L60.6018 16.4619C61.3752 16.8611 62.2921 16.2167 62.1433 15.3576L61.3604 10.8533L64.6793 7.66395C65.3093 7.05521 64.9577 5.99908 64.0897 5.8744Z" fill="#FEB511"></path>
+                    <path d="M88.1432 5.8744L83.8276 5.21746L81.8968 1.11972C81.5588 0.404105 80.4409 0.404105 80.1029 1.11972L78.1731 5.21746L73.8565 5.8744C73.0396 5.99908 72.7086 7.05521 73.3026 7.66291L76.4263 10.8523L75.6893 15.3565C75.5504 16.2094 76.4063 16.8642 77.1402 16.4609L80.9999 14.335L84.8605 16.4619C85.5884 16.8611 86.4514 16.2167 86.3114 15.3576L85.5744 10.8533L88.6982 7.66395C89.2911 7.05521 88.9601 5.99908 88.1432 5.8744Z" fill="#FEB511"></path>
+                    <path d="M112.143 5.8744L107.828 5.21746L105.897 1.11972C105.559 0.404105 104.441 0.404105 104.103 1.11972L102.173 5.21746L97.8565 5.8744C97.0396 5.99908 96.7086 7.05521 97.3026 7.66291L100.426 10.8523L99.6893 15.3565C99.5504 16.2094 100.406 16.8642 101.14 16.4609L105 14.335L108.861 16.4619C109.588 16.8611 110.451 16.2167 110.311 15.3576L109.574 10.8533L112.698 7.66395C113.291 7.05521 112.96 5.99908 112.143 5.8744Z" fill="#FEB511"></path>
+                </g>
+                <defs><clipPath id="clip0_27_1063"><rect width="113" height="16" fill="white" transform="translate(0 0.583008)"></rect></clipPath></defs>
+            </svg>
+            <span class="text-white">Bewertet mit <b>4,8</b> / 5 basierend auf <b>5.000 zufriedenen Kunden</b></span>
         </div>
     </section>
 
-
+    <!-- USP Banner -->
     <section class="bg-primary-orange border-t border-t-[#FFFFFF29]">
-        <div class="container mx-auto px-2 py-2 sm:py-3 flex items-center justify-center">
+        <div class="container mx-auto px-2 py-2 sm:py-3 flex items-center justify-center text-white">
             <div class="inline-flex items-center gap-x-1 sm:gap-x-2">
-                <img width="20" height="20" class="flex-shrink-0 w-3 md:w-5 invert brightness-0" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/c0fa383d-f30a-427a-ed75-5923144bd200/w=40,h=40,format=webp" alt="Fast Delivery">
-                <div class="text-[8px] md:text-xs font-semibold uppercase text-white whitespace-nowrap">KOSTENLOSE & schnelle Lieferung</div>
+                <img width="20" height="20" class="flex-shrink-0 w-3 md:w-5 invert brightness-0" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/c0fa383d-f30a-427a-ed75-5923144bd200/w=40,h=40,format=webp" alt="Delivery">
+                <div class="text-[8px] md:text-xs font-semibold uppercase whitespace-nowrap">KOSTENLOSE & schnelle Lieferung</div>
             </div>
             <div class="w-px h-4 mx-2 md:mx-10 bg-[#FFFFFF29]"></div>
             <div class="inline-flex items-center gap-x-1 sm:gap-x-2">
-                <img width="20" height="20" class="flex-shrink-0 w-3 md:w-5 invert brightness-0" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/faa6d0e3-36a3-455f-3455-0e5816b8a400/w=40,h=40,format=webp" alt="Happy Customers">
-                <div class="text-[8px] md:text-xs font-semibold uppercase text-white whitespace-nowrap">Über 5.000+ zufriedene Kunden</div>
+                <img width="20" height="20" class="flex-shrink-0 w-3 md:w-5 invert brightness-0" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/faa6d0e3-36a3-455f-3455-0e5816b8a400/w=40,h=40,format=webp" alt="Customers">
+                <div class="text-[8px] md:text-xs font-semibold uppercase whitespace-nowrap">Über 5.000+ zufriedene Kunden</div>
             </div>
             <div class="w-px h-4 mx-2 md:mx-10 bg-[#FFFFFF29]"></div>
             <div class="inline-flex items-center gap-x-1 sm:gap-x-2">
                 <img width="20" height="20" class="flex-shrink-0 w-3 md:w-5 invert brightness-0" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/6b484a01-08d7-42f5-fdc0-b02a94411800/w=40,h=40,format=webp" alt="Medicine">
-                <div class="text-[8px] md:text-xs font-semibold uppercase text-white whitespace-nowrap">Bewährte Medizin</div>
+                <div class="text-[8px] md:text-xs font-semibold uppercase whitespace-nowrap">Bewährte Medizin</div>
             </div>
         </div>
     </section>
 
-
-    <!-- Header with Dynamic State -->
-    <header class="bg-main-bg h-[53px] md:h-[66.44px] py-3 shadow-sm md:shadow-none">
+    <!-- Header -->
+    <header class="h-[53px] md:h-[66.44px] py-3 transition-colors duration-500" id="header-container">
         <div class="container mx-auto h-full flex items-center justify-center relative px-4">
             <button id="back-btn" class="hidden flex items-center gap-1 md:gap-3 md:text-lg font-medium absolute left-4 md:left-10 text-[#00C1B7]" onclick="prevStep()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.82843 6.9999H16V8.9999H3.82843L9.1924 14.3638L7.7782 15.778L0 7.9999L7.7782 0.22168L9.1924 1.63589L3.82843 6.9999Z" fill="currentColor"></path></svg>
                 <span>Zurück</span>
             </button>
-           
+            
             <svg xmlns="http://www.w3.org/2000/svg" width="120" height="44" viewBox="0 0 120 44" fill="none" class="max-w-[140px] text-[#37606F]">
                 <path d="M18.9963 35.9814C18.9963 39.8933 14.6797 43.4006 8.64116 43.4006C2.60266 43.4006 0 40.8772 0 37.243C0 33.6088 0.245984 35.1641 0.8173 34.0214L2.20592 33.6168H2.37255C1.88058 34.7991 1.64254 35.9417 1.64254 36.9574C1.64254 40.3377 4.21346 42.742 8.6491 42.742C13.0847 42.742 17.2109 40.417 17.2109 36.7114C17.2109 33.0058 15.3383 32.9185 12.1563 32.7201L6.28448 32.3551C3.91987 32.1885 1.55525 31.6251 1.55525 29.4192C1.55525 27.2133 2.37255 27.1339 4.03889 26.1579L5.05456 25.5469C2.68995 24.3249 1.14263 22 1.14263 19.1037C1.14263 14.8268 4.52292 11.7242 8.96649 11.7242C13.4101 11.7242 12.3071 12.2162 13.5688 13.0732C14.8701 11.6052 16.7507 10.5895 18.9883 10.5895L18.7027 13.0732C18.0123 12.9065 17.3141 12.8272 16.6634 12.8272C15.6874 12.8272 14.7511 13.0335 14.1401 13.4779C15.7667 14.7792 16.7904 16.7788 16.7904 19.1037C16.7904 23.3807 13.4101 26.4436 8.96649 26.4436C4.52292 26.4436 6.68123 26.2373 5.70523 25.8326L4.60227 26.5626C3.49931 27.2926 3.17398 28.0306 3.17398 28.6812C3.17398 29.7842 4.03096 30.2285 6.39557 30.3952L12.3071 30.7602C16.465 31.0062 18.9883 32.7201 18.9883 35.9734L18.9963 35.9814ZM3.26127 19.1037C3.26127 23.0157 5.62588 25.785 8.96649 25.785C12.3071 25.785 14.6717 23.0157 14.6717 19.1037C14.6717 15.1918 12.2674 12.3828 8.96649 12.3828C5.66555 12.3828 3.26127 15.1918 3.26127 19.1037Z" fill="currentColor"></path><path d="M20.9956 1.41674L22.7889 0.599442H22.9555V33.6088H20.9956V1.40881V1.41674Z" fill="currentColor"></path><path d="M44.7131 33.1248L42.9198 33.9421L41.8566 30.4349V30.2286C39.611 32.5138 36.556 34.1008 33.5407 34.1008C29.0972 34.1008 26.8198 31.6965 26.8198 26.5229V12.7479L28.6131 11.9306H28.7798V26.1976C28.7798 27.9909 28.7798 33.0455 34.4056 33.0455C40.0315 33.0455 39.9046 31.5378 41.8645 29.2526V12.7479L43.6578 11.9306H43.8244V30.0302L44.7211 33.1248H44.7131Z" fill="currentColor"></path><path d="M46.665 23.0633C46.665 16.3821 51.1086 11.7719 56.6075 11.7719C62.1065 11.7719 62.8444 13.0335 64.6774 15.5648L63.376 16.7074C61.6224 13.9778 59.4641 12.3432 56.6075 12.3432C52.2433 12.3432 48.863 16.5011 48.863 22.6983C48.863 28.8955 52.4496 32.9661 56.9329 32.9661C61.4161 32.9661 62.5984 31.5775 64.3917 28.7685L64.8837 29.0542C62.9238 32.1091 59.9958 34.1087 56.3219 34.1087C50.7357 34.1087 46.665 29.6652 46.665 23.0633Z" fill="currentColor"></path><path d="M83.5946 32.7995V33.0455C82.817 33.4977 82.0473 33.7755 81.2697 33.7755C79.2701 33.7755 78.9448 31.9028 78.8654 30.7999C76.5801 32.9185 73.4855 34.0215 70.8749 34.0215C68.2643 34.0215 65.249 32.2678 65.249 29.2129C65.249 26.1579 69.0816 23.1426 74.6202 22.492C76.0485 22.3253 77.5165 22.2063 78.8575 22.127V19.683C78.8575 15.0807 77.0642 12.8351 73.3109 12.8351C69.5577 12.8351 69.153 13.6524 67.1137 15.4061L66.7487 14.9538C68.9943 12.9145 71.1923 11.7719 74.1282 11.7719C78.5321 11.7719 80.8095 14.1365 80.8095 19.3497V29.7842C80.8095 31.7441 80.8095 32.8788 82.8488 32.8788C84.888 32.8788 83.3407 32.8391 83.5788 32.7995H83.5946ZM72.0572 32.9661C74.2949 32.9661 76.8658 31.9901 78.8654 30.0302V22.6903C72.3032 23.2617 67.2883 24.2377 67.2883 28.6019C67.2883 32.9661 69.4069 32.9661 72.0572 32.9661Z" fill="currentColor"></path><path d="M100.797 12.2559C99.1707 15.7631 97.7821 19.0244 95.6635 24.079L91.4659 34.0215H91.1406L81.9678 12.2559H84.0864L91.9499 31.0062L94.9652 23.833C97.1235 18.6991 98.6708 14.5808 99.0041 12.2559H100.797Z" fill="currentColor"></path><path d="M101.607 5.82063L103.48 3.94798L105.352 5.82063L103.48 7.69328L101.607 5.82063ZM102.504 12.7478L104.297 11.9305H104.464V33.6168H102.504V12.7478Z" fill="currentColor"></path><path d="M119.992 32.5932C118.445 33.4898 116.977 34.1008 115.064 34.1008C110.256 34.1008 110.256 30.1889 110.256 28.7209V13.1525H106.709V12.4622L110.01 12.2559L112.049 5.86031H112.216V12.2559H119.754L119.183 13.1525H112.216V28.3956C112.216 29.6572 112.216 33.1248 115.969 33.1248C119.722 33.1248 118.254 32.8788 119.675 32.1091L120 32.6011L119.992 32.5932Z" fill="currentColor"></path></svg>
-           
-            <div id="step-counter" class="text-lg font-medium absolute right-4 md:right-10">1/8</div>
+            
+            <div id="step-counter" class="text-lg font-medium absolute right-4 md:right-10 text-primary-black">1/9</div>
         </div>
     </header>
 
-
-    <!-- Progress Bar -->
+    <!-- Barra de Progresso -->
     <div class="bg-white">
-        <div id="progress-bar" class="relative z-10 h-1 bg-light-blue rounded-r transition-all duration-500" style="width: calc(12.5% - 20px)"></div>
+        <div id="progress-bar" class="relative z-10 h-1 bg-light-blue rounded-r" style="width: calc(11.11% - 20px)"></div>
     </div>
 
-
-    <!-- Main Content Area -->
-    <main class="flex-grow py-6 md:pb-20 relative overflow-hidden">
+    <!-- Área Principal de Conteúdo -->
+    <main class="flex-grow py-6 md:pb-20 relative overflow-hidden" id="main-content">
         <div class="container mx-auto px-4">
-           
-            <!-- STEP 1: Weight Goal -->
+            
+            <!-- ETAPA 1 -->
             <div id="step-1" class="step-transition">
                 <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">
-                        Hallo! Schön, dass du dir die Zeit nimmst. Bitte teile uns mit, was aktuell dein Ziel beim Abnehmen ist.
-                    </h3>
-                    <p class="max-w-[540px] mx-auto text-light-blue font-semibold mt-4 leading-[26px]">
-                        Was beschreibt dein Ziel am besten?
-                    </p>
+                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Hallo! Schön, dass du dir die Zeit nimmst. Bitte teile uns mit, was aktuell dein Ziel beim Abnehmen ist.</h3>
+                    <p class="max-w-[540px] mx-auto text-light-blue font-semibold mt-4 leading-[26px]">Was beschreibt dein Ziel am besten?</p>
                 </div>
-
-
-                <div class="max-w-[352px] mx-auto">
-                    <div class="grid gap-2 w-full mx-auto">
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="text-base text-left font-semibold">2-10 kg dauerhaft verlieren</span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="text-base text-left font-semibold">11-20 kg dauerhaft verlieren</span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="text-base text-left font-semibold">Mehr als 20 kg dauerhaft verlieren</span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="text-base text-left font-semibold">Aktuelles Gewicht halten e fit werden</span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                    </div>
+                <div class="max-w-[352px] mx-auto space-y-2">
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">2-10 kg dauerhaft verlieren</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">11-20 kg dauerhaft verlieren</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
                 </div>
             </div>
 
-
-            <!-- STEP 2: Gender Selection -->
+            <!-- ETAPA 2: Gênero -->
             <div id="step-2" class="hidden step-transition">
                 <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">
-                        Super! Bitte teile uns dein Geschlecht mit.
-                    </h3>
+                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Super! Bitte teile uns dein Geschlecht mit.</h3>
                 </div>
-
-
-                <div class="max-w-[352px] mx-auto">
-                    <div class="grid gap-2 w-full mx-auto">
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="flex gap-x-2 items-center">
-                                <svg width="33" height="33" viewBox="0 0 33 33" fill="none" class="text-light-blue group-hover:text-white"><g clip-path="url(#clip0_25_3762)"><path d="M14.4781 14.0587C12.0509 14.0587 10.0762 16.0334 10.0762 18.4606C10.0762 20.8878 12.0509 22.8626 14.4781 22.8626C16.9053 22.8626 18.88 20.8878 18.88 18.4606C18.88 16.0334 16.9053 14.0587 14.4781 14.0587Z" fill="currentColor"></path><path d="M16.5 0.439209C7.66352 0.439209 0.5 7.60273 0.5 16.4392C0.5 25.2757 7.66352 32.4392 16.5 32.4392C25.3365 32.4392 32.5 25.2757 32.5 16.4392C32.5 7.60273 25.3365 0.439209 16.5 0.439209ZM25.5528 14.4181H22.9234V11.876L20.291 14.5083C21.0869 15.6726 21.512 17.0504 21.5106 18.4606C21.5106 22.3378 18.3563 25.492 14.4792 25.492C10.6018 25.492 7.44784 22.3378 7.44784 18.4606C7.44784 14.5835 10.6021 11.4293 14.4792 11.4293C15.8896 11.4278 17.2674 11.853 18.4318 12.6488L21.0642 10.0165H18.5218V7.38641H25.5528V14.4181Z" fill="currentColor"></path></g></svg>
-                                <span class="text-base text-left font-semibold">Männlich</span>
-                            </span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="flex gap-x-2 items-center">
-                                <svg width="33" height="33" viewBox="0 0 33 33" fill="none" class="text-light-blue group-hover:text-white"><g clip-path="url(#clip0_25_3752)"><path d="M18.3297 10.2085C15.9021 10.2085 13.9277 12.1832 13.9277 14.6104C13.9277 17.0376 15.9021 19.0123 18.3297 19.0123C20.7565 19.0123 22.7313 17.0376 22.7313 14.6104C22.7313 12.1832 20.7565 10.2085 18.3297 10.2085Z" fill="currentColor"></path><path d="M16.5 0.439209C7.66352 0.439209 0.5 7.60273 0.5 16.4392C0.5 25.2757 7.66352 32.4392 16.5 32.4392C25.3365 32.4392 32.5 25.2757 32.5 16.4392C32.5 7.60273 25.3365 0.439209 16.5 0.439209ZM18.3291 21.6421C16.8645 21.6421 15.5035 21.1915 14.3765 20.4226L13.2878 21.5112L15.2165 23.4398L13.357 25.2994L11.4283 23.3707L9.49968 25.2994L7.64016 23.4398L9.5688 21.5112L7.64016 19.5826L9.49968 17.723L11.4283 19.6517L12.517 18.563C11.7211 17.3987 11.296 16.0208 11.2974 14.6104C11.2974 10.7333 14.4517 7.57905 18.3291 7.57905C22.2059 7.57905 25.3605 10.733 25.3605 14.6104C25.3602 18.4878 22.2059 21.6421 18.3291 21.6421Z" fill="currentColor"></path></g></svg>
-                                <span class="text-base text-left font-semibold">Weiblich</span>
-                            </span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                    </div>
+                <div class="max-w-[352px] mx-auto space-y-2">
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="flex items-center gap-x-3 text-light-blue group-hover:text-white"><svg width="32" height="32" fill="currentColor"><path d="M14.4781 14.0587C12.0509 14.0587 10.0762 16.0334 10.0762 18.4606C10.0762 20.8878 12.0509 22.8626 14.4781 22.8626C16.9053 22.8626 18.88 20.8878 18.88 18.4606C18.88 16.0334 16.9053 14.0587 14.4781 14.0587Z"></path><path d="M16.5 0.439209C7.66352 0.439209 0.5 7.60273 0.5 16.4392C0.5 25.2757 7.66352 32.4392 16.5 32.4392C25.3365 32.4392 32.5 25.2757 32.5 16.4392C32.5 7.60273 25.3365 0.439209 16.5 0.439209ZM25.5528 14.4181H22.9234V11.876L20.291 14.5083C21.0869 15.6726 21.512 17.0504 21.5106 18.4606C21.5106 22.3378 18.3563 25.492 14.4792 25.492C10.6018 25.492 7.44784 22.3378 7.44784 18.4606C7.44784 14.5835 10.6021 11.4293 14.4792 11.4293C15.8896 11.4278 17.2674 11.853 18.4318 12.6488L21.0642 10.0165H18.5218V7.38641H25.5528V14.4181Z"></path></svg><span class="font-semibold text-black group-hover:text-white">Männlich</span></span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="flex items-center gap-x-3 text-light-blue group-hover:text-white"><svg width="32" height="32" fill="currentColor"><path d="M18.3297 10.2085C15.9021 10.2085 13.9277 12.1832 13.9277 14.6104C13.9277 17.0376 15.9021 19.0123 18.3297 19.0123C20.7565 19.0123 22.7313 17.0376 22.7313 14.6104C22.7313 12.1832 20.7565 10.2085 18.3297 10.2085Z"></path><path d="M16.5 0.439209C7.66352 0.439209 0.5 7.60273 0.5 16.4392C0.5 25.2757 7.66352 32.4392 16.5 32.4392C25.3365 32.4392 32.5 25.2757 32.5 16.4392C32.5 7.60273 25.3365 0.439209 16.5 0.439209ZM18.3291 21.6421C16.8645 21.6421 15.5035 21.1915 14.3765 20.4226L13.2878 21.5112L15.2165 23.4398L13.357 25.2994L11.4283 23.3707L9.49968 25.2994L7.64016 23.4398L9.5688 21.5112L7.64016 19.5826L9.49968 17.723L11.4283 19.6517L12.517 18.563C11.7211 17.3987 11.296 16.0208 11.2974 14.6104C11.2974 10.7333 14.4517 7.57905 18.3291 7.57905C22.2059 7.57905 25.3605 10.733 25.3605 14.6104C25.3602 18.4878 22.2059 21.6421 18.3291 21.6421Z"></path></svg><span class="font-semibold text-black group-hover:text-white">Weiblich</span></span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
                 </div>
             </div>
 
-
-            <!-- STEP 3: Age Selection (New) -->
+            <!-- ETAPA 3: Idade -->
             <div id="step-3" class="hidden step-transition">
                 <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">
-                        Wir glauben, Alter ist nur eine Zahl – aber es hilft uns, den besten Plan für dich zu erstellen! Könntest du uns bitte dein Alter mitteilen?
-                    </h3>
+                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Wir glauben, Alter ist nur eine Zahl – mas ele ajuda a criar o melhor plan für dich!</h3>
                 </div>
-
-
-                <div class="max-w-[352px] mx-auto">
-                    <div class="grid gap-2 w-full mx-auto">
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="text-base text-left font-semibold">Unter 20 Jahre</span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="text-base text-left font-semibold">20-29 Jahre</span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="text-base text-left font-semibold">30-39 Jahre</span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="text-base text-left font-semibold">40-49 Jahre</span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="text-base text-left font-semibold">50-59 Jahre</span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                        <button class="group w-full rounded-xl p-4 flex items-center gap-2 justify-between bg-white md:hover:text-white md:hover:bg-light-blue active:text-white active:bg-light-blue transition-all shadow-sm" onclick="nextStep()">
-                            <span class="text-base text-left font-semibold">Über 60 Jahre</span>
-                            <svg class="text-light-blue group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                        </button>
-                    </div>
+                <div class="max-w-[352px] mx-auto space-y-2">
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">20-29 Jahre</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">30-39 Jahre</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">40-49 Jahre</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
                 </div>
+            </div>
 
-                <!-- ETAPA 4: Julia Success Story -->
+            <!-- ETAPA 4: Julia Success Story -->
             <div id="step-4" class="hidden step-transition">
                 <div class="lg:mt-12 lg:mb-10">
                     <div class="h-full grid xl:gap-x-10 lg:gap-x-20 items-center xl:grid-cols-2 justify-center text-left">
@@ -238,7 +201,7 @@
                 </div>
             </div>
 
-            <!-- ETAPA 5: Altura (NOVA PÁGINA INSERIDA) -->
+            <!-- ETAPA 5: Altura -->
             <div id="step-5" class="hidden step-transition">
                 <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
                     <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Du machst das super! Bitte sag uns noch, wie groß du bist.</h3>
@@ -248,7 +211,7 @@
                         <button class="text-white font-semibold bg-light-blue rounded-[10px] w-full min-h-12 p-1.5 flex items-center justify-center">Metrisch</button>
                         <button class="text-black rounded-[10px] w-full min-h-12 p-1.5 flex items-center justify-center">Imperial</button>
                     </div>
-                    <div class="relative height-input-container bg-white rounded-2xl shadow-sm border border-gray-100 h-[70px] px-4 flex flex-col justify-center">
+                    <div class="relative input-container bg-white rounded-2xl shadow-sm border border-gray-100 h-[70px] px-4 flex flex-col justify-center">
                         <label class="label absolute top-2 transition-all duration-100 text-xs text-gray-500 font-medium" for="height">Größe</label>
                         <div class="flex items-center mt-3">
                             <input id="height" type="number" inputmode="numeric" placeholder="170" class="appearance-none text-xl font-bold min-w-0 grow outline-none bg-transparent placeholder-gray-300">
@@ -261,21 +224,53 @@
                 </div>
             </div>
 
-            <!-- ETAPA 6: Atividade Física (Deslocada) -->
+            <!-- ETAPA 6: Peso Atual e Desejado (NOVA PÁGINA INSERIDA) -->
             <div id="step-6" class="hidden step-transition">
+                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
+                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Wir sind hier, um dich bei deinen Zielen zu unterstützen! Könntest du uns bitte dein aktuelles Gewicht und dein Wunschgewicht mitteilen?</h3>
+                </div>
+                <div class="max-w-[352px] mx-auto space-y-4">
+                    <div class="grid grid-cols-2 w-full h-max rounded-xl p-1 bg-white shadow-sm">
+                        <button class="text-white font-semibold bg-light-blue rounded-[10px] w-full min-h-12 p-1.5 flex items-center justify-center">Metrisch</button>
+                        <button class="text-black rounded-[10px] w-full min-h-12 p-1.5 flex items-center justify-center">Imperial</button>
+                    </div>
+                    <form class="space-y-4 mt-4" onsubmit="event.preventDefault(); nextStep();">
+                        <div class="relative input-container border-[#E3E3E3] rounded-2xl shadow-sm border bg-white h-[70px] px-4 flex flex-col justify-center">
+                            <label class="label absolute top-2 transition-all duration-100 text-[12px] text-gray-500 font-medium" for="currentWeight">Aktuelles Gewicht</label>
+                            <div class="flex items-center mt-3">
+                                <input id="currentWeight" type="number" inputmode="numeric" class="appearance-none text-xl font-bold min-w-0 grow outline-none bg-transparent placeholder-gray-300">
+                                <span class="text-lg font-medium text-gray-400">kg</span>
+                            </div>
+                        </div>
+                        <div class="relative input-container border-[#E3E3E3] rounded-2xl shadow-sm border bg-white h-[70px] px-4 flex flex-col justify-center">
+                            <label class="label absolute top-2 transition-all duration-100 text-[12px] text-gray-500 font-medium" for="desiredWeight">Wunschgewicht</label>
+                            <div class="flex items-center mt-3">
+                                <input id="desiredWeight" type="number" inputmode="numeric" class="appearance-none text-xl font-bold min-w-0 grow outline-none bg-transparent placeholder-gray-300">
+                                <span class="text-lg font-medium text-gray-400">kg</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="select-none uppercase min-h-[70px] w-full bg-light-blue text-white md:hover:bg-hover-blue active:bg-hover-blue transition-all rounded-full text-lg leading-[22px] font-bold flex items-center justify-center gap-4 mt-6">
+                            <span>Weiter</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ETAPA 7: Atividade Física -->
+            <div id="step-7" class="hidden step-transition">
                 <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
                     <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Wie oft bist du im Alltag körperlich aktiv?</h3>
                     <p class="max-w-[540px] mx-auto text-light-blue font-semibold mt-4">Das hilft uns, deinen Kalorienbedarf zu schätzen.</p>
                 </div>
                 <div class="max-w-[352px] mx-auto space-y-2">
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">Fast nie (Bürojob)</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">1-2 Mal pro Woche</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">3+ Mal pro Woche</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">Fast nie (Bürojob)</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">1-2 Mal pro Woche</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">3+ Mal pro Woche</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
                 </div>
             </div>
 
-            <!-- ETAPA 7: Hábitos Alimentares (Deslocada) -->
-            <div id="step-7" class="hidden step-transition">
+            <!-- ETAPA 8: Hábitos Alimentares -->
+            <div id="step-8" class="hidden step-transition">
                 <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
                     <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Isst du oft spät am Abend?</h3>
                 </div>
@@ -286,19 +281,7 @@
                 </div>
             </div>
 
-            <!-- ETAPA 8: Peso Atual (Deslocada) -->
-            <div id="step-8" class="hidden step-transition">
-                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Wie hoch ist dein aktuelles Gewicht?</h3>
-                    <p class="max-w-[540px] mx-auto text-light-blue font-semibold mt-4">Das hilft uns, deinen Fortschritt zu planen.</p>
-                </div>
-                <div class="max-w-[352px] mx-auto space-y-4">
-                    <input type="number" id="weight-input" placeholder="Gewicht in kg (z.B. 85)" class="w-full p-4 rounded-xl border-2 border-transparent focus:border-light-blue outline-none text-center text-xl font-bold shadow-sm">
-                    <button class="w-full rounded-full py-5 bg-light-blue text-white font-bold text-lg uppercase shadow-lg md:hover:bg-hover-blue transition-all" onclick="nextStep()">Plan erstellen</button>
-                </div>
-            </div>
-
-            <!-- ETAPA 9: Processamento Final (Deslocada) -->
+            <!-- ETAPA 9: Processamento Final -->
             <div id="step-9" class="hidden step-transition">
                 <div class="mt-20 text-center space-y-8">
                     <div class="flex justify-center">
