@@ -191,6 +191,120 @@
             </div>
 
             <!-- Prova Social (Oculta na etapa 4) -->
+           <div id="step-4" class="hidden step-transition">
+                <div class="lg:mt-12 lg:mb-10">
+                    <div class="h-full grid xl:gap-x-10 lg:gap-x-20 items-center xl:grid-cols-2 justify-center text-left">
+                        <div class="max-xl:order-first relative">
+                            <img width="620" height="550" alt="Glucavit Before After" class="w-full object-cover rounded-2xl" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/e4038f1f-b322-4e34-8ace-70a354573e00/w=1240,h=1100,format=webp">
+                            <div class="flex flex-col gap-1 items-center p-2 xl:p-4 w-full max-w-[90%] xl:max-w-[340px] mx-auto absolute bottom-5 left-1/2 -translate-x-1/2 bg-white rounded-lg shadow-xl">
+                                <h4 class="text-[26px] font-moret font-semibold">Julia</h4>
+                                <span class="text-light-blue max-xl:text-sm text-xl font-bold">10/15 KG in 2 Monaten verloren</span>
+                            </div>
+                        </div>
+                        <div class="z-10 max-lg:mt-8 w-full space-y-4 xl:space-y-6">
+                            <div class="space-y-4 max-xl:text-center">
+                                <h1 class="font-medium text-3xl md:text-5xl lg:text-6xl font-moret leading-tight text-primary-black">Über 5.000 Erfolgsgeschichten und es werden immer mehr!</h1>
+                                <p class="text-lg text-gray-700">Sicher, effektiv und von Tausenden vertraut – entdecke, warum Glucavit Deutschland Nr. 1 Fettverbrenner im Jahr 2026 ist.</p>
+                            </div>
+                            <div class="max-xl:flex max-xl:justify-center">
+                                <button class="select-none uppercase min-h-[70px] md:min-w-[300px] py-5 px-4 md:px-8 w-full md:w-fit bg-light-blue text-white md:hover:bg-hover-blue active:bg-hover-blue transition-all rounded-full text-lg leading-[22px] font-bold flex items-center justify-center gap-4 xl:min-w-[320px]" onclick="nextStep()">
+                                    <span>Weiter</span>
+                                </button>
+                            </div>
+                            <div class="flex !mt-10 bg-main-bg rounded-3xl px-4 pt-4 space-y-1 relative overflow-hidden min-h-[160px] md:min-h-[200px]">
+                                <div class="z-10 pr-4 md:pr-24">
+                                    <div class="text-[#1A1817] text-lg italic leading-[26px] font-medium">„Dein Plan wird individuell auf deine Ziele und deinen Lebensstil abgestimmt. Falls Anpassungen nötig sind, verfeinern wir ihn.“</div>
+                                    <div class="text-[#1A1817] font-bold mt-4 mb-4 flex items-center justify-between xl:block">
+                                        <span class="text-sm uppercase">Glucavit Forschungsteam</span>
+                                        <img width="106" height="94" alt="Glucavit Doctor" class="w-[106px] h-[94px] object-cover object-top xl:hidden ml-2 rounded-lg" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/9f4acee0-e207-4887-51d5-e334f8dc8500/w=106,h=94">
+                                    </div>
+                                </div>
+                                <img width="140" height="193" alt="Glucavit Doctor" class="absolute bottom-0 right-0 object-cover max-xl:hidden" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/9f4acee0-e207-4887-51d5-e334f8dc8500/w=140,h=193">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ETAPA 5: Altura (NOVA PÁGINA INSERIDA) -->
+            <div id="step-5" class="hidden step-transition">
+                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
+                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Du machst das super! Bitte sag uns noch, wie groß du bist.</h3>
+                </div>
+                <div class="max-w-[352px] mx-auto space-y-4">
+                    <div class="grid grid-cols-2 w-full h-max rounded-xl p-1 bg-white shadow-sm">
+                        <button class="text-white font-semibold bg-light-blue rounded-[10px] w-full min-h-12 p-1.5 flex items-center justify-center">Metrisch</button>
+                        <button class="text-black rounded-[10px] w-full min-h-12 p-1.5 flex items-center justify-center">Imperial</button>
+                    </div>
+                    <div class="relative height-input-container bg-white rounded-2xl shadow-sm border border-gray-100 h-[70px] px-4 flex flex-col justify-center">
+                        <label class="label absolute top-2 transition-all duration-100 text-xs text-gray-500 font-medium" for="height">Größe</label>
+                        <div class="flex items-center mt-3">
+                            <input id="height" type="number" inputmode="numeric" placeholder="170" class="appearance-none text-xl font-bold min-w-0 grow outline-none bg-transparent placeholder-gray-300">
+                            <span class="text-lg font-medium text-gray-400">cm</span>
+                        </div>
+                    </div>
+                    <button class="select-none uppercase min-h-[70px] w-full bg-light-blue text-white md:hover:bg-hover-blue active:bg-hover-blue transition-all rounded-full text-lg leading-[22px] font-bold flex items-center justify-center gap-4" onclick="nextStep()">
+                        <span>Weiter</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ETAPA 6: Atividade Física (Deslocada) -->
+            <div id="step-6" class="hidden step-transition">
+                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
+                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Wie oft bist du im Alltag körperlich aktiv?</h3>
+                    <p class="max-w-[540px] mx-auto text-light-blue font-semibold mt-4">Das hilft uns, deinen Kalorienbedarf zu schätzen.</p>
+                </div>
+                <div class="max-w-[352px] mx-auto space-y-2">
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">Fast nie (Bürojob)</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">1-2 Mal pro Woche</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">3+ Mal pro Woche</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                </div>
+            </div>
+
+            <!-- ETAPA 7: Hábitos Alimentares (Deslocada) -->
+            <div id="step-7" class="hidden step-transition">
+                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
+                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Isst du oft spät am Abend?</h3>
+                </div>
+                <div class="max-w-[352px] mx-auto space-y-2">
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">Ja, fast jeden Tag</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">Nur gelegentlich</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">Nein, fast nie</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                </div>
+            </div>
+
+            <!-- ETAPA 8: Peso Atual (Deslocada) -->
+            <div id="step-8" class="hidden step-transition">
+                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
+                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Wie hoch ist dein aktuelles Gewicht?</h3>
+                    <p class="max-w-[540px] mx-auto text-light-blue font-semibold mt-4">Das hilft uns, deinen Fortschritt zu planen.</p>
+                </div>
+                <div class="max-w-[352px] mx-auto space-y-4">
+                    <input type="number" id="weight-input" placeholder="Gewicht in kg (z.B. 85)" class="w-full p-4 rounded-xl border-2 border-transparent focus:border-light-blue outline-none text-center text-xl font-bold shadow-sm">
+                    <button class="w-full rounded-full py-5 bg-light-blue text-white font-bold text-lg uppercase shadow-lg md:hover:bg-hover-blue transition-all" onclick="nextStep()">Plan erstellen</button>
+                </div>
+            </div>
+
+            <!-- ETAPA 9: Processamento Final (Deslocada) -->
+            <div id="step-9" class="hidden step-transition">
+                <div class="mt-20 text-center space-y-8">
+                    <div class="flex justify-center">
+                        <div class="loader"></div>
+                    </div>
+                    <div id="processing-text" class="space-y-4">
+                        <h3 class="text-2xl font-moret font-bold text-primary-black">Wir analysieren deine Antworten...</h3>
+                        <p class="text-gray-600">Basierend auf über 5.000 erfolgreichen Profilen.</p>
+                    </div>
+                    <div id="final-result" class="hidden space-y-6">
+                        <h3 class="text-3xl font-moret font-bold text-light-blue">Dein Plan ist bereit!</h3>
+                        <p class="text-lg text-primary-black">Glückwunsch! Du bist nur einen Schritt davon entfernt, dein Wunschgewicht mit Glucavit zu erreichen.</p>
+                        <a href="https://glucavit-shop.de" class="inline-block w-full max-w-[352px] rounded-full py-5 bg-primary-orange text-white font-bold text-xl uppercase shadow-lg hover:scale-105 transition-transform text-center">Zum offiziellen Shop</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prova Social (Oculta na etapa 4 e 9) -->
             <div id="shared-social-proof">
                 <div class="my-6 md:mb-10 text-center">
                     <div class="flex gap-x-1 justify-center items-center text-sm mb-2">
@@ -219,7 +333,7 @@
             </div>
 
             <!-- Advantages -->
-            <section class="mt-14 pt-6 border-t border-t-[#00000014]">
+            <section class="mt-14 pt-6 border-t border-t-[#00000014]" id="footer-advantages">
                 <div class="flex flex-wrap justify-center md:justify-between gap-4 max-w-[900px] mx-auto">
                     <div class="flex gap-x-3 items-center basis-[calc(50%-16px)] md:basis-auto">
                         <img width="44" height="44" class="w-11 h-11" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/10fb77de-afea-4ce0-dfbc-62c83f8d5f00/w=44,h=44,format=webp" alt="Vegan"><div class="text-sm md:text-lg font-medium">Vegan</div>
@@ -244,25 +358,40 @@
 
     <script>
         let currentStep = 1;
+        const totalSteps = 9;
 
         function updateUI() {
             const body = document.getElementById('body-container');
             const header = document.getElementById('header-container');
             const socialProof = document.getElementById('shared-social-proof');
+            const footerAdv = document.getElementById('footer-advantages');
 
-            // Dynamic Step 4 Logic
+            // Dynamic Styling for Step 4 and Final Processing
             if (currentStep === 4) {
                 body.style.backgroundColor = '#bcf3f1'; // bg-secondary
                 header.style.backgroundColor = '#bcf3f1';
                 socialProof.classList.add('hidden');
+            } else if (currentStep === totalSteps) {
+                body.style.backgroundColor = '#e5f9f8';
+                header.style.backgroundColor = '#e5f9f8';
+                socialProof.classList.add('hidden');
+                footerAdv.classList.add('hidden');
+                
+                // Final Processing Logic
+                setTimeout(() => {
+                    document.getElementById('processing-text').classList.add('hidden');
+                    document.querySelector('.loader').classList.add('hidden');
+                    document.getElementById('final-result').classList.remove('hidden');
+                }, 2500);
             } else {
                 body.style.backgroundColor = '#e5f9f8'; // bg-main-bg
                 header.style.backgroundColor = '#e5f9f8';
                 socialProof.classList.remove('hidden');
+                footerAdv.classList.remove('hidden');
             }
 
             // Steps Visibility
-            for (let i = 1; i <= 8; i++) {
+            for (let i = 1; i <= totalSteps; i++) {
                 const step = document.getElementById(`step-${i}`);
                 if (step) step.classList.add('hidden');
             }
@@ -270,20 +399,34 @@
             if (activeStep) activeStep.classList.remove('hidden');
 
             // Counter and Progress
-            document.getElementById('step-counter').innerText = `${currentStep}/8`;
-            const percentage = currentStep * 12.5;
+            document.getElementById('step-counter').innerText = `${currentStep}/${totalSteps}`;
+            const percentage = (currentStep / totalSteps) * 100;
             document.getElementById('progress-bar').style.width = `calc(${percentage}% - 20px)`;
 
             // Back button
             const backBtn = document.getElementById('back-btn');
-            if (currentStep > 1) backBtn.classList.remove('hidden');
+            if (currentStep > 1 && currentStep < totalSteps) backBtn.classList.remove('hidden');
             else backBtn.classList.add('hidden');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function nextStep() { if (currentStep < 8) { currentStep++; updateUI(); } }
-        function prevStep() { if (currentStep > 1) { currentStep--; updateUI(); } }
+        function nextStep() { 
+            if (currentStep < totalSteps) { 
+                currentStep++; 
+                updateUI(); 
+            } 
+        }
+
+        function prevStep() { 
+            if (currentStep > 1) { 
+                currentStep--; 
+                updateUI(); 
+            } 
+        }
+
+        // Initialize UI
+        updateUI();
     </script>
 </body>
 </html>
