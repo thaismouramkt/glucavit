@@ -1,661 +1,306 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Glucavit | Quiz Glucavit für Gewichtsverlust | Offizieller Glucavit™-Shop</title>
+    <title>Glucavit | Quiz Glucavit für Gewichtsverlust</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-orange': '#d95e00',
-                        'light-blue': '#00c1b7',
-                        'main-bg': '#e5f9f8',
-                        'secondary': '#bcf3f1',
-                        'primary-black': '#111827',
-                        'hover-blue': '#06948c',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
-                        moret: ['serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden; /* Trava o scroll do fundo */
         }
-        .font-moret {
-            font-family: 'Moret', 'Times New Roman', Times, serif;
-        }
-        [v-cloak] { display: none; }
-        .step-transition { transition: all 0.3s ease-in-out; }
-        
-        #progress-bar {
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        .bg-primary-orange { background-color: #d95e00; }
+        .bg-main-bg { background-color: #e5f9f8; }
+        .text-light-blue { color: #00c1b7; }
+        .bg-light-blue { background-color: #00c1b7; }
+        .font-moret { font-family: 'Times New Roman', serif; }
+
+        /* Efeito de desfoque no conteúdo do fundo */
+        #bg-container {
+            filter: blur(8px);
+            pointer-events: none;
+            user-select: none;
         }
 
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #00c1b7;
-            border-radius: 50%;
+        /* Estilização Customizada do Pop-up (CR-POPUP) */
+        #cr-popup-overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(2px);
+        }
+
+        #cr-popup {
+            background: white;
+            border-radius: 20px;
+            max-width: 700px;
+            width: 95%;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .cr-badge {
+            background: #00a551;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .cr-box {
+            display: flex;
+            flex-direction: row;
+            padding: 20px;
+        }
+
+        .cr-left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cr-left img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .cr-right {
+            flex: 1.5;
+            padding-left: 20px;
+        }
+
+        .cr-right h1 {
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+
+        .cr-sub {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .cr-benefits {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .cr-benefits li {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .tick {
+            color: #00a551;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .cr-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cr-yes {
+            background: #00a551;
+            color: white;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .cr-yes:hover { background: #008a44; }
+
+        .cr-no {
+            background: #f3f4f6;
+            color: #374151;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .cr-microcopy {
+            font-size: 11px;
+            color: #9ca3af;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .cr-trustrow {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            border-top: 1px solid #f3f4f6;
+            padding-top: 15px;
+        }
+
+        .cr-trust {
+            text-align: center;
+            font-size: 10px;
+            color: #374151;
+        }
+
+        .cr-trust strong { display: block; font-size: 11px; }
+
+        .cr-bottom {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .cr-bottom img {
             width: 40px;
             height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            border-radius: 50%;
         }
 
-        .input-container:focus-within .label {
-            top: 0.5rem;
-            font-size: 0.75rem;
-            color: #3b82f6;
+        .cr-footer {
+            font-size: 10px;
+            color: #9ca3af;
+        }
+
+        .cr-footer a { text-decoration: underline; }
+
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        /* Responsividade do Pop-up */
+        @media (max-width: 640px) {
+            .cr-box { flex-direction: column; }
+            .cr-right { padding-left: 0; margin-top: 15px; text-align: center; }
+            .cr-benefits li { justify-content: center; }
+            .cr-badge { font-size: 12px; }
+            .mobile-cta { display: block; }
         }
     </style>
 </head>
-<body class="bg-main-bg min-h-screen flex flex-col transition-colors duration-500" id="body-container">
+<body class="bg-main-bg">
 
-    <!-- Top Rating Banner -->
-    <section class="min-h-10 py-2 sm:py-3 bg-primary-orange">
-        <div class="container mx-auto flex items-center justify-center gap-4 text-xs md:text-sm px-4 text-white">
-            <svg width="113" height="17" viewBox="0 0 113 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_27_1063)">
-                    <path d="M15.1432 5.8744L10.8276 5.21746L8.89678 1.11972C8.55881 0.404105 7.44091 0.404105 7.10294 1.11972L5.17312 5.21746L0.856507 5.8744C0.0395812 5.99908 -0.291389 7.05521 0.302557 7.66291L3.42628 10.8523L2.68934 15.3565C2.55035 16.2094 3.40628 16.8642 4.14021 16.4609L7.99986 14.335L11.8605 16.4619C12.5884 16.8611 13.4514 16.2167 13.3114 15.3576L12.5744 10.8533L15.6982 7.66395C16.2911 7.05521 15.9601 5.99908 15.1432 5.8744Z" fill="#FEB511"></path>
-                    <path d="M39.1432 5.8744L34.8276 5.21746L32.8968 1.11972C32.5588 0.404105 31.4409 0.404105 31.1029 1.11972L29.1731 5.21746L24.8565 5.8744C24.0396 5.99908 23.7086 7.05521 24.3026 7.66291L27.4263 10.8523L26.6893 15.3565C26.5504 16.2094 27.4063 16.8642 28.1402 16.4609L31.9999 14.335L35.8605 16.4619C36.5884 16.8611 37.4514 16.2167 37.3114 15.3576L36.5744 10.8533L39.6982 7.66395C40.2911 7.05521 39.9601 5.99908 39.1432 5.8744Z" fill="#FEB511"></path>
-                    <path d="M64.0897 5.8744L59.5043 5.21746L57.4528 1.11972C57.0937 0.404105 55.906 0.404105 55.5469 1.11972L53.4964 5.21746L48.91 5.8744C48.0421 5.99908 47.6904 7.05521 48.3215 7.66291L51.6404 10.8523L50.8574 15.3565C50.7098 16.2094 51.6192 16.8642 52.399 16.4609L56.4999 14.335L60.6018 16.4619C61.3752 16.8611 62.2921 16.2167 62.1433 15.3576L61.3604 10.8533L64.6793 7.66395C65.3093 7.05521 64.9577 5.99908 64.0897 5.8744Z" fill="#FEB511"></path>
-                    <path d="M88.1432 5.8744L83.8276 5.21746L81.8968 1.11972C81.5588 0.404105 80.4409 0.404105 80.1029 1.11972L78.1731 5.21746L73.8565 5.8744C73.0396 5.99908 72.7086 7.05521 73.3026 7.66291L76.4263 10.8523L75.6893 15.3565C75.5504 16.2094 76.4063 16.8642 77.1402 16.4609L80.9999 14.335L84.8605 16.4619C85.5884 16.8611 86.4514 16.2167 86.3114 15.3576L85.5744 10.8533L88.6982 7.66395C89.2911 7.05521 88.9601 5.99908 88.1432 5.8744Z" fill="#FEB511"></path>
-                    <path d="M112.143 5.8744L107.828 5.21746L105.897 1.11972C105.559 0.404105 104.441 0.404105 104.103 1.11972L102.173 5.21746L97.8565 5.8744C97.0396 5.99908 96.7086 7.05521 97.3026 7.66291L100.426 10.8523L99.6893 15.3565C99.5504 16.2094 100.406 16.8642 101.14 16.4609L105 14.335L108.861 16.4619C109.588 16.8611 110.451 16.2167 110.311 15.3576L109.574 10.8533L112.698 7.66395C113.291 7.05521 112.96 5.99908 112.143 5.8744Z" fill="#FEB511"></path>
-                </g>
-                <defs><clipPath id="clip0_27_1063"><rect width="113" height="16" fill="white" transform="translate(0 0.583008)"></rect></clipPath></defs>
-            </svg>
-            <span class="text-white">Bewertet mit <b>4,8</b> / 5 basierend auf <b>5.000 zufriedenen Kunden</b></span>
-        </div>
-    </section>
-
-    <!-- USP Banner -->
-    <section class="bg-primary-orange border-t border-t-[#FFFFFF29]">
-        <div class="container mx-auto px-2 py-2 sm:py-3 flex items-center justify-center text-white">
-            <div class="inline-flex items-center gap-x-1 sm:gap-x-2">
-                <img width="20" height="20" class="flex-shrink-0 w-3 md:w-5 invert brightness-0" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/c0fa383d-f30a-427a-ed75-5923144bd200/w=40,h=40,format=webp" alt="Delivery">
-                <div class="text-[8px] md:text-xs font-semibold uppercase whitespace-nowrap">KOSTENLOSE & schnelle Lieferung</div>
+    <!-- SITE DE FUNDO (EMBASSADO) -->
+    <div id="bg-container">
+        <!-- Banner Ratings -->
+        <section class="min-h-10 py-2 bg-primary-orange">
+            <div class="container mx-auto flex items-center justify-center gap-4 text-xs px-4">
+                <span class="text-white">Bewertet mit <b>4,8</b> / 5</span>
             </div>
-            <div class="w-px h-4 mx-2 md:mx-10 bg-[#FFFFFF29]"></div>
-            <div class="inline-flex items-center gap-x-1 sm:gap-x-2">
-                <img width="20" height="20" class="flex-shrink-0 w-3 md:w-5 invert brightness-0" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/faa6d0e3-36a3-455f-3455-0e5816b8a400/w=40,h=40,format=webp" alt="Customers">
-                <div class="text-[8px] md:text-xs font-semibold uppercase whitespace-nowrap">Über 5.000+ zufriedene Kunden</div>
-            </div>
-            <div class="w-px h-4 mx-2 md:mx-10 bg-[#FFFFFF29]"></div>
-            <div class="inline-flex items-center gap-x-1 sm:gap-x-2">
-                <img width="20" height="20" class="flex-shrink-0 w-3 md:w-5 invert brightness-0" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/6b484a01-08d7-42f5-fdc0-b02a94411800/w=40,h=40,format=webp" alt="Medicine">
-                <div class="text-[8px] md:text-xs font-semibold uppercase whitespace-nowrap">Bewährte Medizin</div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Header -->
-    <header class="h-[53px] md:h-[66.44px] py-3 transition-colors duration-500" id="header-container">
-        <div class="container mx-auto h-full flex items-center justify-center relative px-4">
-            <button id="back-btn" class="hidden flex items-center gap-1 md:gap-3 md:text-lg font-medium absolute left-4 md:left-10 text-[#00C1B7]" onclick="prevStep()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.82843 6.9999H16V8.9999H3.82843L9.1924 14.3638L7.7782 15.778L0 7.9999L7.7782 0.22168L9.1924 1.63589L3.82843 6.9999Z" fill="currentColor"></path></svg>
-                <span>Zurück</span>
-            </button>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" width="120" height="44" viewBox="0 0 120 44" fill="none" class="max-w-[140px] text-[#37606F]">
-                <path d="M18.9963 35.9814C18.9963 39.8933 14.6797 43.4006 8.64116 43.4006C2.60266 43.4006 0 40.8772 0 37.243C0 33.6088 0.245984 35.1641 0.8173 34.0214L2.20592 33.6168H2.37255C1.88058 34.7991 1.64254 35.9417 1.64254 36.9574C1.64254 40.3377 4.21346 42.742 8.6491 42.742C13.0847 42.742 17.2109 40.417 17.2109 36.7114C17.2109 33.0058 15.3383 32.9185 12.1563 32.7201L6.28448 32.3551C3.91987 32.1885 1.55525 31.6251 1.55525 29.4192C1.55525 27.2133 2.37255 27.1339 4.03889 26.1579L5.05456 25.5469C2.68995 24.3249 1.14263 22 1.14263 19.1037C1.14263 14.8268 4.52292 11.7242 8.96649 11.7242C13.4101 11.7242 12.3071 12.2162 13.5688 13.0732C14.8701 11.6052 16.7507 10.5895 18.9883 10.5895L18.7027 13.0732C18.0123 12.9065 17.3141 12.8272 16.6634 12.8272C15.6874 12.8272 14.7511 13.0335 14.1401 13.4779C15.7667 14.7792 16.7904 16.7788 16.7904 19.1037C16.7904 23.3807 13.4101 26.4436 8.96649 26.4436C4.52292 26.4436 6.68123 26.2373 5.70523 25.8326L4.60227 26.5626C3.49931 27.2926 3.17398 28.0306 3.17398 28.6812C3.17398 29.7842 4.03096 30.2285 6.39557 30.3952L12.3071 30.7602C16.465 31.0062 18.9883 32.7201 18.9883 35.9734L18.9963 35.9814ZM3.26127 19.1037C3.26127 23.0157 5.62588 25.785 8.96649 25.785C12.3071 25.785 14.6717 23.0157 14.6717 19.1037C14.6717 15.1918 12.2674 12.3828 8.96649 12.3828C5.66555 12.3828 3.26127 15.1918 3.26127 19.1037Z" fill="currentColor"></path><path d="M20.9956 1.41674L22.7889 0.599442H22.9555V33.6088H20.9956V1.40881V1.41674Z" fill="currentColor"></path><path d="M44.7131 33.1248L42.9198 33.9421L41.8566 30.4349V30.2286C39.611 32.5138 36.556 34.1008 33.5407 34.1008C29.0972 34.1008 26.8198 31.6965 26.8198 26.5229V12.7479L28.6131 11.9306H28.7798V26.1976C28.7798 27.9909 28.7798 33.0455 34.4056 33.0455C40.0315 33.0455 39.9046 31.5378 41.8645 29.2526V12.7479L43.6578 11.9306H43.8244V30.0302L44.7211 33.1248H44.7131Z" fill="currentColor"></path><path d="M46.665 23.0633C46.665 16.3821 51.1086 11.7719 56.6075 11.7719C62.1065 11.7719 62.8444 13.0335 64.6774 15.5648L63.376 16.7074C61.6224 13.9778 59.4641 12.3432 56.6075 12.3432C52.2433 12.3432 48.863 16.5011 48.863 22.6983C48.863 28.8955 52.4496 32.9661 56.9329 32.9661C61.4161 32.9661 62.5984 31.5775 64.3917 28.7685L64.8837 29.0542C62.9238 32.1091 59.9958 34.1087 56.3219 34.1087C50.7357 34.1087 46.665 29.6652 46.665 23.0633Z" fill="currentColor"></path><path d="M83.5946 32.7995V33.0455C82.817 33.4977 82.0473 33.7755 81.2697 33.7755C79.2701 33.7755 78.9448 31.9028 78.8654 30.7999C76.5801 32.9185 73.4855 34.0215 70.8749 34.0215C68.2643 34.0215 65.249 32.2678 65.249 29.2129C65.249 26.1579 69.0816 23.1426 74.6202 22.492C76.0485 22.3253 77.5165 22.2063 78.8575 22.127V19.683C78.8575 15.0807 77.0642 12.8351 73.3109 12.8351C69.5577 12.8351 69.153 13.6524 67.1137 15.4061L66.7487 14.9538C68.9943 12.9145 71.1923 11.7719 74.1282 11.7719C78.5321 11.7719 80.8095 14.1365 80.8095 19.3497V29.7842C80.8095 31.7441 80.8095 32.8788 82.8488 32.8788C84.888 32.8788 83.3407 32.8391 83.5788 32.7995H83.5946ZM72.0572 32.9661C74.2949 32.9661 76.8658 31.9901 78.8654 30.0302V22.6903C72.3032 23.2617 67.2883 24.2377 67.2883 28.6019C67.2883 32.9661 69.4069 32.9661 72.0572 32.9661Z" fill="currentColor"></path><path d="M100.797 12.2559C99.1707 15.7631 97.7821 19.0244 95.6635 24.079L91.4659 34.0215H91.1406L81.9678 12.2559H84.0864L91.9499 31.0062L94.9652 23.833C97.1235 18.6991 98.6708 14.5808 99.0041 12.2559H100.797Z" fill="currentColor"></path><path d="M101.607 5.82063L103.48 3.94798L105.352 5.82063L103.48 7.69328L101.607 5.82063ZM102.504 12.7478L104.297 11.9305H104.464V33.6168H102.504V12.7478Z" fill="currentColor"></path><path d="M119.992 32.5932C118.445 33.4898 116.977 34.1008 115.064 34.1008C110.256 34.1008 110.256 30.1889 110.256 28.7209V13.1525H106.709V12.4622L110.01 12.2559L112.049 5.86031H112.216V12.2559H119.754L119.183 13.1525H112.216V28.3956C112.216 29.6572 112.216 33.1248 115.969 33.1248C119.722 33.1248 118.254 32.8788 119.675 32.1091L120 32.6011L119.992 32.5932Z" fill="currentColor"></path></svg>
-            
-            <div id="step-counter" class="text-lg font-medium absolute right-4 md:right-10 text-primary-black">1/9</div>
-        </div>
-    </header>
+        <header class="bg-main-bg h-[66px] flex items-center border-b">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <div class="font-bold text-xl text-[#37606F]">Glucavit™</div>
+                <div class="text-lg font-medium">1/8</div>
+            </div>
+        </header>
 
-    <!-- Barra de Progresso -->
-    <div class="bg-white">
-        <div id="progress-bar" class="relative z-10 h-1 bg-light-blue rounded-r" style="width: calc(11.11% - 20px)"></div>
+        <main class="py-10 px-4 max-w-[900px] mx-auto text-center">
+            <h1 class="text-3xl font-moret mb-4">Schön, dass du dir die Zeit nimmst.</h1>
+            <div class="space-y-4 max-w-[400px] mx-auto opacity-50">
+                <div class="bg-white p-4 rounded-xl shadow">Option 1</div>
+                <div class="bg-white p-4 rounded-xl shadow">Option 2</div>
+                <div class="bg-white p-4 rounded-xl shadow">Option 3</div>
+            </div>
+        </main>
+
+        <footer class="fixed bottom-0 w-full bg-[#111827] h-[66px] flex items-center justify-center text-[#BCBCBC] text-xs">
+            © 2026 Glucavit. Alle Rechte vorbehalten.
+        </footer>
     </div>
 
-    <!-- Área Principal de Conteúdo -->
-    <main class="flex-grow py-6 md:pb-20 relative overflow-hidden" id="main-content">
-        <div class="container mx-auto px-4">
-            
-            <!-- ETAPA 1 -->
-            <div id="step-1" class="step-transition">
-                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Hallo! Schön, dass du dir die Zeit nimmst. Bitte teile uns mit, was aktuell dein Ziel beim Abnehmen ist.</h3>
-                    <p class="max-w-[540px] mx-auto text-light-blue font-semibold mt-4 leading-[26px]">Was beschreibt dein Ziel am besten?</p>
+    <!-- POP-UP OVERLAY -->
+    <div id="cr-popup-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div id="cr-popup" role="dialog" aria-modal="true">
+            <div class="cr-badge">✅ OFFIZIELLER SHOP • Preis & Verfügbarkeit prüfen</div>
+            <div class="cr-box">
+                <div class="cr-left">
+                    <img src="https://gesundheitskapseln.de/wp-content/uploads/2026/01/glucavit_3bottles.png" alt="Glucavit 3 Bottles">
                 </div>
-                <div class="max-w-[352px] mx-auto space-y-2">
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">2-10 kg dauerhaft verlieren</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">11-20 kg dauerhaft verlieren</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">Mehr als 20 kg dauerhaft verlieren</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">Aktuelles Gewicht halten und fit werden</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold text-left">Ich habe mich noch nicht entschieden</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                </div>
-            </div>
-
-            <!-- ETAPA 2: Gênero -->
-            <div id="step-2" class="hidden step-transition">
-                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Super! Bitte teile uns dein Geschlecht mit.</h3>
-                </div>
-                <div class="max-w-[352px] mx-auto space-y-2">
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="flex items-center gap-x-3 text-light-blue group-hover:text-white"><svg width="32" height="32" fill="currentColor"><path d="M14.4781 14.0587C12.0509 14.0587 10.0762 16.0334 10.0762 18.4606C10.0762 20.8878 12.0509 22.8626 14.4781 22.8626C16.9053 22.8626 18.88 20.8878 18.88 18.4606C18.88 16.0334 16.9053 14.0587 14.4781 14.0587Z"></path><path d="M16.5 0.439209C7.66352 0.439209 0.5 7.60273 0.5 16.4392C0.5 25.2757 7.66352 32.4392 16.5 32.4392C25.3365 32.4392 32.5 25.2757 32.5 16.4392C32.5 7.60273 25.3365 0.439209 16.5 0.439209ZM25.5528 14.4181H22.9234V11.876L20.291 14.5083C21.0869 15.6726 21.512 17.0504 21.5106 18.4606C21.5106 22.3378 18.3563 25.492 14.4792 25.492C10.6018 25.492 7.44784 22.3378 7.44784 18.4606C7.44784 14.5835 10.6021 11.4293 14.4792 11.4293C15.8896 11.4278 17.2674 11.853 18.4318 12.6488L21.0642 10.0165H18.5218V7.38641H25.5528V14.4181Z"></path></svg><span class="font-semibold text-black group-hover:text-white">Männlich</span></span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="flex items-center gap-x-3 text-light-blue group-hover:text-white"><svg width="32" height="32" fill="currentColor"><path d="M18.3297 10.2085C15.9021 10.2085 13.9277 12.1832 13.9277 14.6104C13.9277 17.0376 15.9021 19.0123 18.3297 19.0123C20.7565 19.0123 22.7313 17.0376 22.7313 14.6104C22.7313 12.1832 20.7565 10.2085 18.3297 10.2085Z"></path><path d="M16.5 0.439209C7.66352 0.439209 0.5 7.60273 0.5 16.4392C0.5 25.2757 7.66352 32.4392 16.5 32.4392C25.3365 32.4392 32.5 25.2757 32.5 16.4392C32.5 7.60273 25.3365 0.439209 16.5 0.439209ZM18.3291 21.6421C16.8645 21.6421 15.5035 21.1915 14.3765 20.4226L13.2878 21.5112L15.2165 23.4398L13.357 25.2994L11.4283 23.3707L9.49968 25.2994L7.64016 23.4398L9.5688 21.5112L7.64016 19.5826L9.49968 17.723L11.4283 19.6517L12.517 18.563C11.7211 17.3987 11.296 16.0208 11.2974 14.6104C11.2974 10.7333 14.4517 7.57905 18.3291 7.57905C22.2059 7.57905 25.3605 10.733 25.3605 14.6104C25.3602 18.4878 22.2059 21.6421 18.3291 21.6421Z"></path></svg><span class="font-semibold text-black group-hover:text-white">Weiblich</span></span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                </div>
-            </div>
-
-            <!-- ETAPA 3: Idade -->
-            <div id="step-3" class="hidden step-transition">
-                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Wir glauben, Alter ist nur eine Zahl – mas ele ajuda a criar o melhor plan für dich!</h3>
-                </div>
-                <div class="max-w-[352px] mx-auto space-y-2">
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">Unter 20 Jahre</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">20-29 Jahre</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">30-39 Jahre</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">40-49 Jahre</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">50-59 Jahre</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
-                    <button class="group w-full rounded-xl p-4 flex items-center justify-between bg-white md:hover:bg-light-blue md:hover:text-white transition-all shadow-sm" onclick="nextStep()"><span class="font-semibold">Über 60 Jahre</span><svg width="16" height="16" fill="currentColor"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z"></path></svg></button>
+                <div class="cr-right">
+                    <h1>Jetzt den offiziellen Glucavit™-Rabatt sichern</h1>
+                    <p class="cr-sub">Du wirst zur offiziellen Bestellseite weitergeleitet.</p>
                     
-                </div>
-            </div>
+                    <ul class="cr-benefits">
+                        <li><span class="tick">✓</span> Offizielle Bundles & Aktionen</li>
+                        <li><span class="tick">✓</span> 30 Tage Geld-zurück-Garantie</li>
+                        <li><span class="tick">✓</span> Sicher bezahlen (SSL)</li>
+                    </ul>
 
-            <!-- ETAPA 4: Julia Success Story -->
-            <div id="step-4" class="hidden step-transition">
-                <div class="lg:mt-12 lg:mb-10">
-                    <div class="h-full grid xl:gap-x-10 lg:gap-x-20 items-center xl:grid-cols-2 justify-center text-left">
-                        <div class="max-xl:order-first relative">
-                            <img width="620" height="550" alt="Glucavit Before After" class="w-full object-cover rounded-2xl" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/e4038f1f-b322-4e34-8ace-70a354573e00/w=1240,h=1100,format=webp">
-                            <div class="flex flex-col gap-1 items-center p-2 xl:p-4 w-full max-w-[90%] xl:max-w-[340px] mx-auto absolute bottom-5 left-1/2 -translate-x-1/2 bg-white rounded-lg shadow-xl">
-                                <h4 class="text-[26px] font-moret font-semibold">Julia</h4>
-                                <span class="text-light-blue max-xl:text-sm text-xl font-bold">10/15 KG in 2 Monaten verloren</span>
-                            </div>
-                        </div>
-                        <div class="z-10 max-lg:mt-8 w-full space-y-4 xl:space-y-6">
-                            <div class="space-y-4 max-xl:text-center">
-                                <h1 class="font-medium text-3xl md:text-5xl lg:text-6xl font-moret leading-tight text-primary-black">Über 5.000 Erfolgsgeschichten und es werden immer mehr!</h1>
-                                <p class="text-lg text-gray-700">Sicher, effektiv und von Tausenden vertraut – entdecke, warum Glucavit Deutschland Nr. 1 Fettverbrenner im Jahr 2026 ist.</p>
-                            </div>
-                            <div class="max-xl:flex max-xl:justify-center">
-                                <button class="select-none uppercase min-h-[70px] md:min-w-[300px] py-5 px-4 md:px-8 w-full md:w-fit bg-light-blue text-white md:hover:bg-hover-blue active:bg-hover-blue transition-all rounded-full text-lg leading-[22px] font-bold flex items-center justify-center gap-4 xl:min-w-[320px]" onclick="nextStep()">
-                                    <span>Weiter</span>
-                                </button>
-                            </div>
-                            <div class="flex !mt-10 bg-main-bg rounded-3xl px-4 pt-4 space-y-1 relative overflow-hidden min-h-[160px] md:min-h-[200px]">
-                                <div class="z-10 pr-4 md:pr-24">
-                                    <div class="text-[#1A1817] text-lg italic leading-[26px] font-medium">„Dein Plan wird individuell auf deine Ziele und deinen Lebensstil abgestimmt. Falls Anpassungen nötig sind, verfeinern wir ihn, um sicherzustellen, dass du die bestmöglichen Ergebnisse erzielst.“</div>
-                                    <div class="text-[#1A1817] font-bold mt-4 mb-4 flex items-center justify-between xl:block">
-                                        <span class="text-sm uppercase">Glucavit Forschungsteam</span>
-                                        <img width="106" height="94" alt="Glucavit Doctor" class="w-[106px] h-[94px] object-cover object-top xl:hidden ml-2 rounded-lg" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/9f4acee0-e207-4887-51d5-e334f8dc8500/w=106,h=94">
-                                    </div>
-                                </div>
-                                <img width="140" height="193" alt="Glucavit Doctor" class="absolute bottom-0 right-0 object-cover max-xl:hidden" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/9f4acee0-e207-4887-51d5-e334f8dc8500/w=140,h=193">
-                            </div>
-                        </div>
+                    <div class="cr-btns">
+                        <button class="cr-yes" id="btn-accept">✅ Preis & Verfügbarkeit prüfen</button>
+                        <button class="cr-no" id="btn-reject">Zum Checkout →</button>
+                        <p class="cr-microcopy">Direkt zur offiziellen Seite. Keine Registrierung.</p>
+                    </div>
+
+                    <div class="cr-trustrow">
+                        <div class="cr-trust"><strong>Qualität</strong><span>EU-Standard</span></div>
+                        <div class="cr-trust"><strong>Sicher</strong><span>SSL Checkout</span></div>
+                        <div class="cr-trust"><strong>Garantie</strong><span>30 Tage</span></div>
+                    </div>
+
+                    <div class="cr-bottom">
+                        <img src="https://gesundheitskapseln.de/wp-content/uploads/2026/01/glucavit_woman.png" alt="User">
+                        <nav class="cr-footer">
+                            <a href="#">Hinweis</a> | <a href="#">Nutzung</a> | <a href="#">Datenschutz</a>
+                        </nav>
                     </div>
                 </div>
             </div>
-
-            <!-- ETAPA 5: Altura -->
-            <div id="step-5" class="hidden step-transition">
-                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Du machst das super! Bitte sag uns noch, wie groß du bist.</h3>
-                </div>
-                <div class="max-w-[352px] mx-auto space-y-4">
-                    <div class="grid grid-cols-2 w-full h-max rounded-xl p-1 bg-white shadow-sm">
-                        <button class="text-white font-semibold bg-light-blue rounded-[10px] w-full min-h-12 p-1.5 flex items-center justify-center">Metrisch</button>
-                        <button class="text-black rounded-[10px] w-full min-h-12 p-1.5 flex items-center justify-center">Imperial</button>
-                    </div>
-                    <div class="relative input-container bg-white rounded-2xl shadow-sm border border-gray-100 h-[70px] px-4 flex flex-col justify-center">
-                        <label class="label absolute top-2 transition-all duration-100 text-xs text-gray-500 font-medium" for="height">Größe</label>
-                        <div class="flex items-center mt-3">
-                            <input id="height" type="number" inputmode="numeric" placeholder="170" class="appearance-none text-xl font-bold min-w-0 grow outline-none bg-transparent placeholder-gray-300">
-                            <span class="text-lg font-medium text-gray-400">cm</span>
-                        </div>
-                    </div>
-                    <button class="select-none uppercase min-h-[70px] w-full bg-light-blue text-white md:hover:bg-hover-blue active:bg-hover-blue transition-all rounded-full text-lg leading-[22px] font-bold flex items-center justify-center gap-4" onclick="nextStep()">
-                        <span>Weiter</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ETAPA 6: Peso Atual e Desejado -->
-            <div id="step-6" class="hidden step-transition">
-                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Wir sind hier, um dich bei deinen Zielen zu unterstützen! Könntest du uns bitte dein aktuelles Gewicht und dein Wunschgewicht mitteilen?</h3>
-                </div>
-                <div class="max-w-[352px] mx-auto space-y-4">
-                    <div class="grid grid-cols-2 w-full h-max rounded-xl p-1 bg-white shadow-sm">
-                        <button class="text-white font-semibold bg-light-blue rounded-[10px] w-full min-h-12 p-1.5 flex items-center justify-center">Metrisch</button>
-                        <button class="text-black rounded-[10px] w-full min-h-12 p-1.5 flex items-center justify-center">Imperial</button>
-                    </div>
-                    <form class="space-y-4 mt-4" onsubmit="event.preventDefault(); nextStep();">
-                        <div class="relative input-container border-[#E3E3E3] rounded-2xl shadow-sm border bg-white h-[70px] px-4 flex flex-col justify-center">
-                            <label class="label absolute top-2 transition-all duration-100 text-[12px] text-gray-500 font-medium" for="currentWeight">Aktuelles Gewicht</label>
-                            <div class="flex items-center mt-3">
-                                <input id="currentWeight" type="number" inputmode="numeric" class="appearance-none text-xl font-bold min-w-0 grow outline-none bg-transparent placeholder-gray-300">
-                                <span class="text-lg font-medium text-gray-400">kg</span>
-                            </div>
-                        </div>
-                        <div class="relative input-container border-[#E3E3E3] rounded-2xl shadow-sm border bg-white h-[70px] px-4 flex flex-col justify-center">
-                            <label class="label absolute top-2 transition-all duration-100 text-[12px] text-gray-500 font-medium" for="desiredWeight">Wunschgewicht</label>
-                            <div class="flex items-center mt-3">
-                                <input id="desiredWeight" type="number" inputmode="numeric" class="appearance-none text-xl font-bold min-w-0 grow outline-none bg-transparent placeholder-gray-300">
-                                <span class="text-lg font-medium text-gray-400">kg</span>
-                            </div>
-                        </div>
-                        <button type="submit" class="select-none uppercase min-h-[70px] w-full bg-light-blue text-white md:hover:bg-hover-blue active:bg-hover-blue transition-all rounded-full text-lg leading-[22px] font-bold flex items-center justify-center gap-4 mt-6">
-                            <span>Weiter</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- ETAPA 7: Gráfico de Perda de Peso -->
-            <div id="step-7" class="hidden step-transition">
-                <div class="lg:mt-24 lg:mb-10">
-                    <div class="h-full grid items-center md:grid-cols-2 md:gap-20 text-left">
-                        <div class="max-md:mt-6 z-50">
-                            <h2 class="text-[26px] md:text-5xl max-md:text-center font-moret text-primary-black leading-tight">Sieh den Unterschied! Basierend auf deinen Angaben kannst du mit Glucavit so viel Gewicht verlieren – ganz ohne extreme Diäten.</h2>
-                            <div class="mt-4 md:mt-8">
-                                <button class="select-none uppercase min-h-[70px] md:min-w-[300px] py-5 px-4 md:px-8 w-full md:w-fit bg-light-blue text-white md:hover:bg-hover-blue active:bg-hover-blue disabled:bg-hover-blue transition-all rounded-full text-lg leading-[22px] font-bold flex items-center justify-center gap-4 md:min-w-[320px]" onclick="nextStep()">
-                                    <span>Weiter</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div id="weight-loss-chart" class="max-md:order-first bg-white rounded-2xl px-4 md:px-6 pb-6 pt-7 md:py-12 lg:py-[52px] z-50 shadow-xl">
-                            <h3 class="text-center mb-9 md:mt-2 md:mb-16 max-md:text-[27px] text-4.5xl font-moret">Deine Gewichtsverlustrate</h3>
-                            <svg class="w-full h-fit" width="552" height="261" viewBox="0 0 552 261" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <line y1="-0.576923" x2="256.154" y2="-0.576923" transform="matrix(0.00133906 0.999999 -1 0.000354833 137.711 2.93945)" stroke="#E9ECEF" stroke-width="1.15385"></line>
-                                <line y1="-0.576923" x2="256.154" y2="-0.576923" transform="matrix(0.00133906 0.999999 -1 0.000354833 272.423 2.93945)" stroke="#E9ECEF" stroke-width="1.15385"></line>
-                                <line y1="-0.576923" x2="256.154" y2="-0.576923" transform="matrix(0.00133906 0.999999 -1 0.000354833 407.135 2.93945)" stroke="#E9ECEF" stroke-width="1.15385"></line>
-                                <line y1="-0.576923" x2="256.154" y2="-0.576923" transform="matrix(0.00133906 0.999999 -1 0.000354833 541.851 2.93945)" stroke="#E9ECEF" stroke-width="1.15385"></line>
-                                <path d="M302.423 149.098C199.154 90.638 103.962 44.4782 3 52.555V259.093H543V204.863C543 204.863 405.692 207.559 302.423 149.098Z" fill="url(#paint0_linear_581_91)" fill-opacity="0.4"></path>
-                                <path d="M543 76.7853C500.308 81.4009 498 115.439 454.154 119.478C410.308 123.516 386.077 89.4778 339.923 92.3624C293.769 95.247 262.615 158.132 170.885 101.016C79.1538 43.9006 3 54.2854 3 54.2854" stroke="#FF654B" stroke-width="4.61538" stroke-linecap="round"></path>
-                                <path d="M3 52.555C103.962 44.4781 199.154 90.638 302.423 149.098C405.692 207.559 541.846 204.863 541.846 204.863" stroke="#00C1B7" stroke-width="4.61538" stroke-linecap="round"></path>
-                                <line x1="488.771" y1="174.094" x2="488.771" y2="192.555" stroke="#00C1B7" stroke-width="2.30769"></line>
-                                <path d="M493.941 192.556C493.941 195.425 491.621 197.749 488.761 197.749C485.901 197.749 483.581 195.425 483.581 192.556C483.581 189.688 485.901 187.364 488.761 187.364C491.621 187.364 493.941 189.688 493.941 192.556Z" fill="#00C1B7" stroke="#00C1B7" stroke-width="1.15385"></path>
-                                <path d="M430.522 0.592061H542.415V45.5618H430.522V0.592061Z" fill="#FF654B" stroke="#FF654B" stroke-width="1.18412"></path>
-                                <path d="M488.773 41.5391L488.773 98.0775" stroke="#FF654B" stroke-width="2.30769"></path>
-                                <path d="M493.941 98.0759C493.941 100.945 491.621 103.268 488.761 103.268C485.901 103.268 483.581 100.945 483.581 98.0759C483.581 95.2071 485.901 92.8836 488.761 92.8836C491.621 92.8836 493.941 95.2071 493.941 98.0759Z" fill="#FF654B" stroke="#FF654B" stroke-width="1.15385"></path>
-                                <defs>
-                                    <linearGradient id="paint0_linear_581_91" x1="273" y1="2.64883" x2="273" y2="259.093" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#00C1B7"></stop>
-                                        <stop offset="1" stop-color="#00C1B7" stop-opacity="0"></stop>
-                                    </linearGradient>
-                                </defs>
-                                <text x="427" y="157" fill="white" font-size="13" font-weight="600" font-family="Inter">Mit Glucavit</text>
-                                <text x="434" y="29" fill="white" font-size="18" font-weight="600" font-family="Inter">Strenge Diät</text>
-                            </svg>
-                            <div class="flex justify-between items-center text-sm text-[#5E677D] mt-2">
-                                <div>1. Monat</div>
-                                <div>3. Monat</div>
-                            </div>
-                            <div class="mt-2 md:mt-5 flex items-center gap-6">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-5 h-1 rounded-full bg-light-blue"></div>
-                                    <div class="flex flex-row"><span class="mr-1 font-light inline-block text-[#141936] text-xs md:text-lg leading-[18px] md:leading-7">Mit</span><span class="inline-block font-bold text-[#141936] text-xs md:text-lg leading-[18px] md:leading-7">Glucavit</span></div>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <div class="w-5 h-1 rounded-full bg-[#E42100]"></div>
-                                    <div class="text-[#141936] text-xs md:text-lg leading-[18px] md:leading-7">Mit Diät</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ETAPA 8: Forma Corporal -->
-            <div id="step-8" class="hidden step-transition">
-                <div class="mb-4 md:mt-6 lg:mt-10 md:mb-6 mx-auto text-center max-w-[900px]">
-                    <h3 class="md:text-4.5xl text-2xl font-medium font-moret text-primary-black leading-tight">Jeder Körper ist schön – und wir sind hier, um dir zu helfen, dich noch wohler in deiner Haut zu fühlen. Könntest du uns bitte deine aktuelle Körperform mitteilen?</h3>
-                </div>
-                <div class="max-w-[900px] mx-auto">
-                    <div class="grid md:grid-cols-3 gap-2">
-                        <button class="group w-full bg-white rounded-xl md:hover:bg-light-blue md:hover:outline md:hover:outline-1 md:hover:outline-light-blue active:bg-light-blue active:outline active:outline-1 active:outline-light-blue transition-all p-4 flex md:flex-col items-center gap-4" onclick="nextStep()">
-                            <div class="min-w-[68px] md:mx-auto flex-shrink-0 h-[122px] md:h-[193px] w-auto flex items-center justify-center bg-gray-50 rounded-lg">
-                                <svg width="40" height="80" viewBox="0 0 40 80" fill="none" class="text-gray-300"><rect x="10" y="5" width="20" height="70" rx="10" fill="currentColor"/></svg>
-                            </div>
-                            <span class="w-full flex items-center justify-between gap-2">
-                                <span class="text-md font-semibold group-hover:text-white group-active:text-white">Dünn</span>
-                                <svg class="text-light-blue group-hover:text-white group-active:text-white" xmlns="http://www.glucavit.vercel.app/Glucavit_Imagens/imgi_1.png" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                            </span>
-                        </button>
-                        <button class="group w-full bg-white rounded-xl md:hover:bg-light-blue md:hover:outline md:hover:outline-1 md:hover:outline-light-blue active:bg-light-blue active:outline active:outline-1 active:outline-light-blue transition-all p-4 flex md:flex-col items-center gap-4" onclick="nextStep()">
-                            <div class="min-w-[68px] md:mx-auto flex-shrink-0 h-[122px] md:h-[193px] w-auto flex items-center justify-center bg-gray-50 rounded-lg">
-                                <svg width="50" height="80" viewBox="0 0 50 80" fill="none" class="text-gray-300"><rect x="5" y="5" width="40" height="70" rx="15" fill="currentColor"/></svg>
-                            </div>
-                            <span class="w-full flex items-center justify-between gap-2">
-                                <span class="text-md font-semibold group-hover:text-white group-active:text-white">Trainiert</span>
-                                <svg class="text-light-blue group-hover:text-white group-active:text-white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                            </span>
-                        </button>
-                        <button class="group w-full bg-white rounded-xl md:hover:bg-light-blue md:hover:outline md:hover:outline-1 md:hover:outline-light-blue active:bg-light-blue active:outline active:outline-1 active:outline-light-blue transition-all p-4 flex md:flex-col items-center gap-4" onclick="nextStep()">
-                            <div class="min-w-[68px] md:mx-auto flex-shrink-0 h-[122px] md:h-[193px] w-auto flex items-center justify-center bg-gray-50 rounded-lg">
-                                <svg width="60" height="80" viewBox="0 0 60 80" fill="none" class="text-gray-300"><path d="M10 5C30 5 30 75 10 75H50C30 75 30 5 50 5H10Z" fill="currentColor"/></svg>
-                            </div>
-                            <span class="w-full flex items-center justify-between gap-2">
-                                <span class="text-md font-semibold group-hover:text-white group-active:text-white">Kurvig</span>
-                                <svg class="text-light-blue group-hover:text-white group-active:text-white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.1716 8.7855L0 8.7855L0 6.7855L12.1716 6.7855L6.8076 1.4216L8.2218 0.00739983L16 7.7855L8.2218 15.5637L6.8076 14.1495L12.1716 8.7855Z" fill="currentColor"></path></svg>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ETAPA 9: Resumo Final e Oferta -->
-            <div id="step-9" class="hidden step-transition">
-                <!-- BMI and Summary -->
-                <div class="space-y-10">
-                    <div class="max-w-[800px] mx-auto text-center space-y-4">
-                        <div class="text-lg font-semibold text-light-blue">Basierend auf unseren Daten und Berechnungen</div>
-                        <h2 class="text-3xl md:text-6.5xl font-moret leading-tight text-primary-black">Du kannst dein Zielgewicht de 50 kg bis zum 13. März 2026 erreichen</h2>
-                        <p class="text-lg text-[#000000CC]">Die Prognose basiert auf den von Ihnen bereitgestellten Daten. Sie wird unter der Annahme einer regelmäßigen Einnahme von Glucavit und einer ausgewogenen Ernährung berechnet.</p>
-                    </div>
-
-                    <!-- BMI Gauge Card -->
-                    <div class="grid md:grid-cols-2 gap-6 max-w-[1200px] mx-auto">
-                        <div class="bg-white p-6 md:p-10 rounded-2xl shadow-sm flex flex-col">
-                            <div class="uppercase text-center text-[13px] leading-6 tracking-[1px] font-bold text-black/50">Dein Body-Mass-Index (BMI)</div>
-                            <div class="text-5xl font-bold text-center mt-4 mb-5">39.06</div>
-                            <div class="rounded-full h-10 grid grid-cols-4 relative overflow-visible">
-                                <div class="bg-[#B8B8EF] rounded-l-full"></div>
-                                <div class="bg-[#12DED3]"></div>
-                                <div class="bg-[#FFC600]"></div>
-                                <div class="bg-[#FF654B] rounded-r-full"></div>
-                                <div class="left-[87.5%] absolute -top-1 px-1 bg-white">
-                                    <div class="h-[48px] bg-black rounded-full w-[5px]"></div>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-4 gap-1 text-[10px] md:text-xs mt-4 text-gray-500 font-medium">
-                                <div class="text-left">Untergewicht</div>
-                                <div class="text-left">Normal</div>
-                                <div class="text-center">Übergewicht</div>
-                                <div class="text-right font-bold text-black">Fettleibigkeit</div>
-                            </div>
-                            <div class="bg-[#FF724329] p-4 mt-8 rounded-xl text-[13px] text-[#D34111] leading-5">
-                                <b>Risiken eines ungesunden BMI</b>: Hoher Blutdruck, erhöhtes Risiko für Herzinfarkt, Typ-2-Diabetes, chronische Rücken- und Gelenkschmerzen.
-                            </div>
-                        </div>
-
-                        <!-- Metabolic Age Card -->
-                        <div class="bg-white p-6 md:p-10 rounded-2xl shadow-sm flex flex-col">
-                            <div class="uppercase text-center text-[13px] leading-6 tracking-[1px] font-bold text-black/50">Dein Stoffwechselalter</div>
-                            <div class="text-5xl font-bold text-center mt-4 mb-5">83 Jahre</div>
-                            <div class="text-lg mb-4 text-center font-medium">Das ist höher als bei 80% der Menschen in deinem Alter.</div>
-                            <p class="text-gray-600 text-center">Unterstütze deinen Stoffwechsel und ein gesundes Gewichtsmanagement – mit natürlichen Inhaltsstoffen.</p>
-                            <div class="text-[#D34111] bg-[#FF724329] flex items-center gap-3 p-4 mt-auto rounded-xl text-[13px] font-semibold">
-                                <svg width="24" height="24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.45l8.15 14.55H3.85L12 5.45zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
-                                <span>Achtung! Deine Fettverbrennungsrate ist aktuell sehr niedrig.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Profile Details -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-[1200px] mx-auto">
-                        <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col items-center">
-                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Geschlecht</span>
-                            <div class="mt-2 text-light-blue"><svg width="40" height="40" fill="currentColor"><path d="M16 4a4 4 0 100 8 4 4 0 000-8zM6 16v2a10 10 0 0020 0v-2H6z"/></svg></div>
-                        </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col items-center">
-                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Alter</span>
-                            <span class="mt-2 text-3xl font-bold">60+</span>
-                        </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col items-center">
-                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Grösse</span>
-                            <span class="mt-2 text-3xl font-bold">160<span class="text-lg ml-1 font-medium text-gray-400">cm</span></span>
-                        </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col items-center">
-                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Gewicht</span>
-                            <span class="mt-2 text-3xl font-bold">100<span class="text-lg ml-1 font-medium text-gray-400">kg</span></span>
-                        </div>
-                    </div>
-
-                    <!-- Progress Charts Section -->
-                    <div class="mt-4 py-6 px-4 md:px-18 bg-white rounded-3xl grid md:grid-cols-2 md:items-center gap-6 shadow-sm">
-                        <div>
-                            <h5 class="font-light text-3.5xl md:text-5xl mb-4 font-moret max-md:text-center">Verwandle kleine Erfolge in große Errungenschaften</h5>
-                            <p class="max-md:text-center">Die Glucavit hilft dir, stetige Fortschritte zu machen und Woche für Woche bessere Ergebnisse beim Abnehmen zu erzielen.</p>
-                        </div>
-                        <div class="md:p-8">
-                            <h5 class="text-right font-bold text-3.5xl md:text-4.5xl text-light-blue">-24 kg</h5>
-                            <p class="text-right font-medium text-sm md:text-lg mt-0.5">in deinem ersten Monat</p>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-full mt-4" width="388" height="203" viewBox="0 0 388 203" fill="none">
-                                <line x1="361.5" y1="183" x2="361.5" y2="137" stroke="black" stroke-opacity="0.48" stroke-dasharray="6 6"></line>
-                                <line x1="248.5" y1="183" x2="248.5" y2="109" stroke="black" stroke-opacity="0.48" stroke-dasharray="6 6"></line>
-                                <path d="M1.50024 32C63.0385 32.0001 108.606 40.5457 166.533 68.4714C203.565 86.3242 256.082 122.331 326.895 137.172C347.134 141.414 363.168 143 384.5 143" stroke="#00C1B7" stroke-width="4"></path>
-                                <circle cx="23" cy="31.5" r="9" fill="#00C1B7" stroke="white" stroke-width="3"></circle>
-                                <circle cx="135" cy="55.5" r="9" fill="#00C1B7" stroke="white" stroke-width="3"></circle>
-                                <circle cx="248" cy="109.5" r="9" fill="#00C1B7" stroke="white" stroke-width="3"></circle>
-                                <circle cx="361" cy="142.5" r="9" fill="#00C1B7" stroke="white" stroke-width="3"></circle>
-                                <line x1="23.5" y1="182" x2="23.5" y2="44" stroke="black" stroke-opacity="0.48" stroke-dasharray="6 6"></line>
-                                <line x1="135.5" y1="183" x2="135.5" y2="64" stroke="black" stroke-opacity="0.48" stroke-dasharray="6 6"></line>
-                                <text x="22" y="15" fill="black" font-size="14" font-weight="800">100</text>
-                                <text x="135" y="40" fill="black" font-size="14" font-weight="800">88</text>
-                                <text x="250" y="90" fill="black" font-size="14" font-weight="800">82</text>
-                                <text x="365" y="125" fill="black" font-size="14" font-weight="800">76</text>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Testimonials and Final Recommendation Section -->
-                    <div class="bg-primary-yellow rounded-3xl py-10 md:py-20 px-4">
-                        <div class="max-w-[1200px] mx-auto">
-                            <h2 class="text-center text-4xl font-moret mb-10">Wirf einen Blick auf die Erfolgsgeschichten unserer glücklichen Kunden</h2>
-                            <div class="grid md:grid-cols-3 gap-6">
-                                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                                    <div class="flex items-center gap-3 mb-4">
-                                        <img class="size-10 rounded-full object-cover" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/ff643552-257a-4c06-db61-0e5cd6eef500/w=160,h=160,format=webp" alt="User">
-                                        <div>
-                                            <div class="font-bold">Lisa K.</div>
-                                            <div class="text-xs text-gray-400">Berlin</div>
-                                        </div>
-                                    </div>
-                                    <p class="text-sm italic">"Dank Glucavit habe ich in nur einem Monat 5 Kilo abgenommen. Ich fühle mich energiegeladen!"</p>
-                                </div>
-                                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                                    <div class="flex items-center gap-3 mb-4">
-                                        <img class="size-10 rounded-full object-cover" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/c167c01f-35e8-4c88-07bc-c9997bbb6400/w=160,h=160,format=webp" alt="User">
-                                        <div>
-                                            <div class="font-bold">Javier P.</div>
-                                            <div class="text-xs text-gray-400">München</div>
-                                        </div>
-                                    </div>
-                                    <p class="text-sm italic">"Glucavit hat mir nach all den Jahren endlich das Gefühl gegeben, wirklich Fortschritte zu machen."</p>
-                                </div>
-                                <div class="bg-white p-6 rounded-2xl shadow-sm">
-                                    <div class="flex items-center gap-3 mb-4">
-                                        <img class="size-10 rounded-full object-cover" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/d006fc3c-92de-48d6-f93f-2d2453a4ff00/w=160,h=160,format=webp" alt="User">
-                                        <div>
-                                            <div class="font-bold">Laura S.</div>
-                                            <div class="text-xs text-gray-400">Frankfurt</div>
-                                        </div>
-                                    </div>
-                                    <p class="text-sm italic">"Glucavit ist die beste Entscheidung, die ich dieses Jahr getroffen habe."</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Final Offer Block -->
-                    <div class="bg-white rounded-3xl overflow-hidden shadow-xl max-w-[960px] mx-auto grid md:grid-cols-2 mt-10">
-                        <div class="relative">
-                            <img class="w-full h-full object-cover" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/48c969db-9f8d-4dba-56fe-96e19f6f3100/w=960,h=1004,format=webp" alt="Glucavit Pack">
-                            <div class="absolute top-6 left-6 bg-primary-orange text-white size-24 rounded-full flex flex-col items-center justify-center font-bold">
-                                <span class="text-xs">Jetzt</span>
-                                <span class="text-2xl">47%</span>
-                                <span class="text-xs">HOLEN</span>
-                            </div>
-                        </div>
-                        <div class="p-8 md:p-12 bg-main-bg flex flex-col justify-center">
-                            <div class="bg-[#6060C8] text-white rounded-xl p-4 flex justify-between items-center mb-8">
-                                <span class="font-semibold">Sonderangebot läuft ab:</span>
-                                <span id="timer-display" class="text-2xl font-bold tabular-nums">15:00</span>
-                            </div>
-                            <h3 class="text-4xl font-moret mb-4">Bestseller</h3>
-                            <div class="border-y border-gray-200 py-6 mb-6">
-                                <div class="flex items-baseline gap-2">
-                                    <span class="text-4xl font-bold">36,65 €</span>
-                                    <span class="text-sm text-gray-500">pro Packung</span>
-                                </div>
-                                <div class="flex items-center gap-2 mt-2">
-                                    <span class="text-xl line-through text-red-500 font-medium">69,95 €</span>
-                                    <span class="text-xs text-gray-400">Gesamtpreis 109,95 €</span>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-600 mb-8">Dieses Paket ist nur für Nutzer gedacht, die ihr Leben wirklich verändern wollen.</p>
-                            <a href="https://glucavit-shop.de" class="bg-light-blue text-white py-5 rounded-full text-center font-bold text-xl uppercase shadow-lg md:hover:bg-hover-blue transition-all">Jetzt Glucavit kaufen</a>
-                            <div class="mt-6 flex items-center justify-center gap-2 text-[10px] font-bold text-light-blue uppercase tracking-widest">
-                                <svg width="20" height="20" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                                Von Experten empfohlen
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Social Proof (Shared, hidden on specific steps) -->
-            <div id="shared-social-proof">
-                <div class="my-6 md:mb-10 text-center">
-                    <div class="flex gap-x-1 justify-center items-center text-sm mb-2">
-                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" class="flex-shrink-0"><path d="M12.4992 13.3582C11.8102 13.3582 11.2513 13.9168 11.2513 14.6061C11.2513 15.0682 11.5033 15.4707 11.8767 15.6865V17.0738H13.1217V15.6865C13.4951 15.4707 13.7471 15.0682 13.7471 14.6061C13.7471 13.9168 13.1883 13.3582 12.4992 13.3582ZM12.4997 7.30725C11.4508 7.30725 10.5977 8.16047 10.5977 9.20928V11.2348H14.4016V9.20928C14.4015 8.16063 13.5483 7.30725 12.4997 7.30725Z" fill="black"></path><path d="M12.4998 0.439331C5.87257 0.439331 0.5 5.81206 0.5 12.4393C0.5 19.0664 5.87257 24.4392 12.4998 24.4392C19.127 24.4392 24.5 19.0663 24.5 12.4393C24.5 5.81206 19.127 0.439331 12.4998 0.439331ZM16.1871 18.609H8.8131C8.03437 18.609 7.403 17.9776 7.403 17.1986V12.6451C7.403 11.9658 7.88356 11.3985 8.52325 11.265V9.20924C8.52325 7.01648 10.3073 5.23229 12.5002 5.23229C14.693 5.23229 16.477 7.01632 16.477 9.20924V11.265C17.1164 11.3989 17.597 11.9658 17.597 12.6451V17.1986H17.5972C17.5972 17.9775 16.9658 18.609 16.1871 18.609Z" fill="black"></path></svg>
-                        <span>Deine Angaben sind bei uns sicher und bleiben vertraulich.</span>
-                    </div>
-                    <img class="h-fit mt-1 mx-auto" width="153" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/7eb7d7fe-3eb4-42db-0b8d-b78b9c089d00/w=153,h=26,format=webp,fit=contain" alt="Security Logos">
-                </div>
-
-                <div class="flex flex-col p-4 md:p-6 gap-4 rounded-3xl shadow-lg bg-white max-w-[900px] md:mx-auto">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-x-2">
-                            <img width="40" height="40" class="rounded-full object-cover" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/ff643552-257a-4c06-db61-0e5cd6eef500/w=160,h=160,format=webp" alt="Lisa K.">
-                            <div class="text-left">
-                                <p class="font-medium text-base text-[#1A0800]">Lisa K.</p>
-                                <div class="flex items-center gap-2 text-gray-500">
-                                    <img width="18" height="18" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/75412d9d-bc20-4a10-97c3-be51c9245f00/w=18,h=18" alt="DE">
-                                    <p class="text-xs">Berlin</p>
-                                </div>
-                            </div>
-                        </div>
-                        <span class="text-[#FEB511]">★★★★★</span>
-                    </div>
-                    <p class="text-left font-normal text-base text-gray-700">Dank Glucavit habe ich in nur einem Monat 5 Kilo abgenommen. Ich fühle mich energiegeladen und selbstbewusst!</p>
-                </div>
-            </div>
-
-            <!-- Footer Advantages (hidden on specific steps) -->
-            <section class="mt-14 pt-6 border-t border-t-[#00000014]" id="footer-advantages">
-                <div class="flex flex-wrap justify-center md:justify-between gap-4 max-w-[900px] mx-auto">
-                    <div class="flex gap-x-3 items-center basis-[calc(50%-16px)] md:basis-auto">
-                        <img width="44" height="44" class="w-11 h-11" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/10fb77de-afea-4ce0-dfbc-62c83f8d5f00/w=44,h=44,format=webp" alt="Vegan"><div class="text-sm md:text-lg font-medium">Vegan</div>
-                    </div>
-                    <div class="flex gap-x-3 items-center basis-[calc(50%-16px)] md:basis-auto">
-                        <img width="44" height="44" class="w-11 h-11" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/7be14189-3ac5-4a6e-5cd4-14b938dfd500/w=44,h=44,format=webp" alt="Glutenfrei"><div class="text-sm md:text-lg font-medium">Glutenfrei</div>
-                    </div>
-                    <div class="flex gap-x-3 items-center basis-[calc(50%-16px)] md:basis-auto">
-                        <img width="44" height="44" class="w-11 h-11" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/e53d3ab0-2744-49bf-8032-3251fee40d00/w=44,h=44,format=webp" alt="No GMO"><div class="text-sm md:text-lg font-medium whitespace-nowrap">Keine Gentechnik</div>
-                    </div>
-                    <div class="flex gap-x-3 items-center basis-[calc(50%-16px)] md:basis-auto">
-                        <img width="44" height="44" class="w-11 h-11" src="https://imagedelivery.net/u8JiH5bJQTfO_tBFRSJ5Lg/5cfdf1e4-e7fa-4c08-7d28-a795cb812c00/w=44,h=44,format=webp" alt="Stoffwechsel"><div class="text-sm md:text-lg font-medium">Stoffwechsel</div>
-                    </div>
-                </div>
-            </section>
         </div>
-    </main>
+    </div>
 
-    <footer class="mt-auto">
-        <div class="flex justify-center items-center bg-primary-black h-[66px] text-[#BCBCBC] text-xs">© 2026 Glucavit. Alle Rechte vorbehalten.</div>
-    </footer>
+    <!-- Mobile CTA Button -->
+    <div class="mobile-cta">
+        <button class="cr-yes w-full shadow-xl" onclick="window.location.href='https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/'">Jetzt bestellen</button>
+    </div>
 
     <script>
-        let currentStep = 1;
-        const totalSteps = 9;
+        // Link atualizado conforme solicitado
+        const OFFER_URL = "https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/";
+        
+        const acceptBtn = document.getElementById('btn-accept');
+        const rejectBtn = document.getElementById('btn-reject');
 
-        function updateUI() {
-            const body = document.getElementById('body-container');
-            const header = document.getElementById('header-container');
-            const socialProof = document.getElementById('shared-social-proof');
-            const footerAdv = document.getElementById('footer-advantages');
+        const goToOffer = (e) => {
+            if(e) e.stopPropagation();
+            window.location.href = OFFER_URL;
+        };
 
-            // Default styles reset
-            body.style.backgroundColor = '#e5f9f8';
-            header.style.backgroundColor = '#e5f9f8';
-            socialProof.classList.remove('hidden');
-            footerAdv.classList.remove('hidden');
+        // Adiciona evento de clique aos botões do pop-up
+        if(acceptBtn) acceptBtn.addEventListener('click', goToOffer);
+        if(rejectBtn) rejectBtn.addEventListener('click', goToOffer);
 
-            // Dynamic Styling for Success Stories and Summary
-            if (currentStep === 4 || currentStep === 7) {
-                body.style.backgroundColor = '#bcf3f1'; // bg-secondary
-                header.style.backgroundColor = '#bcf3f1';
-                socialProof.classList.add('hidden');
-            } else if (currentStep === totalSteps) {
-                socialProof.classList.add('hidden');
-                footerAdv.classList.add('hidden');
-                startTimer();
-            }
-
-            // Steps Visibility
-            for (let i = 1; i <= totalSteps; i++) {
-                const step = document.getElementById(`step-${i}`);
-                if (step) step.classList.add('hidden');
-            }
-            const activeStep = document.getElementById(`step-${currentStep}`);
-            if (activeStep) activeStep.classList.remove('hidden');
-
-            // Counter and Progress
-            document.getElementById('step-counter').innerText = `${currentStep}/${totalSteps}`;
-            const percentage = (currentStep / totalSteps) * 100;
-            document.getElementById('progress-bar').style.width = `calc(${percentage}% - 20px)`;
-
-            // Back button
-            const backBtn = document.getElementById('back-btn');
-            if (currentStep > 1 && currentStep < totalSteps) backBtn.classList.remove('hidden');
-            else backBtn.classList.add('hidden');
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Redirecionar ao clicar no overlay (fundo escuro ao redor do popup)
+        const overlay = document.getElementById('cr-popup-overlay');
+        if(overlay) {
+            overlay.addEventListener('click', (e) => {
+                if(e.target.id === 'cr-popup-overlay') {
+                    goToOffer();
+                }
+            });
         }
-
-        function nextStep() { 
-            if (currentStep < totalSteps) { 
-                currentStep++; 
-                updateUI(); 
-            } 
-        }
-
-        function prevStep() { 
-            if (currentStep > 1) { 
-                currentStep--; 
-                updateUI(); 
-            } 
-        }
-
-        // Timer Logic for Final Page
-        let timerStarted = false;
-        function startTimer() {
-            if (timerStarted) return;
-            timerStarted = true;
-            let time = 15 * 60;
-            const display = document.getElementById('timer-display');
-            const interval = setInterval(() => {
-                let minutes = Math.floor(time / 60);
-                let seconds = time % 60;
-                display.innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                if (--time < 0) clearInterval(interval);
-            }, 1000);
-        }
-
-        // Initialize UI
-        updateUI();
     </script>
 </body>
 </html>
