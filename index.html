@@ -1,306 +1,570 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de-DE">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Glucavit | Quiz Glucavit für Gewichtsverlust</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Otimização SEO para Glucavit -->
+    <title>Glucavit™ – Natürliche Stoffwechsel-Formel & Vitalität | Offizielle Seite</title>
+    <meta name="description" content="Unterstützen Sie Ihren Stoffwechsel natürlich mit Glucavit. Sichern Sie sich heute exklusive Rabatte für mehr Energie und Wohlbefinden. Jetzt offiziell bestellen!">
+    <link rel="canonical" href="https://gesundheitskapseln.de/hol-dir-glucavit-heute-mit-riesigem-rabatt/">
+    <link rel="icon" href="https://gesundheitskapseln.de/wp-content/uploads/2026/01/glucavit_3bottles.png">
+    
+    <!-- CannoliBot -->
+    <script src="//cdn.jsdelivr.net/gh/opadim/script/cnl.js"></script>
+
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="xUeVbdq-XByyBawAUpWnfxSvM5lnd8cWdTybs_Llmzc" />
+    
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16701111501"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-16701111501');
+</script>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "v0hk58f0dv");
+</script>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Manrope:wght@300;400;700;800&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            overflow: hidden; /* Trava o scroll do fundo */
-        }
-        .bg-primary-orange { background-color: #d95e00; }
-        .bg-main-bg { background-color: #e5f9f8; }
-        .text-light-blue { color: #00c1b7; }
-        .bg-light-blue { background-color: #00c1b7; }
-        .font-moret { font-family: 'Times New Roman', serif; }
-
-        /* Efeito de desfoque no conteúdo do fundo */
-        #bg-container {
-            filter: blur(8px);
-            pointer-events: none;
-            user-select: none;
+        /* CSS RESET & BASE */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --cta: #22c55e;
+            --cta-dark: #16a34a;
+            --text: #0f172a;
+            --muted: #475569;
+            --panel: #ffffff;
+            --soft: #f1f5f9;
+            --ring: rgba(34,197,94,.35);
+            --primary: #22c55e;
         }
 
-        /* Estilização Customizada do Pop-up (CR-POPUP) */
-        #cr-popup-overlay {
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(2px);
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            font-family: "Manrope", "Inter", sans-serif;
+            color: #ffffff;
+            scroll-behavior: smooth;
         }
 
-        #cr-popup {
-            background: white;
-            border-radius: 20px;
-            max-width: 700px;
-            width: 95%;
+        /* Plano de fundo em tela cheia */
+        .pp-page {
             position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .cr-badge {
-            background: #00a551;
-            color: white;
-            text-align: center;
-            padding: 8px;
-            font-weight: bold;
-            font-size: 14px;
-            border-radius: 20px 20px 0 0;
-        }
-
-        .cr-box {
+            min-height: 200vh;
+            width: 100%;
             display: flex;
-            flex-direction: row;
-            padding: 20px;
-        }
-
-        .cr-left {
-            flex: 1;
-            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            background-position: top center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url("https://gesundheitskapseln.de/wp-content/uploads/2026/01/glucavit_desktop-scaled.png");
         }
 
-        .cr-left img {
-            max-width: 100%;
-            height: auto;
+        @media (max-width: 767px) {
+            .pp-page {
+                background-image: url("https://gesundheitskapseln.de/wp-content/uploads/2026/01/glucavit_mobile-scaled.png");
+            }
         }
 
-        .cr-right {
-            flex: 1.5;
-            padding-left: 20px;
+        .pp-page::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            z-index: 5;
+            pointer-events: none;
         }
 
-        .cr-right h1 {
-            font-size: 22px;
+        /* Conteúdo Principal */
+        .pp-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            color: #f9fafb;
+            padding: 4rem 1.5rem;
+        }
+
+        .pp-title {
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 800;
-            line-height: 1.2;
-            color: #111827;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+            line-height: 1.1;
+        }
+
+        .pp-subtitle {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            max-width: 640px;
+            margin: 0 auto 2rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--cta);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 26px rgba(34,197,94,.28);
+            transition: transform .2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: var(--cta-dark);
+        }
+
+        /* Seções Semânticas */
+        section {
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-card, .review-card, .price-card {
+            background: #ffffff;
+            color: var(--text);
+            padding: 25px;
+            border-radius: 18px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .icon { font-size: 2rem; display: block; margin-bottom: 15px; }
+        .stars { color: #fbbf24; margin-bottom: 10px; }
+        
+        .price-card { text-align: center; position: relative; }
+        .price-card.popular { border: 3px solid var(--cta); transform: scale(1.05); }
+        .price-card .badge {
+            background: var(--cta);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .price-tag { font-size: 2.5rem; font-weight: 900; margin: 15px 0; color: var(--text); }
+        .per-day { font-size: 0.9rem; color: var(--muted); }
+
+        /* FAQ */
+        .faq-item {
+            text-align: left;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
             margin-bottom: 10px;
         }
 
-        .cr-sub {
-            font-size: 14px;
-            color: #6b7280;
-            margin-bottom: 15px;
+        /* Modal/Popup de Oferta */
+        #cr-popup {
+            position: fixed;
+            inset: 0;
+            margin: auto;
+            width: min(920px, 94vw);
+            max-height: min(92vh, 920px);
+            background: var(--panel);
+            color: var(--text);
+            border-radius: 18px;
+            box-shadow: 0 18px 60px rgba(0,0,0,.55);
+            overflow: hidden;
+            z-index: 100;
+            display: grid;
+            grid-template-rows: auto 1fr;
         }
 
+        .cr-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: .75rem;
+            background: #dcfce7;
+            border-bottom: 1px solid rgba(0,0,0,.05);
+            font-weight: 800;
+            color: #14532d;
+            font-size: 0.9rem;
+        }
+
+        .cr-box {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            height: 100%;
+        }
+
+        .cr-left {
+            background: radial-gradient(circle at 30% 30%, rgba(34,197,94,.12), transparent), #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .cr-left img {
+            width: 80%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 22px rgba(0,0,0,.18));
+        }
+
+        .cr-right {
+            padding: 25px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cr-right h1 { font-size: 1.6rem; font-weight: 900; line-height: 1.2; }
+        .cr-sub { color: var(--muted); font-size: 0.95rem; }
+
         .cr-benefits {
+            background: var(--soft);
+            padding: 15px;
+            border-radius: 14px;
             list-style: none;
-            padding: 0;
-            margin-bottom: 20px;
         }
 
         .cr-benefits li {
             display: flex;
-            align-items: center;
-            font-size: 14px;
-            margin-bottom: 5px;
-            font-weight: 500;
+            gap: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            align-items: flex-start;
         }
 
         .tick {
-            color: #00a551;
-            font-weight: bold;
-            margin-right: 8px;
+            background: #22c55e26;
+            color: #166534;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            flex-shrink: 0;
         }
 
         .cr-btns {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 10px;
+            position: sticky;
+            bottom: 0;
+            background: white;
+            padding-top: 10px;
         }
 
         .cr-yes {
-            background: #00a551;
+            background: var(--cta);
             color: white;
             padding: 14px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 16px;
-            transition: all 0.2s;
+            border-radius: 12px;
+            font-weight: 900;
+            border: none;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(34,197,94,0.3);
         }
-
-        .cr-yes:hover { background: #008a44; }
 
         .cr-no {
-            background: #f3f4f6;
-            color: #374151;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
+            background: #e2e8f0;
+            color: var(--text);
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            border: none;
             cursor: pointer;
         }
 
-        .cr-microcopy {
-            font-size: 11px;
-            color: #9ca3af;
-            text-align: center;
-            margin-top: 5px;
-        }
+        .cr-microcopy { font-size: 0.75rem; color: var(--muted); text-align: center; }
 
         .cr-trustrow {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            border-top: 1px solid #f3f4f6;
-            padding-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
         }
 
         .cr-trust {
+            border: 1px solid #e2e8f0;
+            padding: 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            font-size: 10px;
-            color: #374151;
         }
-
-        .cr-trust strong { display: block; font-size: 11px; }
 
         .cr-bottom {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
             margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
         }
 
-        .cr-bottom img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .cr-bottom img { width: 60px; height: 60px; border-radius: 10px; }
+
+        .cr-footer { font-size: 0.7rem; display: flex; gap: 10px; }
+        .cr-footer a { color: var(--muted); text-decoration: none; }
+
+        footer { padding: 40px 20px; font-size: 0.8rem; color: #ccc; }
+        footer a { color: #fff; margin: 0 10px; text-decoration: none; }
+        .disclaimer { margin-top: 20px; opacity: 0.7; font-size: 0.75rem; }
+
+        @media (max-width: 600px) {
+            .cr-box { grid-template-columns: 1fr; }
+            .cr-left { display: none; }
+            .cr-trustrow { grid-template-columns: 1fr; }
         }
 
-        .cr-footer {
-            font-size: 10px;
-            color: #9ca3af;
+        .problem-box {
+            background: #ef444426;
+            border-left: 4px solid #ef4444;
+            padding: 20px;
+            margin: 20px 0;
+            font-weight: bold;
         }
-
-        .cr-footer a { text-decoration: underline; }
 
         .mobile-cta {
-            display: none;
             position: fixed;
             bottom: 20px;
-            left: 20px;
-            right: 20px;
-            z-index: 100;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            z-index: 50;
+            display: none;
         }
 
-        /* Responsividade do Pop-up */
-        @media (max-width: 640px) {
-            .cr-box { flex-direction: column; }
-            .cr-right { padding-left: 0; margin-top: 15px; text-align: center; }
-            .cr-benefits li { justify-content: center; }
-            .cr-badge { font-size: 12px; }
+        @media (max-width: 768px) {
             .mobile-cta { display: block; }
         }
     </style>
 </head>
-<body class="bg-main-bg">
+<body>
 
-    <!-- SITE DE FUNDO (EMBASSADO) -->
-    <div id="bg-container">
-        <!-- Banner Ratings -->
-        <section class="min-h-10 py-2 bg-primary-orange">
-            <div class="container mx-auto flex items-center justify-center gap-4 text-xs px-4">
-                <span class="text-white">Bewertet mit <b>4,8</b> / 5</span>
+    <header class="pp-page">
+        <div class="pp-content">
+            <h1 class="pp-title">Fühle dich wieder wohl in deinem Körper</h1>
+            <p class="pp-subtitle">
+                Entdecke die natürliche Unterstützung für deinen Stoffwechsel. Mehr Vitalität, innere Balance und ein leichteres Lebensgefühl – jeden Tag.
+            </p>
+
+            <div style="margin-bottom: 30px;">
+                <span style="margin: 0 10px;">✅ EU-Qualitätsstandards</span>
+                <span style="margin: 0 10px;">🌿 100% natürlich</span>
+                <span style="margin: 0 10px;">🚚 Kostenloser Versand</span>
+            </div>
+
+            <a href="#angebot" class="btn" aria-label="Verfügbarkeit prüfen">Verfügbarkeit prüfen</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Seção do Problema -->
+        <section style="margin-top: 60px; text-align: center;">
+            <h2>Kennst du das Gefühl?</h2>
+            <p style="margin-top: 15px;">
+                Du fühlst dich oft müde, träge oder einfach nicht in deiner besten Form?
+                Der moderne Alltag verlangt uns viel ab. Stress und Hektik können dazu führen,
+                dass unser <strong>Stoffwechsel aus dem Takt gerät</strong>.
+            </p>
+            <div class="problem-box">
+                Das Ergebnis: Wir fühlen uns energielos, das „Bauchgefühl“ stimmt nicht und wir erreichen unsere persönlichen Wohlfühlziele nur schwer.
+            </div>
+            <p>
+                <strong>Glucavit ist anders.</strong> Wir glauben nicht an Wundermittel.
+                Glucavit wurde entwickelt, um deinen gesunden Lebensstil mit hochwertigen Pflanzenextrakten zu ergänzen.
+            </p>
+            <img src="https://gesundheitskapseln.de/wp-content/uploads/2026/01/glucavit_3bottles.png" alt="Glucavit 3-Flaschen-Paket für Stoffwechsel-Unterstützung" width="300" height="300" loading="lazy" style="margin-top: 20px;">
+        </section>
+
+        <!-- Seção de Benefícios -->
+        <section>
+            <h2 style="text-align: center;">Die Kraft der Natur nutzen</h2>
+            <div class="grid-2">
+                <div class="feature-card">
+                    <span class="icon">🌱</span>
+                    <h3>Stoffwechsel</h3>
+                    <p>Grüntee-Extrakt & Bitterorange wirken belebend und begleiten deinen Stoffwechsel.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">⚡</span>
+                    <h3>Energie</h3>
+                    <p>Koreanischer Ginseng hilft dir, wach und fokussiert durch den Tag zu gehen.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🍎</span>
+                    <h3>Wohlbefinden</h3>
+                    <p>Ingwer, Apfelessig & Zimt unterstützen ein angenehmes Bauchgefühl.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">⚖️</span>
+                    <h3>Innere Balance</h3>
+                    <p>Berberin & Resveratrol für mehr Balance im Alltag.</p>
+                </div>
             </div>
         </section>
 
-        <header class="bg-main-bg h-[66px] flex items-center border-b">
-            <div class="container mx-auto px-4 flex justify-between items-center">
-                <div class="font-bold text-xl text-[#37606F]">Glucavit™</div>
-                <div class="text-lg font-medium">1/8</div>
-            </div>
-        </header>
-
-        <main class="py-10 px-4 max-w-[900px] mx-auto text-center">
-            <h1 class="text-3xl font-moret mb-4">Schön, dass du dir die Zeit nimmst.</h1>
-            <div class="space-y-4 max-w-[400px] mx-auto opacity-50">
-                <div class="bg-white p-4 rounded-xl shadow">Option 1</div>
-                <div class="bg-white p-4 rounded-xl shadow">Option 2</div>
-                <div class="bg-white p-4 rounded-xl shadow">Option 3</div>
-            </div>
-        </main>
-
-        <footer class="fixed bottom-0 w-full bg-[#111827] h-[66px] flex items-center justify-center text-[#BCBCBC] text-xs">
-            © 2026 Glucavit. Alle Rechte vorbehalten.
-        </footer>
-    </div>
-
-    <!-- POP-UP OVERLAY -->
-    <div id="cr-popup-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div id="cr-popup" role="dialog" aria-modal="true">
-            <div class="cr-badge">✅ OFFIZIELLER SHOP • Preis & Verfügbarkeit prüfen</div>
-            <div class="cr-box">
-                <div class="cr-left">
-                    <img src="https://gesundheitskapseln.de/wp-content/uploads/2026/01/glucavit_3bottles.png" alt="Glucavit 3 Bottles">
+        <!-- Seção de Oferta Principal -->
+        <section id="angebot" style="text-align: center;">
+            <h2>Wähle dein Wohlfühl-Paket</h2>
+            <div class="grid-2">
+                <div class="price-card">
+                    <h3>Starter-Paket</h3>
+                    <p>30-Tage-Vorrat</p>
+                    <div class="price-tag">49,95 €</div>
+                    <p>+ 4,95 € Versand</p>
+                    <button class="cr-yes" style="width: 100%; margin-top: 15px;" aria-label="Starter-Paket bestellen">In den Warenkorb</button>
                 </div>
-                <div class="cr-right">
-                    <h1>Jetzt den offiziellen Glucavit™-Rabatt sichern</h1>
-                    <p class="cr-sub">Du wirst zur offiziellen Bestellseite weitergeleitet.</p>
-                    
-                    <ul class="cr-benefits">
-                        <li><span class="tick">✓</span> Offizielle Bundles & Aktionen</li>
-                        <li><span class="tick">✓</span> 30 Tage Geld-zurück-Garantie</li>
-                        <li><span class="tick">✓</span> Sicher bezahlen (SSL)</li>
-                    </ul>
+                <div class="price-card popular">
+                    <div class="badge">BELIEBTESTE WAHL</div>
+                    <h3>Vorrats-Paket</h3>
+                    <p>90-Tage-Vorrat</p>
+                    <div class="price-tag" style="color: var(--cta);">109,95 €</div>
+                    <p class="per-day">Nur 1,22 € pro Tag | Du sparst 99,90 €</p>
+                    <p style="color: var(--cta); font-weight: bold; margin-top: 5px;">🚚 Kostenloser Versand</p>
+                    <button class="cr-yes" style="width: 100%; margin-top: 15px;" aria-label="Vorrats-Paket bestellen">In den Warenkorb</button>
+                </div>
+            </div>
+        </section>
 
-                    <div class="cr-btns">
-                        <button class="cr-yes" id="btn-accept">✅ Preis & Verfügbarkeit prüfen</button>
-                        <button class="cr-no" id="btn-reject">Zum Checkout →</button>
-                        <p class="cr-microcopy">Direkt zur offiziellen Seite. Keine Registrierung.</p>
-                    </div>
+        <!-- FAQ -->
+        <section>
+            <h2 style="text-align: center;">Häufig gestellte Fragen</h2>
+            <div style="margin-top: 30px;">
+                <div class="faq-item"><strong>❓ Wie nehme ich Glucavit ein?</strong><br>Täglich 1–2 Kapseln mit Wasser zu einer Mahlzeit.</div>
+                <div class="faq-item"><strong>❓ Ist Glucavit sicher?</strong><br>Ja, hergestellt nach EU-Standards mit natürlichen Inhaltsstoffen.</div>
+            </div>
+        </section>
+    </main>
 
-                    <div class="cr-trustrow">
-                        <div class="cr-trust"><strong>Qualität</strong><span>EU-Standard</span></div>
-                        <div class="cr-trust"><strong>Sicher</strong><span>SSL Checkout</span></div>
-                        <div class="cr-trust"><strong>Garantie</strong><span>30 Tage</span></div>
-                    </div>
+    <!-- Rodapé -->
+    <footer style="text-align: center;">
+        <div class="container">
+            <div>
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+                <a href="#">AGB</a>
+                <a href="#">Kontakt</a>
+            </div>
+            <p style="margin-top: 20px;">&copy; 2026 Glucavit™. Alle Rechte vorbehalten.</p>
+            <div class="disclaimer">
+                Nahrungsergänzungsmittel sind kein Ersatz für eine ausgewogene Ernährung. Ergebnisse variieren.
+            </div>
+        </div>
+    </footer>
 
-                    <div class="cr-bottom">
-                        <img src="https://gesundheitskapseln.de/wp-content/uploads/2026/01/glucavit_woman.png" alt="User">
-                        <nav class="cr-footer">
-                            <a href="#">Hinweis</a> | <a href="#">Nutzung</a> | <a href="#">Datenschutz</a>
-                        </nav>
-                    </div>
+    <!-- POPUP / MODAL DE OFERTA -->
+    <div id="popup-overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:90;"></div>
+    <div id="cr-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+        <div class="cr-badge">✅ OFFIZIELLER SHOP • Preis & Verfügbarkeit prüfen</div>
+        <div class="cr-box">
+            <div class="cr-left">
+                <img src="https://gesundheitskapseln.de/wp-content/uploads/2026/01/glucavit_3bottles.png" alt="Glucavit Flaschen Angebot">
+            </div>
+            <div class="cr-right">
+                <h1 id="popup-title">Jetzt den offiziellen Glucavit™-Rabatt sichern</h1>
+                <p class="cr-sub">Du wirst zur offiziellen Bestellseite weitergeleitet.</p>
+                
+                <ul class="cr-benefits">
+                    <li><span class="tick">✓</span> Offizielle Bundles & Aktionen</li>
+                    <li><span class="tick">✓</span> 30 Tage Geld-zurück-Garantie</li>
+                    <li><span class="tick">✓</span> Sicher bezahlen (SSL)</li>
+                </ul>
+
+                <div class="cr-btns">
+                    <button class="cr-yes" id="btn-accept">✅ Preis & Verfügbarkeit prüfen</button>
+                    <button class="cr-no" id="btn-reject">Zum Checkout →</button>
+                    <p class="cr-microcopy">Direkt zur offiziellen Seite. Keine Registrierung.</p>
+                </div>
+
+                <div class="cr-trustrow">
+                    <div class="cr-trust"><strong>Qualität</strong><span>EU-Standard</span></div>
+                    <div class="cr-trust"><strong>Sicher</strong><span>SSL Checkout</span></div>
+                    <div class="cr-trust"><strong>Garantie</strong><span>30 Tage</span></div>
+                </div>
+
+                <div class="cr-bottom">
+                    <img src="https://gesundheitskapseln.de/wp-content/uploads/2026/01/glucavit_woman.png" alt="Glucavit Kundenzufriedenheit">
+                    <nav class="cr-footer">
+                        <a href="#">Hinweis</a> | <a href="#">Nutzung</a> | <a href="#">Datenschutz</a>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Mobile CTA Button -->
+    <!-- Botão Fixo Mobile -->
     <div class="mobile-cta">
-        <button class="cr-yes w-full shadow-xl" onclick="window.location.href='https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/'">Jetzt bestellen</button>
+        <button class="btn" style="width: 100%;" onclick="window.location.href='https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/'">Jetzt bestellen</button>
     </div>
 
     <script>
-        // Link atualizado conforme solicitado
         const OFFER_URL = "https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/";
         
+        const popup = document.getElementById('cr-popup');
+        const overlay = document.getElementById('popup-overlay');
         const acceptBtn = document.getElementById('btn-accept');
         const rejectBtn = document.getElementById('btn-reject');
 
         const goToOffer = (e) => {
-            if(e) e.stopPropagation();
+            e.stopPropagation();
             window.location.href = OFFER_URL;
         };
 
-        // Adiciona evento de clique aos botões do pop-up
-        if(acceptBtn) acceptBtn.addEventListener('click', goToOffer);
-        if(rejectBtn) rejectBtn.addEventListener('click', goToOffer);
-
-        // Redirecionar ao clicar no overlay (fundo escuro ao redor do popup)
-        const overlay = document.getElementById('cr-popup-overlay');
-        if(overlay) {
-            overlay.addEventListener('click', (e) => {
-                if(e.target.id === 'cr-popup-overlay') {
-                    goToOffer();
-                }
-            });
-        }
+        acceptBtn.addEventListener('click', goToOffer);
+        rejectBtn.addEventListener('click', goToOffer);
+        
+        // Atribui o link a todos os botões de conversão na página
+        document.querySelectorAll('.cr-yes').forEach(btn => {
+            btn.addEventListener('click', goToOffer);
+        });
     </script>
 </body>
 </html>
