@@ -30,12 +30,11 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-             /* Removido o filtro de blur e resetado o scale para manter a nitidez total */
             filter: none;
             transform: scale(1);
             z-index: -1;
             will-change: transform, filter;
-            background-color: #f3f4f6;
+            background-color: #f3f4f6;;
         }
 
 
@@ -167,7 +166,6 @@
 
         /* Overlay com Scroll Suave */
         #cr-popup-overlay {
-            background-color: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(5px);
             z-index: 100;
             overflow-y: auto;
@@ -184,7 +182,8 @@
 <body class="m-0 p-0 overflow-hidden h-screen w-full bg-slate-900">
 
 
-    
+    <!-- Camada de Fundo com Blur reduzido -->
+    <div class="bg-responsive" aria-hidden="true"></div>
 
 
     <!-- OVERLAY DO POP-UP -->
