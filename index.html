@@ -31,9 +31,10 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* Filtro removido para nitidez máxima */
-            filter: none;
-            transform: scale(1);
+            /* Inserido um blur leve (2px) para uma aparência sofisticada sem perder a forma */
+            filter: blur(2px);
+            /* Escala levemente aumentada para compensar o desfoque nas bordas */
+            transform: scale(1.03);
             z-index: -1;
             will-change: transform, filter;
             background-color: #f3f4f6;
@@ -166,9 +167,8 @@
         .cr-footer a:hover { color: #94a3b8; }
 
 
-        /* Overlay (Fundo do Pop-up) totalmente nítido */
+        /* Overlay do Pop-up (mantido transparente e nítido para mostrar o blur leve da imagem abaixo) */
         #cr-popup-overlay {
-            /* Removido o blur e a cor de fundo para nitidez total */
             backdrop-filter: none;
             background-color: transparent;
             z-index: 100;
@@ -186,7 +186,7 @@
 <body class="m-0 p-0 overflow-hidden h-screen w-full bg-slate-900">
 
 
-    <!-- Camada de Fundo Totalmente Nítida -->
+    <!-- Camada de Fundo com Blur leve aplicado -->
     <div class="bg-responsive" aria-hidden="true"></div>
 
 
