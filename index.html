@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -11,234 +10,20 @@
     <meta name="description" content="Unterstützen Sie Ihren Stoffwechsel natürlich mit Glucavit. Sichern Sie sich heute exklusive Rabatte für mehr Energie und Wohlbefinden. Jetzt offiziell bestellen!">
     <meta name="google-site-verification" content="xUeVbdq-XByyBawAUpWnfxSvM5lnd8cWdTybs_Llmzc" />
    
-    <!-- Resource Hints -->
+    <!-- Resource Hints (Preload LCP Image) -->
     <link rel="preload" as="image" href="./imagens/glucavit_3.png" media="(max-width: 767px)">
     <link rel="preload" as="image" href="./imagens/glucavit_3.png">
     <link rel="icon" href="./imagens/glucavit_3.png">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
+    <!-- CSS Otimizado e Minificado (Substitui o Tailwind CDN para performance) -->
     <style>
-        /* Desempenho e Background */
-        .bg-responsive {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            filter: blur(2px);
-            transform: scale(1.03);
-            z-index: -1;
-            will-change: transform, filter;
-            background-color: #f3f4f6;
-        }
-
-        @media (min-width: 1025px) { 
-            .bg-responsive { 
-                background-image: url('./imagens/glucavit_desktop.png'), linear-gradient(to right, #e2e8f0, #cbd5e1); 
-            } 
-        }
-        @media (min-width: 768px) and (max-width: 1024px) { 
-            .bg-responsive { 
-                background-image: url('./imagens/glucavit_tablet.png'), linear-gradient(to right, #cbd5e1, #94a3b8); 
-            } 
-        }
-        @media (max-width: 767px) { 
-            .bg-responsive { 
-                background-image: url('./imagens/glucavit_mobile.png'), linear-gradient(to bottom, #f1f5f9, #e2e8f0); 
-            } 
-        }
-
-        /* Estilos do Pop-up */
-        #cr-popup {
-            max-width: 850px;
-            width: 100%;
-            background: white;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-            animation: popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            /* margin: auto; removido para permitir flex-column funcionar melhor com o SEO abaixo */
-            margin-bottom: 20px;
-            flex-shrink: 0;
-        }
-
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.95) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .cr-badge {
-            background: #f1f5f9;
-            color: #475569;
-            padding: 10px;
-            text-align: center;
-            font-size: 0.7rem;
-            font-weight: 800;
-            border-bottom: 1px solid #e2e8f0;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* Layout Responsivo */
-        .cr-box { display: flex; flex-direction: column; }
-
-        @media (min-width: 768px) {
-            .cr-box { flex-direction: row; min-height: 520px; }
-            .cr-left { width: 42%; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); display: flex; align-items: center; justify-content: center; padding: 40px; }
-            .cr-right { width: 58%; padding: 40px; }
-            .cr-right h1 { font-size: 2rem; }
-        }
-
-        @media (max-width: 767px) {
-            #cr-popup { border-radius: 20px; max-width: 95%; }
-            .cr-left { padding: 25px 20px 10px 20px; background: #fff; }
-            .cr-left img { max-width: 140px; margin: 0 auto; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-            .cr-right { padding: 15px 20px 25px 20px; }
-            .cr-right h1 { font-size: 1.35rem; text-align: center; margin-bottom: 12px; }
-            .cr-sub { text-align: center; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4; }
-            .cr-benefits li { font-size: 0.8rem; margin-bottom: 8px; }
-            .cr-trustrow { padding-top: 15px; margin-top: 15px; }
-            .cr-trust strong { font-size: 0.6rem; }
-            .cr-trust span { font-size: 0.55rem; }
-            .cr-btns { margin-bottom: 15px; }
-        }
-
-        .cr-left img { width: 100%; height: auto; object-fit: contain; transition: transform 0.4s ease; }
-        .cr-left a:hover img { transform: scale(1.05); }
-
-        .cr-right h1 { font-weight: 900; color: #0f172a; line-height: 1.15; }
-        .cr-sub { color: #64748b; }
-
-        .cr-benefits { list-style: none; padding: 0; }
-        .cr-benefits li { display: flex; align-items: flex-start; margin-bottom: 10px; color: #334155; font-weight: 500; }
-        .tick { color: #22c55e; margin-right: 10px; font-weight: bold; flex-shrink: 0; font-size: 1.1rem; line-height: 1; }
-
-        .cr-yes {
-            width: 100%;
-            background: #22c55e;
-            color: white;
-            padding: 18px;
-            border-radius: 14px;
-            font-weight: 800;
-            font-size: 1.05rem;
-            margin-bottom: 8px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 6px -1px rgba(79, 91, 120, 0.2);
-        }
-        .cr-yes:hover { background: #3b455e; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(79, 91, 120, 0.3); }
-        .cr-yes:active { transform: translateY(0); }
-       
-        .cr-no {
-            width: 100%;
-            background: transparent;
-            color: #94a3b8;
-            padding: 10px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-decoration: underline;
-            cursor: pointer;
-            border: none;
-            transition: color 0.2s;
-        }
-        .cr-no:hover { color: #64748b; }
-
-        .cr-microcopy { font-size: 0.65rem; color: #94a3b8; text-align: center; margin-top: 6px; }
-
-        .cr-trustrow { display: flex; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 20px; margin-top: 20px; margin-bottom: 20px; }
-        .cr-trust { text-align: center; flex: 1; }
-        .cr-trust strong { display: block; font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 0.02em; }
-        .cr-trust span { font-size: 0.65rem; color: #94a3b8; }
-
-        .cr-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
-        .cr-bottom img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #f1f5f9; flex-shrink: 0; }
-        .cr-footer { font-size: 0.6rem; color: #cbd5e1; flex-grow: 1; text-align: right; }
-        .cr-footer a { margin-left: 8px; text-decoration: none; white-space: nowrap; transition: color 0.2s; }
-        .cr-footer a:hover { color: #94a3b8; }
-
-        /* Overlay do Pop-up */
-        #cr-popup-overlay {
-            backdrop-filter: none;
-            background-color: transparent;
-            z-index: 100;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column; /* Alterado para permitir empilhamento vertical */
-            align-items: center;
-            justify-content: flex-start; /* Permite scroll se o conteúdo crescer */
-            padding-top: 5vh; /* Espaço do topo */
-            -webkit-overflow-scrolling: touch;
-        }
-       
-        @media (max-width: 767px) {
-            #cr-popup-overlay { padding: 20px 10px; justify-content: center; }
-        }
-
-        /* --- SEO SECTION STYLES --- */
-        .seo-btn {
-            background-color: transparent;
-            color: #94a3b8; /* Cinza suave discreto */
-            padding: 10px;
-            font-size: 10px; /* Fonte pequena */
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: color 0.3s;
-            font-weight: 300; /* Slim / Fina */
-            display: block;
-            margin: 5px auto 10px auto;
-            box-shadow: none;
-            opacity: 0.8;
-            letter-spacing: 0.5px;
-        }
-
-        .seo-btn:hover {
-            color: #64748b; /* Levemente mais escuro no hover */
-            background-color: transparent;
-            text-decoration: underline;
-            opacity: 1;
-            transform: none;
-        }
-
-        /* Container que fica oculto */
-        #glucavit-seo-content {
-            display: none; /* Oculto por padrão */
-            max-width: 800px;
-            width: 95%; /* Responsivo */
-            margin: 0 auto 50px auto; /* Margem inferior para scroll */
-            padding: 30px;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            background-color: #ffffff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        /* Estilos Isolados do Conteúdo SEO */
-        #glucavit-seo-content .meta-preview {
-            background: #f8fafc;
-            padding: 20px;
-            border-left: 5px solid #3b82f6;
-            margin-bottom: 25px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 0.9rem;
-            color: #475569;
-            border-radius: 0 8px 8px 0;
-        }
+        /* Reset & Tailwind Utilities Replacement (Critical CSS) */
+        *,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}img{display:block;vertical-align:middle;max-width:100%;height:auto}button{cursor:pointer}
+        /* Used Tailwind Classes */
+        .m-0{margin:0}.p-0{padding:0}.p-4{padding:1rem}.my-6{margin-top:1.5rem;margin-bottom:1.5rem}.block{display:block}.flex{display:flex}.fixed{position:fixed}.inset-0{top:0;right:0;bottom:0;left:0}.h-screen{height:100vh}.w-full{width:100%}.overflow-hidden{overflow:hidden}.text-center{text-align:center}.bg-slate-900{background-color:#0f172a}.border-gray-200{border-color:#e5e7eb}
         
-        #glucavit-seo-content h1 { color: #1e293b; font-size: 26px; margin-bottom: 15px; font-weight: 800; line-height: 1.3; }
-        #glucavit-seo-content h2 { color: #0f766e; font-size: 20px; margin-top: 30px; margin-bottom: 10px; font-weight: 700; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
-        #glucavit-seo-content h3 { font-size: 1.1rem; font-weight: 600; margin-top: 20px; color: #334155; }
-        #glucavit-seo-content p { margin-bottom: 15px; line-height: 1.6; color: #475569; }
-        #glucavit-seo-content ul { list-style-type: disc; padding-left: 20px; color: #475569; }
-        #glucavit-seo-content li { margin-bottom: 8px; }
-        #glucavit-seo-content .badge { background: #ef4444; color: white; padding: 3px 8px; font-size: 11px; border-radius: 99px; vertical-align: middle; font-weight: bold; letter-spacing: 0.5px; margin-left: 8px; }
-        #glucavit-seo-content blockquote { border-left: 4px solid #cbd5e1; padding-left: 15px; font-style: italic; color: #64748b; margin: 20px 0; }
+        /* Custom Styles Minified */
+        .bg-responsive{position:fixed;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;filter:blur(2px);transform:scale(1.03);z-index:-1;will-change:transform,filter;background-color:#f3f4f6}@media (min-width:1025px){.bg-responsive{background-image:url('./imagens/glucavit_desktop.png'),linear-gradient(to right,#e2e8f0,#cbd5e1)}}@media (min-width:768px) and (max-width:1024px){.bg-responsive{background-image:url('./imagens/glucavit_tablet.png'),linear-gradient(to right,#cbd5e1,#94a3b8)}}@media (max-width:767px){.bg-responsive{background-image:url('./imagens/glucavit_mobile.png'),linear-gradient(to bottom,#f1f5f9,#e2e8f0)}}#cr-popup{max-width:850px;width:100%;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.4);animation:popIn .5s cubic-bezier(0.16,1,0.3,1) forwards;margin-bottom:20px;flex-shrink:0}@keyframes popIn{from{opacity:0;transform:scale(0.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}.cr-badge{background:#f1f5f9;color:#475569;padding:10px;text-align:center;font-size:.7rem;font-weight:800;border-bottom:1px solid #e2e8f0;text-transform:uppercase;letter-spacing:.05em}.cr-box{display:flex;flex-direction:column}@media (min-width:768px){.cr-box{flex-direction:row;min-height:520px}.cr-left{width:42%;background:linear-gradient(135deg,#f8fafc 0%,#f1f5f9 100%);display:flex;align-items:center;justify-content:center;padding:40px}.cr-right{width:58%;padding:40px}.cr-right h1{font-size:2rem}}@media (max-width:767px){#cr-popup{border-radius:20px;max-width:95%}.cr-left{padding:25px 20px 10px 20px;background:#fff}.cr-left img{max-width:140px;margin:0 auto;filter:drop-shadow(0 10px 15px rgba(0,0,0,0.1))}.cr-right{padding:15px 20px 25px 20px}.cr-right h1{font-size:1.35rem;text-align:center;margin-bottom:12px}.cr-sub{text-align:center;font-size:.85rem;margin-bottom:20px;line-height:1.4}.cr-benefits li{font-size:.8rem;margin-bottom:8px}.cr-trustrow{padding-top:15px;margin-top:15px}.cr-trust strong{font-size:.6rem}.cr-trust span{font-size:.55rem}.cr-btns{margin-bottom:15px}}.cr-left img{width:100%;height:auto;object-fit:contain;transition:transform .4s ease}.cr-left a:hover img{transform:scale(1.05)}.cr-right h1{font-weight:900;color:#0f172a;line-height:1.15}.cr-sub{color:#64748b}.cr-benefits{list-style:none;padding:0}.cr-benefits li{display:flex;align-items:flex-start;margin-bottom:10px;color:#334155;font-weight:500}.tick{color:#22c55e;margin-right:10px;font-weight:bold;flex-shrink:0;font-size:1.1rem;line-height:1}.cr-yes{width:100%;background:#22c55e;color:#fff;padding:18px;border-radius:14px;font-weight:800;font-size:1.05rem;margin-bottom:8px;transition:all .3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;border:none;box-shadow:0 4px 6px -1px rgba(79,91,120,0.2)}.cr-yes:hover{background:#3b455e;transform:translateY(-2px);box-shadow:0 10px 15px -3px rgba(79,91,120,0.3)}.cr-yes:active{transform:translateY(0)}.cr-no{width:100%;background:0 0;color:#94a3b8;padding:10px;font-size:.8rem;font-weight:600;text-decoration:underline;cursor:pointer;border:none;transition:color .2s}.cr-no:hover{color:#64748b}.cr-microcopy{font-size:.65rem;color:#94a3b8;text-align:center;margin-top:6px}.cr-trustrow{display:flex;justify-content:space-between;border-top:1px solid #f1f5f9;padding-top:20px;margin-top:20px;margin-bottom:20px}.cr-trust{text-align:center;flex:1;text-decoration:none}.cr-trust strong{display:block;font-size:.7rem;color:#475569;text-transform:uppercase;letter-spacing:.02em}.cr-trust span{font-size:.65rem;color:#94a3b8}.cr-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}.cr-bottom img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #f1f5f9;flex-shrink:0}.cr-footer{font-size:.6rem;color:#64748b;flex-grow:1;text-align:right}.cr-footer a{margin-left:8px;text-decoration:none;color:#64748b;white-space:nowrap;transition:color .2s}.cr-footer a:hover{color:#94a3b8}#cr-popup-overlay{backdrop-filter:none;background-color:transparent;z-index:100;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:5vh;-webkit-overflow-scrolling:touch}@media (max-width:767px){#cr-popup-overlay{padding:20px 10px;justify-content:center}}.seo-btn{background-color:transparent;color:#94a3b8;padding:10px;font-size:10px;border:none;border-radius:4px;cursor:pointer;transition:color .3s;font-weight:300;display:block;margin:5px auto 10px auto;box-shadow:none;opacity:.8;letter-spacing:.5px}.seo-btn:hover{color:#64748b;background-color:transparent;text-decoration:underline;opacity:1;transform:none}#glucavit-seo-content{display:none;max-width:800px;width:95%;margin:0 auto 50px auto;padding:30px;border:1px solid #e2e8f0;border-radius:16px;background-color:#fff;box-shadow:0 10px 25px rgba(0,0,0,0.1)}#glucavit-seo-content .meta-preview{background:#f8fafc;padding:20px;border-left:5px solid #3b82f6;margin-bottom:25px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9rem;color:#475569;border-radius:0 8px 8px 0}#glucavit-seo-content h1{color:#1e293b;font-size:26px;margin-bottom:15px;font-weight:800;line-height:1.3}#glucavit-seo-content h2{color:#0f766e;font-size:20px;margin-top:30px;margin-bottom:10px;font-weight:700;border-bottom:1px solid #f1f5f9;padding-bottom:10px}#glucavit-seo-content h3{font-size:1.1rem;font-weight:600;margin-top:20px;color:#334155}#glucavit-seo-content p{margin-bottom:15px;line-height:1.6;color:#475569}#glucavit-seo-content ul{list-style-type:disc;padding-left:20px;color:#475569}#glucavit-seo-content li{margin-bottom:8px}#glucavit-seo-content .badge{background:#ef4444;color:#fff;padding:3px 8px;font-size:11px;border-radius:99px;vertical-align:middle;font-weight:bold;letter-spacing:.5px;margin-left:8px}#glucavit-seo-content blockquote{border-left:4px solid #cbd5e1;padding-left:15px;font-style:italic;color:#64748b;margin:20px 0}
     </style>
 </head>
 <body class="m-0 p-0 overflow-hidden h-screen w-full bg-slate-900">
@@ -248,32 +33,36 @@
 
     <!-- OVERLAY (Main Container) -->
     <main id="cr-popup-overlay" class="fixed inset-0 p-4">
-        
+       
         <!-- POP-UP ORIGINAL -->
         <article id="cr-popup" role="dialog" aria-labelledby="popup-title" aria-modal="true">
             <div class="cr-badge">✅ OFFIZIELLER SHOP • Preis & Verfügbarkeit prüfen</div>
            
             <div class="cr-box">
                 <div class="cr-left">
-                    <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" class="block w-full">
+                    <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" class="block w-full text-center">
+                        <!-- Imagem com fallback, fetchpriority alto e loading eager para LCP -->
                         <img src="./imagens/glucavit_3.png" 
-                             alt="Glucavit™ Product Bottle" width="350" height="350" loading="eager">
+                             alt="Glucavit™ Product Bottle" 
+                             width="350" height="350" 
+                             loading="eager"
+                             fetchpriority="high"
+                             onerror="this.onerror=null; this.src='https://placehold.co/350x350/e2e8f0/475569?text=Glucavit+Product';">
                     </a>
                 </div>
                
                 <div class="cr-right">
                     <h1 id="popup-title">
-                        <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/">Erreichen Sie Ihre Gewichtsabnahmeziele – einfacher denn je mit Glucavit!</a>
+                        <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" style="color: #0F172A; text-decoration: none;">Erreichen Sie Ihre Gewichtsabnahmeziele – einfacher denn je mit Glucavit!</a>
                     </h1>
                     <p class="cr-sub">Investiere in ein gesünderes, schlankeres und energiegeladeneres Ich.</p>
-                                        
-                    <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" class="cr-benefits">
+                                             
+                    <ul class="cr-benefits">
                         <li><span class="tick">✓</span> Unterstützt natürliche Energie</li>
                         <li><span class="tick">✓</span> Fördert Stoffwechsel & Fettverbrennung</li>
                         <li><span class="tick">✓</span> Unterstützt Verdauung & reduziert Blähungen</li>
                         <li><span class="tick">✓</span> Unterstützt hormonelles Gleichgewicht & mentale Klarheit</li>
                         <li><span class="tick">✓</span> Sanfte, natürliche Detox-Unterstützung</li>
-                        </a>
                     </ul>
 
                     <div class="cr-btns">
@@ -300,7 +89,9 @@
 
                     <div class="cr-bottom">
                         <img src="./imagens/mulher_segurando_glucavit.png"
-                             alt="Verified User" width="40" height="40">
+                             alt="Verified User" width="40" height="40"
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='https://placehold.co/40x40/f1f5f9/94a3b8?text=User';">
                         <nav class="cr-footer">
                             <a href="#">Hinweis</a> | <a href="#">Nutzung</a> | <a href="#">Datenschutz</a>
                         </nav>
@@ -375,7 +166,7 @@
 
     </main>
 
-    <!-- Scripts de Rastreamento -->
+    <!-- Scripts de Rastreamento (Mantidos, mas otimizados para não bloquear) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16701111501"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -394,27 +185,9 @@
 
     <script async src="//cdn.jsdelivr.net/gh/opadim/script/cnl.js"></script>
 
-    <!-- Script do SEO Toggle -->
+    <!-- Script do SEO Toggle (Minificado inline) -->
     <script>
-        function toggleSeoInfo() {
-            var content = document.getElementById("glucavit-seo-content");
-            var btn = document.getElementById("toggleSeoBtn");
-            
-            if (content.style.display === "none" || content.style.display === "") {
-                content.style.display = "block";
-                btn.innerHTML = "Menos informações Glucavit ▴";
-                btn.setAttribute("aria-expanded", "true");
-                
-                // Opcional: Rolar suavemente até o conteúdo
-                setTimeout(() => {
-                    content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-            } else {
-                content.style.display = "none";
-                btn.innerHTML = "Mais informações Glucavit ▾";
-                btn.setAttribute("aria-expanded", "false");
-            }
-        }
+        function toggleSeoInfo(){var e=document.getElementById("glucavit-seo-content"),t=document.getElementById("toggleSeoBtn");"none"===e.style.display||""===e.style.display?(e.style.display="block",t.innerHTML="Menos informações Glucavit ▾",t.setAttribute("aria-expanded","true"),setTimeout((()=>{e.scrollIntoView({behavior:"smooth",block:"start"})}),100)):(e.style.display="none",t.innerHTML="Mais informações Glucavit ▾",t.setAttribute("aria-expanded","false"))}
     </script>
 
 </body>
