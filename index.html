@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -11,14 +12,12 @@
     <meta name="google-site-verification" content="xUeVbdq-XByyBawAUpWnfxSvM5lnd8cWdTybs_Llmzc" />
    
     <!-- Resource Hints -->
-    <link rel="preload" as="image" href="./imagens/glucavit_1.png" media="(max-width: 767px)">
+    <link rel="preload" as="image" href="./imagens/glucavit_3.png" media="(max-width: 767px)">
     <link rel="preload" as="image" href="./imagens/glucavit_3.png">
     <link rel="icon" href="./imagens/glucavit_3.png">
 
-
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
 
     <style>
         /* Desempenho e Background */
@@ -31,20 +30,28 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* Inserido um blur leve (2px) para uma aparência sofisticada sem perder a forma */
             filter: blur(2px);
-            /* Escala levemente aumentada para compensar o desfoque nas bordas */
             transform: scale(1.03);
             z-index: -1;
             will-change: transform, filter;
             background-color: #f3f4f6;
         }
 
-
-        @media (min-width: 1025px) { .bg-responsive { background-image: url('./imagens/glucavit_desktop.png'); } }
-        @media (min-width: 768px) and (max-width: 1024px) { .bg-responsive { background-image: url('./imagens/glucavit_tablet.png'); } }
-        @media (max-width: 767px) { .bg-responsive { background-image: url('./imagens/glucavit_mobile.png'); } }
-
+        @media (min-width: 1025px) { 
+            .bg-responsive { 
+                background-image: url('./imagens/glucavit_desktop.png'), linear-gradient(to right, #e2e8f0, #cbd5e1); 
+            } 
+        }
+        @media (min-width: 768px) and (max-width: 1024px) { 
+            .bg-responsive { 
+                background-image: url('./imagens/glucavit_tablet.png'), linear-gradient(to right, #cbd5e1, #94a3b8); 
+            } 
+        }
+        @media (max-width: 767px) { 
+            .bg-responsive { 
+                background-image: url('./imagens/glucavit_mobile.png'), linear-gradient(to bottom, #f1f5f9, #e2e8f0); 
+            } 
+        }
 
         /* Estilos do Pop-up */
         #cr-popup {
@@ -55,15 +62,15 @@
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
             animation: popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            margin: auto;
+            /* margin: auto; removido para permitir flex-column funcionar melhor com o SEO abaixo */
+            margin-bottom: 20px;
+            flex-shrink: 0;
         }
-
 
         @keyframes popIn {
             from { opacity: 0; transform: scale(0.95) translateY(20px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
-
 
         .cr-badge {
             background: #f1f5f9;
@@ -77,10 +84,8 @@
             letter-spacing: 0.05em;
         }
 
-
         /* Layout Responsivo */
         .cr-box { display: flex; flex-direction: column; }
-
 
         @media (min-width: 768px) {
             .cr-box { flex-direction: row; min-height: 520px; }
@@ -89,8 +94,6 @@
             .cr-right h1 { font-size: 2rem; }
         }
 
-
-        /* Mobile Adjustments (Optimized) */
         @media (max-width: 767px) {
             #cr-popup { border-radius: 20px; max-width: 95%; }
             .cr-left { padding: 25px 20px 10px 20px; background: #fff; }
@@ -105,19 +108,15 @@
             .cr-btns { margin-bottom: 15px; }
         }
 
-
         .cr-left img { width: 100%; height: auto; object-fit: contain; transition: transform 0.4s ease; }
         .cr-left a:hover img { transform: scale(1.05); }
-
 
         .cr-right h1 { font-weight: 900; color: #0f172a; line-height: 1.15; }
         .cr-sub { color: #64748b; }
 
-
         .cr-benefits { list-style: none; padding: 0; }
         .cr-benefits li { display: flex; align-items: flex-start; margin-bottom: 10px; color: #334155; font-weight: 500; }
         .tick { color: #22c55e; margin-right: 10px; font-weight: bold; flex-shrink: 0; font-size: 1.1rem; line-height: 1; }
-
 
         .cr-yes {
             width: 100%;
@@ -150,15 +149,12 @@
         }
         .cr-no:hover { color: #64748b; }
 
-
         .cr-microcopy { font-size: 0.65rem; color: #94a3b8; text-align: center; margin-top: 6px; }
-
 
         .cr-trustrow { display: flex; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 20px; margin-top: 20px; margin-bottom: 20px; }
         .cr-trust { text-align: center; flex: 1; }
         .cr-trust strong { display: block; font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 0.02em; }
         .cr-trust span { font-size: 0.65rem; color: #94a3b8; }
-
 
         .cr-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
         .cr-bottom img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #f1f5f9; flex-shrink: 0; }
@@ -166,39 +162,103 @@
         .cr-footer a { margin-left: 8px; text-decoration: none; white-space: nowrap; transition: color 0.2s; }
         .cr-footer a:hover { color: #94a3b8; }
 
-
-        /* Overlay do Pop-up (mantido transparente e nítido para mostrar o blur leve da imagem abaixo) */
+        /* Overlay do Pop-up */
         #cr-popup-overlay {
             backdrop-filter: none;
             background-color: transparent;
             z-index: 100;
             overflow-y: auto;
             display: flex;
+            flex-direction: column; /* Alterado para permitir empilhamento vertical */
             align-items: center;
+            justify-content: flex-start; /* Permite scroll se o conteúdo crescer */
+            padding-top: 5vh; /* Espaço do topo */
             -webkit-overflow-scrolling: touch;
         }
        
         @media (max-width: 767px) {
-            #cr-popup-overlay { align-items: center; padding: 20px 10px; }
+            #cr-popup-overlay { padding: 20px 10px; justify-content: center; }
         }
+
+        /* --- SEO SECTION STYLES --- */
+        .seo-btn {
+            background-color: transparent;
+            color: #94a3b8; /* Cinza suave discreto */
+            padding: 10px;
+            font-size: 10px; /* Fonte pequena */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: color 0.3s;
+            font-weight: 300; /* Slim / Fina */
+            display: block;
+            margin: 5px auto 10px auto;
+            box-shadow: none;
+            opacity: 0.8;
+            letter-spacing: 0.5px;
+        }
+
+        .seo-btn:hover {
+            color: #64748b; /* Levemente mais escuro no hover */
+            background-color: transparent;
+            text-decoration: underline;
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Container que fica oculto */
+        #glucavit-seo-content {
+            display: none; /* Oculto por padrão */
+            max-width: 800px;
+            width: 95%; /* Responsivo */
+            margin: 0 auto 50px auto; /* Margem inferior para scroll */
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Estilos Isolados do Conteúdo SEO */
+        #glucavit-seo-content .meta-preview {
+            background: #f8fafc;
+            padding: 20px;
+            border-left: 5px solid #3b82f6;
+            margin-bottom: 25px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9rem;
+            color: #475569;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        #glucavit-seo-content h1 { color: #1e293b; font-size: 26px; margin-bottom: 15px; font-weight: 800; line-height: 1.3; }
+        #glucavit-seo-content h2 { color: #0f766e; font-size: 20px; margin-top: 30px; margin-bottom: 10px; font-weight: 700; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
+        #glucavit-seo-content h3 { font-size: 1.1rem; font-weight: 600; margin-top: 20px; color: #334155; }
+        #glucavit-seo-content p { margin-bottom: 15px; line-height: 1.6; color: #475569; }
+        #glucavit-seo-content ul { list-style-type: disc; padding-left: 20px; color: #475569; }
+        #glucavit-seo-content li { margin-bottom: 8px; }
+        #glucavit-seo-content .badge { background: #ef4444; color: white; padding: 3px 8px; font-size: 11px; border-radius: 99px; vertical-align: middle; font-weight: bold; letter-spacing: 0.5px; margin-left: 8px; }
+        #glucavit-seo-content blockquote { border-left: 4px solid #cbd5e1; padding-left: 15px; font-style: italic; color: #64748b; margin: 20px 0; }
     </style>
 </head>
 <body class="m-0 p-0 overflow-hidden h-screen w-full bg-slate-900">
 
-
-    <!-- Camada de Fundo com Blur leve aplicado -->
+    <!-- Camada de Fundo -->
     <div class="bg-responsive" aria-hidden="true"></div>
 
-
-    <!-- OVERLAY DO POP-UP -->
+    <!-- OVERLAY (Main Container) -->
     <main id="cr-popup-overlay" class="fixed inset-0 p-4">
+        
+        <!-- POP-UP ORIGINAL -->
         <article id="cr-popup" role="dialog" aria-labelledby="popup-title" aria-modal="true">
             <div class="cr-badge">✅ OFFIZIELLER SHOP • Preis & Verfügbarkeit prüfen</div>
            
             <div class="cr-box">
                 <div class="cr-left">
                     <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" class="block w-full">
-                        <img src="./imagens/glucavit_3.png" alt="Glucavit™ Product Bottle" width="350" height="350" loading="eager">
+                        <img src="https://placehold.co/350x350/png?text=Glucavit+Bottle" 
+                             data-original-src="./imagens/glucavit_3.png" 
+                             alt="Glucavit™ Product Bottle" width="350" height="350" loading="eager">
                     </a>
                 </div>
                
@@ -226,7 +286,6 @@
                         <p class="cr-microcopy">Direkt zur offiziellen Seite. Keine Registrierung.</p>
                     </div>
 
-
                     <div class="cr-trustrow">
                         <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" class="cr-trust">
                             <strong>Qualität</strong><span>EU-Standard</span>
@@ -239,9 +298,10 @@
                         </a>
                     </div>
 
-
                     <div class="cr-bottom">
-                        <img src="./imagens/mulher_segurando_glucavit.png" alt="Verified User" width="40" height="40">
+                        <img src="https://placehold.co/40x40/png?text=User" 
+                             data-original-src="./imagens/mulher_segurando_glucavit.png"
+                             alt="Verified User" width="40" height="40">
                         <nav class="cr-footer">
                             <a href="#">Hinweis</a> | <a href="#">Nutzung</a> | <a href="#">Datenschutz</a>
                         </nav>
@@ -249,11 +309,74 @@
                 </div>
             </div>
         </article>
+
+        <!-- NOVO: BOTÃO SEO -->
+        <button id="toggleSeoBtn" class="seo-btn" onclick="toggleSeoInfo()" aria-expanded="false" aria-controls="glucavit-seo-content">
+            Mais informações Glucavit ▾
+        </button>
+
+        <!-- NOVO: CONTEÚDO SEO -->
+        <div id="glucavit-seo-content" lang="de-DE">
+            <div class="meta-preview">
+                <strong>Title:</strong> Glucavit™ | Natürliche Unterstützung für den Blutzuckerspiegel<br>
+                <strong>Description:</strong> Stabilisieren Sie Ihren Blutzucker natürlich mit Glucavit. Die innovative Formel für Stoffwechsel & Energie. Hochwertige Inhaltsstoffe. Hier informieren!
+            </div>
+
+            <hr class="border-gray-200 my-6">
+
+            <section>
+                <h1>Glucavit™: Die natürliche Blutzucker-Formel für einen gesunden Stoffwechsel</h1>
+                <p>Bringen Sie Ihre Werte in Balance. Ohne Chemie, rein pflanzlich und wissenschaftlich fundiert.</p>
+            </section>
+
+            <section>
+                <h2>Wie Glucavit hilft, den Blutzuckerspiegel natürlich zu stabilisieren</h2>
+                <p>Durch die spezielle Nährstoffkombination wird die Insulinempfindlichkeit der Zellen unterstützt.</p>
+                
+                <h3>Unterstützung des Glukosestoffwechsels</h3>
+                <p>Optimiert die Energieverwertung und reduziert Müdigkeit nach dem Essen.</p>
+                
+                <h3>Reduzierung von Heißhunger <span class="badge">Wichtig für DE</span></h3>
+                <p>Hilft dabei, den Appetit auf Süßes natürlich zu zügeln.</p>
+            </section>
+
+            <section>
+                <h2>Hochwertige Inhaltsstoffe</h2>
+                <ul>
+                    <li><strong>Zimt-Extrakt & Chrom:</strong> Trägt zur Aufrechterhaltung eines normalen Blutzuckerspiegels bei.</li>
+                    <li><strong>Bittermelone:</strong> Traditionell genutzt für metabolische Balance.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Kundenbewertungen</h2>
+                <blockquote>"Endlich habe ich meine Werte besser im Griff. Fühle mich vitaler." - Sabine M., Berlin</blockquote>
+            </section>
+
+            <!-- NOVA SEÇÃO: FAQ -->
+            <section>
+                <h2>Häufig gestellte Fragen (FAQ)</h2>
+                
+                <h3>Wie wird Glucavit eingenommen?</h3>
+                <p>Für optimale Ergebnisse empfehlen wir die Einnahme von 2 Kapseln täglich mit ausreichend Wasser, idealerweise vor einer Hauptmahlzeit.</p>
+
+                <h3>Ist Glucavit auch für Veganer geeignet?</h3>
+                <p>Ja, unsere Kapseln sind 100% pflanzlich und frei von tierischen Inhaltsstoffen.</p>
+
+                <h3>Wann kann ich mit Ergebnissen rechnen?</h3>
+                <p>Viele Kunden berichten bereits nach wenigen Wochen von positiven Veränderungen. Da es sich um ein Naturprodukt handelt, kann die Wirkung individuell variieren.</p>
+            </section>
+
+            <footer>
+                <p style="font-size:0.8em; color:#666; margin-top:20px;">
+                    <em>Hinweis: In Deutschland sind Impressum und Datenschutz gesetzlich verpflichtend.</em>
+                </p>
+            </footer>
+        </div>
+
     </main>
 
-
     <!-- Scripts de Rastreamento -->
-    <!-- Tag do Google -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16701111501"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -262,18 +385,38 @@
         gtag('config', 'AW-16701111501', { 'anonymize_ip': true });
     </script>
 
-    <!-- Clarity -->
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "v0hk58f0dv");
-</script>
+    </script>
 
-    <!-- CannolBot -->
     <script async src="//cdn.jsdelivr.net/gh/opadim/script/cnl.js"></script>
 
+    <!-- Script do SEO Toggle -->
+    <script>
+        function toggleSeoInfo() {
+            var content = document.getElementById("glucavit-seo-content");
+            var btn = document.getElementById("toggleSeoBtn");
+            
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+                btn.innerHTML = "Menos informações Glucavit ▴";
+                btn.setAttribute("aria-expanded", "true");
+                
+                // Opcional: Rolar suavemente até o conteúdo
+                setTimeout(() => {
+                    content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else {
+                content.style.display = "none";
+                btn.innerHTML = "Mais informações Glucavit ▾";
+                btn.setAttribute("aria-expanded", "false");
+            }
+        }
+    </script>
 
 </body>
 </html>
