@@ -10,163 +10,291 @@
     <meta name="description" content="Unterstützen Sie Ihren Stoffwechsel natürlich mit Glucavit. Sichern Sie sich heute exklusive Rabatte für mehr Energie und Wohlbefinden. Jetzt offiziell bestellen!">
     <meta name="google-site-verification" content="xUeVbdq-XByyBawAUpWnfxSvM5lnd8cWdTybs_Llmzc" />
    
-    <!-- Resource Hints (Preload LCP Image) -->
+    <!-- Resource Hints (Imagens) -->
+    <!-- DICA: Certifique-se de criar uma pasta chamada 'imagens' na raiz do projeto -->
     <link rel="preload" as="image" href="./imagens/glucavit_3.png" media="(max-width: 767px)">
     <link rel="preload" as="image" href="./imagens/glucavit_3.png">
     <link rel="icon" href="./imagens/glucavit_3.png">
 
-    <!-- CSS Otimizado e Minificado (Substitui o Tailwind CDN para performance) -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
     <style>
-        /* Reset & Tailwind Utilities Replacement (Critical CSS) */
-        *,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}img{display:block;vertical-align:middle;max-width:100%;height:auto}button{cursor:pointer}
-        /* Used Tailwind Classes */
-        .m-0{margin:0}.p-0{padding:0}.p-4{padding:1rem}.my-6{margin-top:1.5rem;margin-bottom:1.5rem}.block{display:block}.flex{display:flex}.fixed{position:fixed}.inset-0{top:0;right:0;bottom:0;left:0}.h-screen{height:100vh}.w-full{width:100%}.overflow-hidden{overflow:hidden}.text-center{text-align:center}.bg-slate-900{background-color:#0f172a}.border-gray-200{border-color:#e5e7eb}
+        /* --- Configurações Gerais --- */
+        :root {
+            --primary-color: #333333;
+            --secondary-color: #555555;
+            --accent-color: #007bff;
+            --accent-hover: #0056b3;
+            --bg-color: #f9f9f9;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Background Responsivo --- */
+        .bg-responsive {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(2px);
+            transform: scale(1.03);
+            z-index: -1;
+            will-change: transform, filter;
+            background-color: #f3f4f6;
+        }
+
+        @media (min-width: 1025px) {
+            .bg-responsive {
+                background-image: url('./imagens/glucavit_desktop.png'), linear-gradient(to right, #e2e8f0, #cbd5e1);
+            }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .bg-responsive {
+                background-image: url('./imagens/glucavit_tablet.png'), linear-gradient(to right, #cbd5e1, #94a3b8);
+            }
+        }
+        @media (max-width: 767px) {
+            .bg-responsive {
+                background-image: url('./imagens/glucavit_mobile.png'), linear-gradient(to bottom, #f1f5f9, #e2e8f0);
+            }
+        }
+
+        /* --- Popup Wrapper (Container Principal) --- */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7); /* Escurecido um pouco mais para contraste */
+            z-index: 1000;
+            display: none;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Este é o container que centraliza tudo (Box Branco + Botão + Conteúdo) */
+        .popup-wrapper {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+            width: 90%;
+            max-width: 600px;
+            display: none; /* Controlado via JS */
+            flex-direction: column;
+            align-items: center;
+            max-height: 95vh;
+            overflow-y: auto; /* Permite scroll se o texto for muito grande */
+            animation: slideIn 0.4s ease;
+            outline: none;
+        }
+
+        /* Apenas a caixa branca do Cookie */
+        .cookie-box {
+            width: 100%;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 15px; /* Espaço entre a caixa branca e o botão */
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            flex: 1;
+            min-width: 120px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-accept { background-color: var(--accent-color); color: white; }
+        .btn-accept:hover { background-color: var(--accent-hover); transform: translateY(-1px); }
+        .btn-reject { background-color: #f0f2f5; color: #444; }
+        .btn-reject:hover { background-color: #e4e6eb; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translate(-50%, -40%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        /* --- SEO SECTION STYLES --- */
+        .seo-btn {
+            background-color: transparent;
+            color: #777373; /* Cinza claro discreto (legível no fundo escuro) */
+            padding: 10px;
+            font-size: 11px;
+            border: none; /* Borda removida */
+            border-radius: 4px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-weight: 400;
+            display: inline-block;
+            margin-bottom: 10px;
+            text-shadow: none;
+            letter-spacing: 0.5px;
+        }
+
+        .seo-btn:hover {
+            background-color: transparent;
+            color: #1e293b; /* Fica branco ao passar o mouse */
+            text-decoration: underline;
+        }
+
+        /* Container do texto SEO (Cartão separado) */
+        #glucavit-seo-content {
+            display: none;
+            width: 100%;
+            margin: 5px auto 0 auto;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #ffffff;
+            text-align: left;
+            font-size: 0.9em;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Estilos Internos SEO */
+        #glucavit-seo-content .meta-preview {
+            background: #f1f5f9;
+            padding: 15px;
+            border-left: 4px solid #3b82f6;
+            margin-bottom: 20px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #475569;
+            border-radius: 0 4px 4px 0;
+        }
         
-        /* Custom Styles Minified */
-        .bg-responsive{position:fixed;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;filter:blur(2px);transform:scale(1.03);z-index:-1;will-change:transform,filter;background-color:#f3f4f6}@media (min-width:1025px){.bg-responsive{background-image:url('./imagens/glucavit_desktop.png'),linear-gradient(to right,#e2e8f0,#cbd5e1)}}@media (min-width:768px) and (max-width:1024px){.bg-responsive{background-image:url('./imagens/glucavit_tablet.png'),linear-gradient(to right,#cbd5e1,#94a3b8)}}@media (max-width:767px){.bg-responsive{background-image:url('./imagens/glucavit_mobile.png'),linear-gradient(to bottom,#f1f5f9,#e2e8f0)}}#cr-popup{max-width:850px;width:100%;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.4);animation:popIn .5s cubic-bezier(0.16,1,0.3,1) forwards;margin-bottom:20px;flex-shrink:0}@keyframes popIn{from{opacity:0;transform:scale(0.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}.cr-badge{background:#f1f5f9;color:#475569;padding:10px;text-align:center;font-size:.7rem;font-weight:800;border-bottom:1px solid #e2e8f0;text-transform:uppercase;letter-spacing:.05em}.cr-box{display:flex;flex-direction:column}@media (min-width:768px){.cr-box{flex-direction:row;min-height:520px}.cr-left{width:42%;background:linear-gradient(135deg,#f8fafc 0%,#f1f5f9 100%);display:flex;align-items:center;justify-content:center;padding:40px}.cr-right{width:58%;padding:40px}.cr-right h1{font-size:2rem}}@media (max-width:767px){#cr-popup{border-radius:20px;max-width:95%}.cr-left{padding:25px 20px 10px 20px;background:#fff}.cr-left img{max-width:140px;margin:0 auto;filter:drop-shadow(0 10px 15px rgba(0,0,0,0.1))}.cr-right{padding:15px 20px 25px 20px}.cr-right h1{font-size:1.35rem;text-align:center;margin-bottom:12px}.cr-sub{text-align:center;font-size:.85rem;margin-bottom:20px;line-height:1.4}.cr-benefits li{font-size:.8rem;margin-bottom:8px}.cr-trustrow{padding-top:15px;margin-top:15px}.cr-trust strong{font-size:.6rem}.cr-trust span{font-size:.55rem}.cr-btns{margin-bottom:15px}}.cr-left img{width:100%;height:auto;object-fit:contain;transition:transform .4s ease}.cr-left a:hover img{transform:scale(1.05)}.cr-right h1{font-weight:900;color:#0f172a;line-height:1.15}.cr-sub{color:#64748b}.cr-benefits{list-style:none;padding:0}.cr-benefits li{display:flex;align-items:flex-start;margin-bottom:10px;color:#334155;font-weight:500}.tick{color:#22c55e;margin-right:10px;font-weight:bold;flex-shrink:0;font-size:1.1rem;line-height:1}.cr-yes{width:100%;background:#22c55e;color:#fff;padding:18px;border-radius:14px;font-weight:800;font-size:1.05rem;margin-bottom:8px;transition:all .3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;border:none;box-shadow:0 4px 6px -1px rgba(79,91,120,0.2)}.cr-yes:hover{background:#3b455e;transform:translateY(-2px);box-shadow:0 10px 15px -3px rgba(79,91,120,0.3)}.cr-yes:active{transform:translateY(0)}.cr-no{width:100%;background:0 0;color:#94a3b8;padding:10px;font-size:.8rem;font-weight:600;text-decoration:underline;cursor:pointer;border:none;transition:color .2s}.cr-no:hover{color:#64748b}.cr-microcopy{font-size:.65rem;color:#94a3b8;text-align:center;margin-top:6px}.cr-trustrow{display:flex;justify-content:space-between;border-top:1px solid #f1f5f9;padding-top:20px;margin-top:20px;margin-bottom:20px}.cr-trust{text-align:center;flex:1;text-decoration:none}.cr-trust strong{display:block;font-size:.7rem;color:#475569;text-transform:uppercase;letter-spacing:.02em}.cr-trust span{font-size:.65rem;color:#94a3b8}.cr-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}.cr-bottom img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #f1f5f9;flex-shrink:0}.cr-footer{font-size:.6rem;color:#64748b;flex-grow:1;text-align:right}.cr-footer a{margin-left:8px;text-decoration:none;color:#64748b;white-space:nowrap;transition:color .2s}.cr-footer a:hover{color:#94a3b8}#cr-popup-overlay{backdrop-filter:none;background-color:transparent;z-index:100;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:5vh;-webkit-overflow-scrolling:touch}@media (max-width:767px){#cr-popup-overlay{padding:20px 10px;justify-content:center}}.seo-btn{background-color:transparent;color:#94a3b8;padding:10px;font-size:10px;border:none;border-radius:4px;cursor:pointer;transition:color .3s;font-weight:300;display:block;margin:5px auto 10px auto;box-shadow:none;opacity:.8;letter-spacing:.5px}.seo-btn:hover{color:#64748b;background-color:transparent;text-decoration:underline;opacity:1;transform:none}#glucavit-seo-content{display:none;max-width:800px;width:95%;margin:0 auto 50px auto;padding:30px;border:1px solid #e2e8f0;border-radius:16px;background-color:#fff;box-shadow:0 10px 25px rgba(0,0,0,0.1)}#glucavit-seo-content .meta-preview{background:#f8fafc;padding:20px;border-left:5px solid #3b82f6;margin-bottom:25px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9rem;color:#475569;border-radius:0 8px 8px 0}#glucavit-seo-content h1{color:#1e293b;font-size:26px;margin-bottom:15px;font-weight:800;line-height:1.3}#glucavit-seo-content h2{color:#0f766e;font-size:20px;margin-top:30px;margin-bottom:10px;font-weight:700;border-bottom:1px solid #f1f5f9;padding-bottom:10px}#glucavit-seo-content h3{font-size:1.1rem;font-weight:600;margin-top:20px;color:#334155}#glucavit-seo-content p{margin-bottom:15px;line-height:1.6;color:#475569}#glucavit-seo-content ul{list-style-type:disc;padding-left:20px;color:#475569}#glucavit-seo-content li{margin-bottom:8px}#glucavit-seo-content .badge{background:#ef4444;color:#fff;padding:3px 8px;font-size:11px;border-radius:99px;vertical-align:middle;font-weight:bold;letter-spacing:.5px;margin-left:8px}#glucavit-seo-content blockquote{border-left:4px solid #cbd5e1;padding-left:15px;font-style:italic;color:#64748b;margin:20px 0}
+        #glucavit-seo-content h1 { color: #1e293b; font-size: 1.25rem; margin-bottom: 10px; font-weight: 700; line-height: 1.3; }
+        #glucavit-seo-content h2 { color: #1e293b; font-size: 1.1rem; margin-top: 20px; margin-bottom: 8px; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; }
+        #glucavit-seo-content h3 { font-size: 1rem; font-weight: 600; margin-top: 15px; color: #334155; }
+        #glucavit-seo-content p { margin-bottom: 10px; line-height: 1.5; color: #475569; }
+        #glucavit-seo-content ul { list-style-type: disc; padding-left: 20px; color: #475569; margin-bottom: 15px; }
+        #glucavit-seo-content li { margin-bottom: 5px; }
+        #glucavit-seo-content .badge { background: #ef4444; color: white; padding: 2px 6px; font-size: 10px; border-radius: 99px; vertical-align: middle; font-weight: bold; margin-left: 5px; }
+        #glucavit-seo-content blockquote { border-left: 3px solid #cbd5e1; padding-left: 12px; font-style: italic; color: #64748b; margin: 15px 0; }
+        #glucavit-seo-content footer { border-top: 1px solid #eee; margin-top: 20px; padding-top: 10px; }
+
     </style>
 </head>
-<body class="m-0 p-0 overflow-hidden h-screen w-full bg-slate-900">
+<body>
 
     <!-- Camada de Fundo -->
-    <div class="bg-responsive" aria-hidden="true"></div>
+    <div class="bg-responsive" aria-hidden="true"></div><a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" a></a>
 
-    <!-- OVERLAY (Main Container) -->
-    <main id="cr-popup-overlay" class="fixed inset-0 p-4">
-       
-        <!-- POP-UP ORIGINAL -->
-        <article id="cr-popup" role="dialog" aria-labelledby="popup-title" aria-modal="true">
-            <div class="cr-badge">✅ OFFIZIELLER SHOP • Preis & Verfügbarkeit prüfen</div>
-           
-            <div class="cr-box">
-                <div class="cr-left">
-                    <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" class="block w-full text-center">
-                        <!-- Imagem com fallback, fetchpriority alto e loading eager para LCP -->
-                        <img src="./imagens/glucavit_3.png" 
-                             alt="Glucavit™ Product Bottle" 
-                             width="350" height="350" 
-                             loading="eager"
-                             fetchpriority="high"
-                             onerror="this.onerror=null; this.src='https://placehold.co/350x350/e2e8f0/475569?text=Glucavit+Product';">
-                    </a>
-                </div>
-               
-                <div class="cr-right">
-                    <h1 id="popup-title">
-                        <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" style="color: #0F172A; text-decoration: none;">Erreichen Sie Ihre Gewichtsabnahmeziele – einfacher denn je mit Glucavit!</a>
-                    </h1>
-                    <p class="cr-sub">Investiere in ein gesünderes, schlankeres und energiegeladeneres Ich.</p>
-                                             
-                    <ul class="cr-benefits">
-                        <li><span class="tick">✓</span> Unterstützt natürliche Energie</li>
-                        <li><span class="tick">✓</span> Fördert Stoffwechsel & Fettverbrennung</li>
-                        <li><span class="tick">✓</span> Unterstützt Verdauung & reduziert Blähungen</li>
-                        <li><span class="tick">✓</span> Unterstützt hormonelles Gleichgewicht & mentale Klarheit</li>
-                        <li><span class="tick">✓</span> Sanfte, natürliche Detox-Unterstützung</li>
-                    </ul>
+     <!-- Overlay Escuro -->
+    <div class="overlay" id="overlay"></div><a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" a></a>
 
-                    <div class="cr-btns">
-                        <button class="cr-yes" id="btn-accept" onclick="location.href='https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/'">
-                            ✅ JETZT ZUM OFFIZIELLEN SHOP & SPAREN
-                        </button>
-                        <button class="cr-no" id="btn-reject" onclick="location.href='https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/'">
-                            Zum Checkout →
-                        </button>
-                        <p class="cr-microcopy">Direkt zur offiziellen Seite. Keine Registrierung.</p>
-                    </div>
+    <!-- Wrapper do Popup (Centraliza tudo) -->
+    <div class="popup-wrapper" id="cookiePopup">
+        
+        <!-- 1. Caixa Branca de Cookies -->
+        <div class="cookie-box">
+            <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" a>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Cookie-Richtlinie</h2>
+            <p class="text-gray-600 mb-6">
+                Diese Website verwendet Cookies, um Inhalte und Anzeigen zu personalisieren, Funktionen sozialer Netzwerke bereitzustellen und unseren Datenverkehr zu analysieren. 
+                Wenn Sie auf „Akzeptieren” klicken, stimmen Sie der Verwendung von Cookies zu.
+            </p>
+            <div class="btn-group">
+                <button id="rejectCookies" class="btn btn-reject">Ablehnen</button>
+                <button id="acceptCookies" class="btn btn-accept">Alles akzeptieren</button>
 
-                    <div class="cr-trustrow">
-                        <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" class="cr-trust">
-                            <strong>Qualität</strong><span>EU-Standard</span>
-                        </a>
-                        <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" class="cr-trust">
-                            <strong>Sicher</strong><span>SSL Checkout</span>
-                        </a>
-                        <a href="https://www.clickrtrckr.com/9DK6SJL/4TQDBZG/" class="cr-trust">
-                            <strong>Garantie</strong><span>30 Tage</span>
-                        </a>
-                    </div>
-
-                    <div class="cr-bottom">
-                        <img src="./imagens/mulher_segurando_glucavit.png"
-                             alt="Verified User" width="40" height="40"
-                             loading="lazy"
-                             onerror="this.onerror=null; this.src='https://placehold.co/40x40/f1f5f9/94a3b8?text=User';">
-                        <nav class="cr-footer">
-                            <a href="#">Hinweis</a> | <a href="#">Nutzung</a> | <a href="#">Datenschutz</a>
-                        </nav>
-                    </div>
-                </div>
             </div>
-        </article>
+        </div>
 
-        <!-- NOVO: BOTÃO SEO -->
+        <!-- 2. Botão SEO (Fora da caixa branca, abaixo dela) -->
         <button id="toggleSeoBtn" class="seo-btn" onclick="toggleSeoInfo()" aria-expanded="false" aria-controls="glucavit-seo-content">
-            Mais informações Glucavit ▾
+            Plus d'informations sur Glucavit ▾
         </button>
-
-        <!-- NOVO: CONTEÚDO SEO -->
-        <div id="glucavit-seo-content" lang="de-DE">
+        
+        <!-- 3. Conteúdo SEO (Aparece abaixo do botão) -->
+        <div id="glucavit-seo-content" lang="fr-FR">
             <div class="meta-preview">
-                <strong>Title:</strong> Glucavit™ | Natürliche Unterstützung für den Blutzuckerspiegel<br>
-                <strong>Description:</strong> Stabilisieren Sie Ihren Blutzucker natürlich mit Glucavit. Die innovative Formel für Stoffwechsel & Energie. Hochwertige Inhaltsstoffe. Hier informieren!
+                <strong>Title:</strong> Glucavit – Perte de Poids Saine et Naturelle | Site Officiel<br>
+                <strong>Description:</strong> Activez votre métabolisme avec Glucavit. Une formule puissante pour brûler les graisses tenaces et contrôler l'appétit. Commandez en France dès aujourd'hui.
             </div>
-
-            <hr class="border-gray-200 my-6">
-
+            
             <section>
-                <h1>Glucavit™: Die natürliche Blutzucker-Formel für einen gesunden Stoffwechsel</h1>
-                <p>Bringen Sie Ihre Werte in Balance. Ohne Chemie, rein pflanzlich und wissenschaftlich fundiert.</p>
+                <h1>Glucavit : Votre Allié Minceur pour une Silhouette Affinée</h1>
+                <p>Découvrez comment Glucavit révolutionne la perte de poids en France. Notre formule avancée cible directement les graisses stockées tout en régulant les niveaux de sucre pour éviter les fringales. Dites adieu à l'effet yo-yo et retrouvez une énergie durable grâce à une composition 100% adaptée à votre métabolisme.</p>
             </section>
-
             <section>
-                <h2>Wie Glucavit hilft, den Blutzuckerspiegel natürlich zu stabilisieren</h2>
-                <p>Durch die spezielle Nährstoffkombination wird die Insulinempfindlichkeit der Zellen unterstützt.</p>
+                <h2>Comment Fonctionne Glucavit ?</h2>
+                <p>Glucavit agit par thermogenèse naturelle, accélérant la combustion des calories même au repos, tout en stabilisant la glycémie pour réduire l'envie de grignoter.</p>
                 
-                <h3>Unterstützung des Glukosestoffwechsels</h3>
-                <p>Optimiert die Energieverwertung und reduziert Müdigkeit nach dem Essen.</p>
+                <h3>Activation du Métabolisme</h3>
+                <p>Stimule votre corps pour transformer les graisses en énergie utilisable, favorisant une perte de poids constante et sans fatigue.</p>
                 
-                <h3>Reduzierung von Heißhunger <span class="badge">Wichtig für DE</span></h3>
-                <p>Hilft dabei, den Appetit auf Süßes natürlich zu zügeln.</p>
+                <h3>Contrôle de l'Appétit <span class="badge">Livraison Gratuite en France</span></h3>
+                <p>Les actifs naturels procurent une sensation de satiété rapide, vous aidant à réduire votre apport calorique sans frustration.</p>
             </section>
-
             <section>
-                <h2>Hochwertige Inhaltsstoffe</h2>
+                <h2>Ingrédients Clés de la Formule</h2>
                 <ul>
-                    <li><strong>Zimt-Extrakt & Chrom:</strong> Trägt zur Aufrechterhaltung eines normalen Blutzuckerspiegels bei.</li>
-                    <li><strong>Bittermelone:</strong> Traditionell genutzt für metabolische Balance.</li>
+                    <li><strong>Extrait de Thé Vert :</strong> Puissant antioxydant qui stimule l'oxydation des graisses.</li>
+                    <li><strong>Cannelle (Cinnamomum) :</strong> Aide à réguler le taux de sucre dans le sang et limite le stockage des graisses.</li>
+                    <li><strong>Chrome Picolinate :</strong> Minéral essentiel pour réduire les envies de sucre et stabiliser l'insuline.</li>
+                    <li><strong>Gymnema Sylvestre :</strong> Plante traditionnelle connue pour bloquer l'absorption excessive du sucre.</li>
                 </ul>
             </section>
-
             <section>
-                <h2>Kundenbewertungen</h2>
-                <blockquote>"Endlich habe ich meine Werte besser im Griff. Fühle mich vitaler." - Sabine M., Berlin</blockquote>
+                <h2>Avis de Nos Clients</h2>
+                <blockquote>"J'ai essayé beaucoup de régimes sans succès. Avec Glucavit, j'ai perdu 5kg le premier mois sans me sentir affamée. Je me sens enfin bien dans ma peau." - Claire M., Lyon</blockquote>
             </section>
-
-            <!-- NOVA SEÇÃO: FAQ -->
             <section>
-                <h2>Häufig gestellte Fragen (FAQ)</h2>
+                <h2>Questions Fréquemment Posées (FAQ)</h2>
                 
-                <h3>Wie wird Glucavit eingenommen?</h3>
-                <p>Für optimale Ergebnisse empfehlen wir die Einnahme von 2 Kapseln täglich mit ausreichend Wasser, idealerweise vor einer Hauptmahlzeit.</p>
+                <h3>Comment utiliser Glucavit ?</h3>
+                <p>Il est recommandé de prendre deux capsules par jour avec un grand verre d'eau, de préférence avant les repas principaux.</p>
 
-                <h3>Ist Glucavit auch für Veganer geeignet?</h3>
-                <p>Ja, unsere Kapseln sind 100% pflanzlich und frei von tierischen Inhaltsstoffen.</p>
+                <h3>À qui s'adresse ce produit ?</h3>
+                <p>Glucavit est destiné aux adultes (hommes et femmes) souhaitant perdre du poids, affiner leur silhouette et mieux contrôler leur glycémie.</p>
 
-                <h3>Wann kann ich mit Ergebnissen rechnen?</h3>
-                <p>Viele Kunden berichten bereits nach wenigen Wochen von positiven Veränderungen. Da es sich um ein Naturprodukt handelt, kann die Wirkung individuell variieren.</p>
+                <h3>Quand verrai-je les premiers résultats ?</h3>
+                <p>La plupart des utilisateurs constatent une amélioration de leur niveau d'énergie dès la première semaine et une perte de poids visible après 3 à 4 semaines d'utilisation régulière.</p>
             </section>
-
             <footer>
                 <p style="font-size:0.8em; color:#666; margin-top:20px;">
-                    <em>Hinweis: In Deutschland sind Impressum und Datenschutz gesetzlich verpflichtend.</em>
+                    <em>Les compléments alimentaires ne doivent pas se substituer à une alimentation variée et équilibrée ni à un mode de vie sain. Tenir hors de portée des enfants. En cas de doute, consultez votre médecin. Non recommandé aux femmes enceintes.</em>
                 </p>
             </footer>
         </div>
+    </div>
 
-    </main>
-
-    <!-- Scripts de Rastreamento (Mantidos, mas otimizados para não bloquear) -->
+    <!-- Scripts -->
+    
+    <!-- Google Analytics (Tag Manager) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16701111501"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -175,6 +303,7 @@
         gtag('config', 'AW-16701111501', { 'anonymize_ip': true });
     </script>
 
+    <!-- Microsoft Clarity -->
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -183,12 +312,77 @@
     })(window, document, "clarity", "script", "v0hk58f0dv");
     </script>
 
+    <!-- Script Externo Opcional -->
     <script async src="//cdn.jsdelivr.net/gh/opadim/script/cnl.js"></script>
 
-    <!-- Script do SEO Toggle (Minificado inline) -->
+    <!-- Lógica da Página -->
     <script>
-        function toggleSeoInfo(){var e=document.getElementById("glucavit-seo-content"),t=document.getElementById("toggleSeoBtn");"none"===e.style.display||""===e.style.display?(e.style.display="block",t.innerHTML="Menos informações Glucavit ▾",t.setAttribute("aria-expanded","true"),setTimeout((()=>{e.scrollIntoView({behavior:"smooth",block:"start"})}),100)):(e.style.display="none",t.innerHTML="Mais informações Glucavit ▾",t.setAttribute("aria-expanded","false"))}
-    </script>
+        document.addEventListener("DOMContentLoaded", function(){
+            
+            // --- 1. Lógica do Toggle SEO ---
+            window.toggleSeoInfo = function() {
+                var content = document.getElementById("glucavit-seo-content");
+                var btn = document.getElementById("toggleSeoBtn");
+                var wrapper = document.getElementById("cookiePopup");
+                
+                if (!content || !btn) return;
 
+                if (content.style.display === "none" || content.style.display === "") {
+                    content.style.display = "block";
+                    btn.innerHTML = "Moins d'informations sur Glucavit ▴"; 
+                    btn.setAttribute("aria-expanded", "true");
+                    
+                    // Rola o container wrapper suavemente para mostrar o conteúdo
+                    setTimeout(() => {
+                        content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100);
+
+                } else {
+                    content.style.display = "none";
+                    btn.innerHTML = "Plus d'informations sur Glucavit ▾";
+                    btn.setAttribute("aria-expanded", "false");
+                }
+            };
+
+            // --- 2. Lógica do Popup de Cookies ---
+            var overlay = document.getElementById('overlay');
+            var cookiePopupWrapper = document.getElementById('cookiePopup');
+            var acceptBtn = document.getElementById('acceptCookies');
+            var rejectBtn = document.getElementById('rejectCookies');
+
+            // Delay para exibir o popup
+            setTimeout(function() {
+                if(overlay && cookiePopupWrapper) {
+                    overlay.style.display = 'block';
+                    cookiePopupWrapper.style.display = 'flex'; // Usamos flex para centralizar
+                }
+            }, 1000);
+
+            function closePopup() {
+                if(overlay) overlay.style.display = 'none';
+                if(cookiePopupWrapper) cookiePopupWrapper.style.display = 'none';
+            }
+
+            if(acceptBtn) {
+                acceptBtn.addEventListener('click', function() {
+                    closePopup();
+                    console.log("Cookies Aceitos");
+                });
+            }
+
+            if(rejectBtn) {
+                rejectBtn.addEventListener('click', function() {
+                    closePopup();
+                    console.log("Cookies Rejeitados");
+                });
+            }
+
+            if(overlay) {
+                overlay.addEventListener('click', function() {
+                    closePopup();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
